@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block inputs %} {%load static%}
+<br>
+<br>
+
+
+<div id="carro">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active" id="imagem">
+                <img class="carroIMG" src={% static 'pages/carrousel1.jpg' %} alt="Los Angeles">
+                <div class="carousel-caption" id="titulo2">
+
+                    <div class="col-sm-6" id="titulo" style="background-color:black; opacity: 0.75;">
+                        <br>
+                        <h2>Sunnynvest</h2>
+                        <br>
+                        <p>Artificial inteligence applied to investment analysis</p>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+
+            </div>
+            <div class="carousel-item" id="imagem">
+                <img class="carroIMG" src={% static 'pages/carrousel2.jpg' %} alt="Chicago">
+                <div class="carousel-caption" id="titulo2">
+
+                    <div class="col-sm-6" id="titulo" style="background-color:black; opacity: 0.75;">
+                        <br>
+                        <h2>Impress your customer</h2>
+                        <br>
+                        <p>Advanced financial report of ptential investments photovoltaic energy</p>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" id="imagem">
+                <img class="carroIMG" src={% static 'pages/carrousel3.jpg' %} alt="New York">
+                <div class="carousel-caption" id="titulo2">
+
+                    <div class="col-sm-6" id="titulo" style="background-color:black; opacity: 0.75;">
+                        <br>
+                        <h2>Free</h2>
+                        <br>
+                        <p>Completly free web-based software</p>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+</div>
+<style>
+    .carroIMG{
+        width: 100%;
+    }
+    #titulo {
+        margin: auto;
+    }
+    
+    #titulo2 {
+        padding-bottom: 120px;
+    }
+</style>
+
+{% endblock %}

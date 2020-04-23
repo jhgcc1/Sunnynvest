@@ -1,0 +1,1495 @@
+{% extends 'base.html' %} {% block inputs %}
+<br><br><br>
+<br> {% if modeloPJname %}
+<div class="modal" id="myModalPjName">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Error</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Project name already exists, please rename it
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark float-sm-right" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .modal-dialog {
+        position: relative;
+        top: 100px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999999999;
+        overflow: auto;
+        overflow-y: auto;
+    }
+</style>
+<script>
+    $('#myModalPjName').modal('show');
+</script>
+{% endif %}
+<div id="sunLoad" style="display:none;background-color:grey;position:absolute;top:0;left:0;right:0;bottom:0;">
+    <div class="sun">
+        <div class="ray_box">
+            <div class="ray ray1"></div>
+            <div class="ray ray2"></div>
+            <div class="ray ray3"></div>
+            <div class="ray ray4"></div>
+            <div class="ray ray5"></div>
+            <div class="ray ray6"></div>
+            <div class="ray ray7"></div>
+            <div class="ray ray8"></div>
+            <div class="ray ray9"></div>
+        </div>
+        <div class="loadP"></div>
+    </div>
+</div>
+<div style="float:right;margin-right:10%">
+    <button class="btn btn-dark float-sm-right" type="button" name="inputsSample" value="Isample">Sample input</button>
+</div>
+<br>
+<br>
+<div id="containerInput" class="container" style="z-index:-1" ;>
+
+    <form action="" id="formulario" class="formulario" method="post" style="z-index:-999999">
+        {%csrf_token%}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Energy consume (monthly average)</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="energyconsume" required min="0" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">kWh/month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Average daily irradiation (KWh/m2/day)</label>
+                    <select class="form-control" id="distRadiation" name="radiation1">
+                        <option>Please Select</option>
+                        <option>Fixed value</option>
+                        <option>Beta</option>
+                        <option>Gamma</option>
+                        <option>Laplace</option>
+                        <option>Lognormal</option>
+                        <option>Normal</option>
+                        <option>Exponential</option>
+                        <option>Weibull</option>
+                        <option>Uniform</option>
+                      </select>
+                    <div id="oneInputradiation" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputradiation">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="radiation2" required min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputradiation" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputradiation">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="radiation3" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Price paid/KWh</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="pricekwh" required min="0" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">/kWh</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Porcentage of economy disered</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" maxlength="3" id="texto" name="economy" required min="0" max="100" step=".01" min="0">
+
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progresso" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Painel Power</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="painelpower" required min="0" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">Watts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Cost/panel ($/panel distribution)</label>
+                    <select class="form-control" id="distPricePanel" name="panelprice1">
+                        <option selected disabled>Please Select</option>
+                        <option>Fixed value</option>
+                        <option>Beta</option>
+                        <option>Gamma</option>
+                        <option>Laplace</option>
+                        <option>Lognormal</option>
+                        <option>Normal</option>
+                        <option>Exponential</option>
+                        <option>Weibull</option>
+                        <option>Uniform</option>
+                      </select>
+                    <div id="oneInputpanelprice" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputpanelprice">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="panelprice2" required name="price" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputpanelprice" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputpanelprice">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="panelprice3" name="price" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Total investment in inverters ($ invested distribution)</label>
+                    <select class="form-control" id="distInv" name="priceinverters1">
+                    <option selected disabled>Please Select</option>
+                    <option>Fixed value</option>
+                    <option>Beta</option>
+                    <option>Gamma</option>
+                    <option>Laplace</option>
+                    <option>Lognormal</option>
+                    <option>Normal</option>
+                    <option>Exponential</option>
+                    <option>Weibull</option>
+                    <option>Uniform</option>
+                  </select>
+                    <div id="oneInputinv" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputinv">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="priceinverters2" required min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputinv" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputinv">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="priceinverters3" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Total investment in stringboxs</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="pricestringbox" required name="price" min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Total investment in projects planning</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="priceproject" required name="price" min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Total investments in wiring</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="pricewiring" required name="price" min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Other costs</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="priceothers" required name="price" min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Energy production taxes</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">%</span>
+                        </div>
+                        <input type="number" class="form-control" name="energy_production_tax" required name="price" min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Panel's depreciation</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="depreciation_years_painels" required name="price" min="0" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">inverter's depreciation</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="depreciation_years_inverters" required name="price" min="0" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">years</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Total investment in support structures</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="pricess" required min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Total investment with labor</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" class="form-control" name="pricelabor" required min="0" value="" step=".01">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Costs of maintenance/panel/year (distribution)</label>
+                    <select class="form-control" id="distMainten" name="maintenance1">
+                          <option selected disabled>Please Select</option>
+                          <option>Fixed value</option>
+                          <option>Beta</option>
+                          <option>Gamma</option>
+                          <option>Laplace</option>
+                          <option>Lognormal</option>
+                          <option>Normal</option>
+                          <option>Exponential</option>
+                          <option>Weibull</option>
+                          <option>Uniform</option>
+                        </select>
+                    <div id="oneInputmaintain" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputmaintain">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="maintenance2" required min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputmaintain" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputmaintain">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="maintenance3" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Inflation rate</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="inflation" required min="0" maxlength=3 value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">%/year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Costs of equity % (distribution)</label>
+                    <select class="form-control" id="distCcp" name="ccp1">
+                      <option selected disabled>Please Select</option>
+                      <option>Fixed value</option>
+                      <option>Beta</option>
+                      <option>Gamma</option>
+                      <option>Laplace</option>
+                      <option>Lognormal</option>
+                      <option>Normal</option>
+                      <option>Exponential</option>
+                      <option>Weibull</option>
+                      <option>Uniform</option>
+                    </select>
+                    <div id="oneInputccp" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputccp">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="ccp2" required min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputccp" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputccp">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="ccp3" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Costs of debit % (distribution)</label>
+                    <select class="form-control" id="distCct" name=cct1>
+                        <option selected disabled>Please Select</option>
+                        <option>Fixed value</option>
+                        <option>Beta</option>
+                        <option>Gamma</option>
+                        <option>Laplace</option>
+                        <option>Lognormal</option>
+                        <option>Normal</option>
+                        <option>Exponential</option>
+                        <option>Weibull</option>
+                        <option>Uniform</option>
+                      </select>
+                    <div id="oneInputcct" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputcct">Parameter 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="cct2" required min="0" value="" step=".01">
+                        </div>
+                    </div>
+                    <div id="twoInputcct" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputcct">Parameter 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="cct3" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Percentage of financing that is equity</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="texto1" name="pccp" required min="0" max="100" maxlength="3">
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progresso1" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower"> Percentage of financing that is debt</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="texto2" name="pcct" required maxlength="3" min="0" max="100">
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progresso2" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Entity type</label>
+                    <select class="form-control" name="person_or_business_or_sellenergy" id="person_or_business_or_sellenergy">
+                      <option selected disabled>Please Select</option>
+                      <option>Business</option>
+                      <option>Person</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div id="taxIR" style='display:none'>
+                    <div class="form-group">
+                        <label for="ppower">Income tax</label>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="incometax" required min="0" value="" step="0.01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Panel lifespan (years distribution)</label>
+                    <select class="form-control" id="distplifespan" name="plifespan1">
+                      <option selected disabled>Please Select</option>
+                      <option>Fixed value</option>
+                      <option>Custom probabilities</option>
+                    </select>
+                    <div id="oneInputplifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputplifespan">Value 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan2" required min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="twoInputplifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputplifespan">Probability 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan3" min="0" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="3Inputplifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span3Inputplifespan">Value 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan4" min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="4Inputplifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span4Inputplifespan">Probability 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan5" min="0" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="5Inputplifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span5Inputplifespan">Value 3</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan6" min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="6Inputplifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span6Inputplifespan">Probability 3</span>
+                            </div>
+                            <input type="number" class="form-control" name="plifespan7" min="0" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">inverter lifespan (years distribution)</label>
+                    <select class="form-control" id="distilifespan" name="ilifespan1">
+                      <option selected disabled>Please Select</option>
+                      <option>Fixed value</option>
+                      <option>Custom probabilities</option>
+                    </select>
+                    <div id="oneInputilifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanoneInputilifespan">Value 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan2" required min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="twoInputilifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spantwoInputilifespan">Probability 1</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan3" min="0" max="100" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="3Inputilifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span3Inputilifespan">Value 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan4" min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="4Inputilifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span4Inputilifespan">Probability 2</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan5" min="0" max="100" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="5Inputilifespan" style="display:none">
+                        <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span5Inputilifespan">Value 3</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan6" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">Years</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="6Inputilifespan" style="display:none">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="span6Inputilifespan">Probability 3</span>
+                            </div>
+                            <input type="number" class="form-control" name="ilifespan7" min="0" max="100" value="" step=".01">
+                            <div class="input-group-append">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="apower">Percentage of painel power reduction/year</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="preduction" required min="0" max="100" value="" step=".01">
+                        <div class="input-group-append">
+                            <span class="input-group-text">%/year</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Number of years for simulation</label>
+                    <select class="form-control" id="sim_year" name="sim_year">
+                          <option>1 year</option>
+                          <option>2 years</option>
+                          <option>3 years</option>
+                          <option>4 years</option>
+                          <option>5 years</option>
+                          <option>6 years</option>
+                          <option>7 years</option>
+                          <option>8 years</option>
+                          <option>9 years</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+
+                <p>Payment method</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod1" value="cash">
+                    <label class="form-check-label" for="paymentMethod1">
+                Investment paid in installments
+            </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod2" checked value="cash">
+                    <label class="form-check-label" for="paymentMethod2">
+                Investment in one lump sum
+            </label>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="divInstall" style="display:none">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="apower">Advance payment</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="number" class="form-control" name="entry" min="0" value="" step=".01">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="apower">Number of years to pay installment</label>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="yearsTopay" min="0" value="" step="1">
+                            <div class="input-group-append">
+                                <span class="input-group-text">year</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="ppower">Project name (project name must be unique)</label>
+                    <input type="text" required class="form-control" id="ppower" name="projeto" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div> <button class="btn btn-dark float-sm-left" type="submit" name="calcular" value="cal">Report</button>
+    </form>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
+<style type="text/css">
+    .formulario {
+        width: 100%;
+        margin-right: auto;
+        padding-left: 0%;
+    }
+    
+    .container {
+        z-index: -1;
+    }
+    
+    .sun {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50px 50px, orange, white);
+        box-shadow: 0px 0px 40px 15px white;
+        z-index: 100
+    }
+    
+    .ray_box {
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 70px;
+        -webkit-animation: ray_anim 3s linear infinite;
+        animation: ray_anim 3s linear infinite;
+    }
+    
+    .ray {
+        animation: ray_anim2 2s linear infinite;
+        -webkit-animation: ray_anim2 2s linear infinite;
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+        margin-left: 10px;
+        border-radius: 80% 80% 0 0;
+        position: absolute;
+        opacity: 0.1;
+    }
+    
+    .ray1 {
+        height: 120px;
+        width: 30px;
+        -webkit-transform: rotate(200deg);
+        top: -115px;
+        left: 41px;
+    }
+    
+    .ray2 {
+        height: 100px;
+        width: 8px;
+        -webkit-transform: rotate(230deg);
+        top: -70px;
+        left: 84px;
+    }
+    
+    .ray3 {
+        height: 120px;
+        width: 50px;
+        -webkit-transform: rotate(262deg);
+        top: -35px;
+        left: 100px;
+    }
+    
+    .ray4 {
+        height: 100px;
+        width: 14px;
+        -webkit-transform: rotate(305deg);
+        top: 40px;
+        left: 100px;
+    }
+    
+    .ray5 {
+        height: 140px;
+        width: 30px;
+        -webkit-transform: rotate(-15deg);
+        top: 60px;
+        left: 40px;
+    }
+    
+    .ray6 {
+        height: 120px;
+        width: 50px;
+        -webkit-transform: rotate(30deg);
+        top: 60px;
+        left: -30px;
+    }
+    
+    .ray7 {
+        height: 120px;
+        width: 15px;
+        -webkit-transform: rotate(70deg);
+        top: 14px;
+        left: -70px;
+    }
+    
+    .ray8 {
+        height: 130px;
+        width: 30px;
+        -webkit-transform: rotate(110deg);
+        top: -62px;
+        left: -70px;
+    }
+    
+    .ray9 {
+        height: 115px;
+        width: 10px;
+        -webkit-transform: rotate(150deg);
+        top: -105px;
+        left: -32px;
+    }
+    
+    @-webkit-keyframes ray_anim {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    
+    @-webkit-keyframes ray_anim2 {
+        0% {
+            width: 10%;
+        }
+        50% {
+            width: 40%;
+        }
+        100% {
+            width: 10%;
+        }
+    }
+    
+    .loadP::after {
+        content: 'Calculating';
+        position: relative;
+        bottom: -100px;
+        right: 22px;
+        font-size: 22px;
+        animation: loadAction 1s linear infinite;
+        -webkit-animation: loadAction 1s linear infinite;
+    }
+    
+    @keyframes loadAction {
+        25% {
+            content: 'Calculating';
+        }
+        50% {
+            content: 'Calculating.';
+        }
+        75% {
+            content: 'Calculating..';
+        }
+        100% {
+            content: 'Calculating...';
+        }
+    }
+    
+    @-webkit-keyframes loadAction {
+        25% {
+            content: 'Calculating';
+        }
+        50% {
+            content: 'Calculating.';
+        }
+        75% {
+            content: 'Calculating..';
+        }
+        100% {
+            content: 'Calculating...';
+        }
+    }
+</style>
+
+
+<script type="text/javascript">
+    var x;
+    var y;
+    var z;
+    var total;
+    var codigo;
+    var s;
+    var f;
+    var k;
+    var v;
+    var t;
+
+    function keyup(e) {
+        x = document.getElementById('texto').value;
+        document.getElementById('progresso').style.width = x + '%';
+        document.getElementById('progresso').innerHTML = x + '%';
+
+        if (x == '') {
+            document.getElementById('progresso').style.width = '0%';
+            document.getElementById('progresso').innerHTML = '0%';
+            document.getElementById('progresso').style.backgroundColor = "";
+        }
+
+        if (x != 0) {
+            k = parseInt(document.getElementById('texto').value);
+            document.getElementById('texto').value = k;
+            document.getElementById('progresso').style.width = k + '%';
+            document.getElementById('progresso').innerHTML = k + '%';
+        }
+    }
+
+    function keypress(e) {
+        codigo = parseInt(e.keyCode);
+        a = document.getElementById('texto').value;
+        aa = document.getElementById('texto');
+        t = a.toString();
+        s = String.fromCharCode(e.keyCode);
+        z = parseInt(t + s);
+        v = parseInt(s) + parseInt(a);
+        var tt = aa.value.substr(aa.selectionStart, aa.selectionEnd - aa.selectionStart);
+
+        if (codigo >= 48 && codigo <= 57 || codigo == 8) {
+            if (tt) {
+                z = 0;
+                v = 0;
+            }
+
+            if (z > 100 || v > 100) {
+                e.preventDefault();
+                /*document.getElementById('progresso2').style.width = '100%';
+                document.getElementById('progresso2').innerHTML = '100%';
+                document.getElementById('progresso2').style.backgroundColor="blue";
+                document.getElementById('texto1').value=0;
+                document.getElementById('progresso1').innerHTML = '0%';
+                document.getElementById('progresso1').style.width = '0%';
+                document.getElementById('progresso1').style.backgroundColor="blue";
+                document.getElementById('texto2').value=100*/
+            }
+
+            z = document.getElementById('texto').value;
+
+            if (z == '0' && codigo == 48) {
+                e.preventDefault();
+            }
+        } else {
+            e.preventDefault();
+        }
+    }
+
+    function keyup2(e) {
+        y = document.getElementById('texto1').value;
+        z = document.getElementById('texto2').value;
+        total = parseInt(y + z);
+
+        if (z <= 100) {
+            document.getElementById('texto1').value = 100 - z;
+            document.getElementById('texto2').value = z;
+            document.getElementById('progresso2').style.width = z + '%';
+            document.getElementById('progresso1').style.width = 100 - z + '%';
+            document.getElementById('progresso2').innerHTML = z + '%';
+            document.getElementById('progresso1').innerHTML = 100 - z + '%';
+        }
+
+        if (z == '') {
+            document.getElementById('progresso2').style.width = '0%';
+            document.getElementById('progresso1').style.width = 100 - z + '%';
+            document.getElementById('progresso1').innerHTML = 100 - z + '%';
+            document.getElementById('progresso2').innerHTML = '0%';
+            document.getElementById('texto1').value = 100 - z;
+        }
+
+        if (z != 0) {
+            k = parseInt(document.getElementById('texto2').value);
+            document.getElementById('texto2').value = k;
+            document.getElementById('progresso2').style.width = k + '%';
+            document.getElementById('progresso2').innerHTML = k + '%';
+        }
+        /*if(z>100){
+        document.getElementById('progresso2').style.width = '100%';
+          document.getElementById('progresso2').innerHTML = '100%';
+          document.getElementById('progresso2').style.backgroundColor="blue";
+        document.getElementById('texto1').value=0;
+          document.getElementById('progresso1').innerHTML = '0%';
+          document.getElementById('progresso1').style.width = '0%';
+            document.getElementById('progresso1').style.backgroundColor="blue";
+            document.getElementById('texto2').value=100;
+        }*/
+
+    }
+
+    function keypress2(e) {
+        codigo = parseInt(e.keyCode);
+        a = document.getElementById('texto2').value;
+        aa = document.getElementById('texto2');
+        t = a.toString();
+        s = String.fromCharCode(e.keyCode);
+        z = parseInt(t + s);
+        v = parseInt(s) + parseInt(a);
+        var tt = aa.value.substr(aa.selectionStart, aa.selectionEnd - aa.selectionStart);
+
+        if (codigo >= 48 && codigo <= 57 || codigo == 8) {
+            if (tt) {
+                z = 0;
+                v = 0;
+            }
+
+            if (z > 100 || v > 100) {
+                e.preventDefault();
+                /*document.getElementById('progresso2').style.width = '100%';
+                document.getElementById('progresso2').innerHTML = '100%';
+                document.getElementById('progresso2').style.backgroundColor="blue";
+                document.getElementById('texto1').value=0;
+                document.getElementById('progresso1').innerHTML = '0%';
+                document.getElementById('progresso1').style.width = '0%';
+                document.getElementById('progresso1').style.backgroundColor="blue";
+                document.getElementById('texto2').value=100*/
+            }
+
+            z = document.getElementById('texto2').value;
+
+            if (z == '0' && codigo == 48) {
+                e.preventDefault();
+            }
+        } else {
+            e.preventDefault();
+        }
+    }
+
+    function keypress1(e) {
+        codigo = parseInt(e.keyCode);
+        a = document.getElementById('texto1').value;
+        aa = document.getElementById('texto1');
+        t = a.toString();
+        s = String.fromCharCode(e.keyCode);
+        z = parseInt(t + s);
+        v = parseInt(s) + parseInt(a);
+        var tt = aa.value.substr(aa.selectionStart, aa.selectionEnd - aa.selectionStart);
+
+        if (codigo >= 48 && codigo <= 57 || codigo == 8) {
+            if (tt) {
+                z = 0;
+                v = 0;
+            }
+
+            if (z > 100 || v > 100) {
+                e.preventDefault();
+                /*document.getElementById('progresso2').style.width = '100%';
+                document.getElementById('progresso2').innerHTML = '100%';
+                document.getElementById('progresso2').style.backgroundColor="blue";
+                document.getElementById('texto1').value=0;
+                document.getElementById('progresso1').innerHTML = '0%';
+                document.getElementById('progresso1').style.width = '0%';
+                document.getElementById('progresso1').style.backgroundColor="blue";
+                document.getElementById('texto2').value=100*/
+            }
+
+            z = document.getElementById('texto1').value;
+
+            if (z == '0' && codigo == 48) {
+                e.preventDefault();
+            }
+        } else {
+            e.preventDefault();
+        }
+    }
+
+    function handleEntityType(e) {
+        var ev = e.target;
+        var type = ev.options[ev.selectedIndex].value;
+
+        if (type.toLowerCase() == "business") {
+            $("#taxIR").slideDown("slow");
+        } else {
+            $("#taxIR").slideUp("slow");
+        }
+    }
+
+    $("button[name='calcular']").click(function(e) {
+        if ($("#formulario").valid()) {
+            var obj = {
+                "#distMainten": "maintenance",
+                "#distPricePanel": "panel price",
+                "distInv": "inverters price",
+                "#distRadiation": "irradiation",
+                "#distCcp": "cost of equity",
+                "#distCct": "Costs of debit",
+                "#distplifespan": "panel lifespan",
+                "#distilifespan": "inverter lifespan"
+            };
+            var checker = "";
+            var checkerID = "";
+            Object.keys(obj).forEach(function(item) {
+                if ($(item).find(":selected").text() === "Please Select") {
+                    checker = obj[item];
+                    checkerID = item;
+                }
+            });
+            console.log(checker);
+
+            if (checker === "") {
+                if (window.document.documentMode) {
+                    $("#sunLoad").css('display', "");
+                } else {
+                    $("#sunLoad").css('display', 'initial');
+                }
+                $("#containerInput").css('display', 'none');
+                $("#foot").css('display', 'none');
+                $('button[name="inputsSample"]').css("display", "none");
+            } else {
+                console.log("entrou");
+                alert("Please select option for " + checker);
+                e.preventDefault();
+                $(checkerID)[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'center'
+                });
+            }
+        }
+    });
+
+    function handleDist(e, id) {
+        console.log(e);
+        var ev = e.target;
+        var type = ev.options[ev.selectedIndex].value.toLowerCase();
+        var objectLiteral = {
+            "normal": ["Mean", "Standard Deviation"],
+            "beta": ["Alpha", "Beta"],
+            "gamma": ["Shape", "Scale"],
+            "laplace": ["Position", "Scale"],
+            "lognormal": ["Mean", "Sigma"],
+            "exponential": ["Lambda"],
+            "weibull": ["Shape"],
+            "uniform": ["Lower boundary", "Upper boundary"],
+            "fixed value": ["Value"],
+            //vir aqui
+            "custom probabilities": ["Value 1", "Probability 1", "Value 2", "Probability 2", "Value 3", "Probability 3"]
+        };
+
+        if (type == "normal" || type == "uniform" || type == "beta" || type == "lognormal" || type == "gamma" || type == "laplace") {
+            $("#spanoneInput" + id).text(objectLiteral[type][0]);
+            $("#spantwoInput" + id).text(objectLiteral[type][1]);
+            $("#twoInput" + id).slideDown("slow");
+            $("#oneInput" + id).slideDown("slow");
+            $("input[name='" + id + "3").prop('required', true);
+        } else {
+            $("input[name='" + id + "3").prop('required', false);
+
+            if (type != "please select") {
+                if (type == "custom probabilities") {
+                    $("#spanoneInput" + id).text(objectLiteral[type][0]);
+                    $("#spantwoInput" + id).text(objectLiteral[type][1]);
+                    $("#twoInput" + id).slideDown("slow");
+                    $("#oneInput" + id).slideDown("slow");
+                    $("#3Input" + id).slideDown("slow");
+                    $("#4Input" + id).slideDown("slow");
+                    $("#5Input" + id).slideDown("slow");
+                    $("#6Input" + id).slideDown("slow");
+                    $("input[name='" + id + "3").prop('required', true);
+                    $("input[name='" + id + "4").prop('required', true);
+                    $("input[name='" + id + "5").prop('required', true);
+                    $("input[name='" + id + "6").prop('required', true);
+                    $("input[name='" + id + "7").prop('required', true);
+                    console.log("in2");
+                } else {
+                    $("input[name='" + id + "3").prop('required', false);
+                    $("input[name='" + id + "4").prop('required', false);
+                    $("input[name='" + id + "5").prop('required', false);
+                    $("input[name='" + id + "6").prop('required', false);
+                    $("input[name='" + id + "7").prop('required', false);
+                    $("#spanoneInput" + id).text(objectLiteral[type][0]);
+                    $("#oneInput" + id).slideDown("slow");
+                    $("#twoInput" + id).slideUp("slow");
+                    $("#3Input" + id).slideUp("slow");
+                    $("#4Input" + id).slideUp("slow");
+                    $("#5Input" + id).slideUp("slow");
+                    $("#6Input" + id).slideUp("slow");
+                }
+            } else {
+                $("#oneInput" + id).slideUp("slow");
+                $("#twoInput" + id).slideUp("slow");
+                $("#3Input" + id).slideUp("slow");
+                $("#4Input" + id).slideUp("slow");
+                $("#5Input" + id).slideUp("slow");
+                $("#6Input" + id).slideUp("slow");
+            }
+        }
+    }
+
+    function keyup1(e) {
+        z = document.getElementById('texto1').value;
+        y = document.getElementById('texto2').value;
+        total = parseInt(y + z);
+
+        if (z <= 100) {
+            document.getElementById('texto2').value = 100 - z;
+            document.getElementById('texto1').value = z;
+            document.getElementById('progresso1').style.width = z + '%';
+            document.getElementById('progresso2').style.width = 100 - z + '%';
+            document.getElementById('progresso1').innerHTML = z + '%';
+            document.getElementById('progresso2').innerHTML = 100 - z + '%';
+            document.getElementById('progresso2').style.backgroundColor = "";
+            document.getElementById('progresso1').style.backgroundColor = "";
+        }
+
+        if (z == '') {
+            document.getElementById('progresso1').style.width = '0%';
+            document.getElementById('progresso2').style.width = 100 - z + '%';
+            document.getElementById('progresso2').innerHTML = 100 - z + '%';
+            document.getElementById('progresso1').innerHTML = '0%';
+            document.getElementById('progresso2').style.backgroundColor = "";
+            document.getElementById('progresso1').style.backgroundColor = "";
+            document.getElementById('texto2').value = 100 - z;
+        }
+
+        if (z != 0) {
+            k = parseInt(document.getElementById('texto1').value);
+            document.getElementById('texto1').value = k;
+            document.getElementById('progresso1').style.width = k + '%';
+            document.getElementById('progresso1').innerHTML = k + '%';
+        }
+        /*if(z>100){
+        document.getElementById('progresso2').style.width = '100%';
+          document.getElementById('progresso2').innerHTML = '100%';
+          document.getElementById('progresso2').style.backgroundColor="blue";
+        document.getElementById('texto1').value=0;
+          document.getElementById('progresso1').innerHTML = '0%';
+          document.getElementById('progresso1').style.width = '0%';
+            document.getElementById('progresso1').style.backgroundColor="blue";
+            document.getElementById('texto2').value=100;
+        }*/
+
+    }
+
+    $(document).ready(function() {
+        var subargs = "{{subargs|safe}}";
+        console.log(subargs, "subargs");
+        subargs = subargs.replace(/'/g, '"');
+        console.log(subargs, "subargs");
+
+        if (subargs !== "") {
+            subargs = $.parseJSON(subargs);
+            Object.keys(subargs).forEach(function(key, value) {
+                if (typeof subargs[key] == "string" || typeof subargs[key] == "number") {
+                    if (key === "person_or_business_or_sellenergy" || key === "sim_year") {
+                        $("select[name='" + key + "']").val(subargs[key]).change();
+                    } else {
+                        $("input[name='" + key + "']").val(subargs[key]);
+                        $("input[name='" + key + "']").val(subargs[key]);
+                    }
+
+                    $("input[name='" + key + "']").trigger(jQuery.Event('keyup', {
+                        keycode: 0
+                    }));
+                } else {
+                    if (key !== "plifespan" && key !== "ilifespan") {
+                        $("select[name='" + key + "1']").val(subargs[key][0]).change();
+                        $("input[name='" + key + "2']").val(subargs[key][1]);
+                        $("input[name='" + key + "3']").val(subargs[key][2]);
+                    } else {
+                        console.log("in here porra");
+                        $("select[name='" + key + "1']").val(subargs[key][0]).change();
+                        $("input[name='" + key + "2']").val(subargs[key][1]["value1"]["value"]);
+                        $("input[name='" + key + "3']").val(subargs[key][1]["value1"]["probability"]);
+                        $("input[name='" + key + "4']").val(subargs[key][1]["value2"]["value"]);
+                        $("input[name='" + key + "5']").val(subargs[key][1]["value2"]["probability"]);
+                        $("input[name='" + key + "6']").val(subargs[key][1]["value3"]["value"]);
+                        $("input[name='" + key + "7']").val(subargs[key][1]["value3"]["probability"]);
+                    }
+                }
+            });
+        }
+    });
+
+    window.onload = function() {
+        $("input[name='paymentMethod']").change(function() {
+            console.log($("input[name='paymentMethod']:checked"));
+
+            if ($("input#paymentMethod1:checked").length > 0) {
+                //Investment paid in installments
+                $("input[name='paymentMethod']").val("install");
+                $("#divInstall").slideDown("slow");
+            } else {
+                $("input[name='paymentMethod']").val("cash");
+                $("#divInstall").slideUp("slow");
+            }
+        });
+        $('button[name="inputsSample"]').click(function() {
+            alert("Sample input fields applied");
+            objIpunt = {
+                "energyconsume": 300,
+                "pricekwh": 0.6,
+                "economy": 80,
+                "painelpower": 320,
+                "pricestringbox": 100,
+                "priceproject": 100,
+                "pricewiring": 300,
+                "pricess": 200,
+                "pricelabor": 200,
+                "inflation": 5,
+                "pccp": 60,
+                "pcct": 40,
+                "preduction": 0.8,
+                "priceothers": 0,
+                "sim_year": "3 years",
+                "incometax": 25,
+                "person_or_business_or_sellenergy": 'Business',
+                "depreciation_years_painels": 25,
+                "depreciation_years_inverters": 12,
+                "energy_production_tax": 0,
+                "initial_pefficiency": 1,
+                "maintenance": ["Normal", 30, 10],
+                "panelprice": ["Normal", 600, 50],
+                "priceinverters": ["Normal", 6000, 700],
+                "radiation": ["Normal", 4.8, 0.5],
+                "ccp": ["Normal", 10, 2.5],
+                "cct": ["Normal", 10, 2.5],
+                "ilifespan": ["Custom probabilities", {
+                    "value1": {
+                        "probability": 5,
+                        "value": 5
+                    },
+                    "value2": {
+                        "probability": 35,
+                        "value": 10
+                    },
+                    "value3": {
+                        "probability": 60,
+                        "value": 15
+                    }
+                }],
+                "plifespan": ["Custom probabilities", {
+                    "value1": {
+                        "probability": 20,
+                        "value": 20
+                    },
+                    "value2": {
+                        "probability": 50,
+                        "value": 25
+                    },
+                    "value3": {
+                        "probability": 30,
+                        "value": 30
+                    }
+                }]
+            };
+            Object.keys(objIpunt).forEach(function(key, value) {
+                if (typeof objIpunt[key] == "string" || typeof objIpunt[key] == "number") {
+                    if (key === "person_or_business_or_sellenergy" || key === "sim_year") {
+                        $("select[name='" + key + "']").val(objIpunt[key]).change();
+                    } else {
+                        $("input[name='" + key + "']").val(objIpunt[key]);
+                        $("input[name='" + key + "']").val(objIpunt[key]);
+                    }
+
+                    $("input[name='" + key + "']").trigger(jQuery.Event('keyup', {
+                        keycode: 0
+                    }));
+                } else {
+                    if (key !== "plifespan" && key !== "ilifespan") {
+                        $("select[name='" + key + "1']").val(objIpunt[key][0]).change();
+                        $("input[name='" + key + "2']").val(objIpunt[key][1]);
+                        $("input[name='" + key + "3']").val(objIpunt[key][2]);
+                    } else {
+                        console.log("in here porra");
+                        $("select[name='" + key + "1']").val(objIpunt[key][0]).change();
+                        $("input[name='" + key + "2']").val(objIpunt[key][1]["value1"]["value"]);
+                        $("input[name='" + key + "3']").val(objIpunt[key][1]["value1"]["probability"]);
+                        $("input[name='" + key + "4']").val(objIpunt[key][1]["value2"]["value"]);
+                        $("input[name='" + key + "5']").val(objIpunt[key][1]["value2"]["probability"]);
+                        $("input[name='" + key + "6']").val(objIpunt[key][1]["value3"]["value"]);
+                        $("input[name='" + key + "7']").val(objIpunt[key][1]["value3"]["probability"]);
+                    }
+                }
+            });
+        });
+        document.getElementById('texto').onkeypress = keypress;
+        document.getElementById('texto').onkeyup = keyup;
+        document.getElementById('texto1').onkeyup = keyup1;
+        document.getElementById('texto2').onkeyup = keyup2;
+        document.getElementById('texto2').onkeypress = keypress2;
+        document.getElementById('texto1').onkeypress = keypress1;
+        document.getElementById("person_or_business_or_sellenergy").onchange = handleEntityType;
+
+        document.getElementById("distMainten").onchange = function(e) {
+            return handleDist(e, "maintain");
+        };
+
+        document.getElementById("distPricePanel").onchange = function(e) {
+            return handleDist(e, "panelprice");
+        };
+
+        document.getElementById("distInv").onchange = function(e) {
+            return handleDist(e, "inv");
+        };
+
+        document.getElementById("distRadiation").onchange = function(e) {
+            return handleDist(e, "radiation");
+        };
+
+        document.getElementById("distCcp").onchange = function(e) {
+            return handleDist(e, "ccp");
+        };
+
+        document.getElementById("distCct").onchange = function(e) {
+            return handleDist(e, "cct");
+        };
+
+        document.getElementById("distplifespan").onchange = function(e) {
+            return handleDist(e, "plifespan");
+        };
+
+        document.getElementById("distilifespan").onchange = function(e) {
+            return handleDist(e, "ilifespan");
+        }; //document.getElementById("distMainten").onchange = handleDist(e, "maintain");
+        //document.getElementById("distMainten").onchange = handleDist(e, "maintain");
+        //document.getElementById("distMainten").onchange = handleDist(e, "maintain");
+        //document.getElementById("distMainten").onchange = handleDist(e, "maintain");
+        //document.getElementById("distMainten").onchange = handleDist(e, "maintain");
+
+    };
+</script>
+
+
+{% endblock %}

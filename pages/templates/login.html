@@ -1,0 +1,120 @@
+ {% extends 'base.html' %} {% block inputs %} {%load static%}
+
+<style>
+    body {
+        background-image: url("{% static 'pages/fundo.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 115%;
+        background-attachment: fixed;
+    }
+</style>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br> {% if modelo2 %}
+<div class="modal" id="myModal2">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Account created</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                Login with your credentials to continue
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark float-sm-right" data-dismiss="modal">OK!</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .modal-dialog {
+        position: relative;
+        top: 100px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999999999;
+        overflow: auto;
+        overflow-y: auto;
+    }
+</style>
+<script>
+    $('#myModal2').modal('show');
+</script>
+{% endif %}
+<div id="llogin" class="container" align="center" style="height: 340px;width:330px ">
+
+    <div class="container">
+        <br>
+        <div id="textologin">
+            <p style="font-size:25px;color: white">Login</p>
+
+
+        </div>
+
+
+        <form action="" class="formulario" method="post">
+            {% csrf_token %}
+            <p style="text-align:left;font-size:15px">Username:</p>
+            <input type="text" name="nome" required class="form-control">
+            <br>
+            <p style="text-align:left;font-size:15px">Password:</p>
+            <input type="password" name="senha" required class="form-control">
+            <div style="display:flex;justify-content:space-between">
+                <a href="{% url 'ps' %}" id="fpass">Forgot my password</a>
+                <spam style="color:red;display:{{errorLogin}};font-size:12px">
+                    wrong password or login
+                </spam>
+            </div>
+            <br>
+
+            <button id="butao1" class="btn btn-dark float-sm-right" type="submit" name="log" value="log">Login</button>
+
+        </form>
+
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<style>
+    #fpass {
+        color: black;
+        font-size: 12px;
+        text-align: left;
+    }
+    
+    #llogin {
+        background-color: #FFFFF0;
+        -webkit-border-radius: 40px 40px 40px 40px;
+        -moz-border-radius: 40px 40px 40px 40px;
+        -o-border-radius: 40px 40px 40px 40px;
+        border-radius: 40px 40px 40px 40px;
+    }
+    
+    #textologin {
+        background-color: #343a40;
+        text-align: center;
+        -webkit-border-radius: 40px 40px 40px 40px;
+        -moz-border-radius: 40px 40px 40px 40px;
+        -o-border-radius: 40px 40px 40px 40px;
+        border-radius: 40px 40px 40px 40px;
+    }
+    
+    #butao1 {}
+</style>
+
+
+
+{% endblock %}

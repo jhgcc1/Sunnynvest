@@ -1,0 +1,255 @@
+{% extends 'base.html' %} {% block inputs %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("button[name='pjbt']").click(function(e) {
+            $("#sunLoad").css('display', 'initial');
+            $("#containerInput").css('display', 'none');
+            $("#foot").css('display', 'none');
+            $('button[name="inputsSample"]').css("display", "none");
+        });
+        var projectsUser = "{{projects|safe}}";
+        projectsUser = projectsUser.replace(/'/g, '"').replace(/\\/g, "");
+        console.log(projectsUser, "2projectsUser");
+        var Projectlist = JSON.parse(projectsUser);
+        Projectlist.forEach(function(item) {
+            console.log(item);
+            $("#pj").append("<option value=" + item + ">" + item + "</option>");
+        });
+        $("#pj").selectpicker("refresh");
+
+        if ($("#pj option:selected").val()) {
+            if (window.document.documentMode) {
+                $("#pjload").css("display", "");
+            } else {
+                $("#pjload").css("display", "initial");
+            }
+        }
+
+        ;
+    });
+</script>
+
+<div id="sunLoad" style="display:none;background-color:grey;position:absolute;top:0;left:0;right:0;bottom:0;">
+    <div class="sun">
+        <div class="ray_box">
+            <div class="ray ray1"></div>
+            <div class="ray ray2"></div>
+            <div class="ray ray3"></div>
+            <div class="ray ray4"></div>
+            <div class="ray ray5"></div>
+            <div class="ray ray6"></div>
+            <div class="ray ray7"></div>
+            <div class="ray ray8"></div>
+            <div class="ray ray9"></div>
+        </div>
+        <div class="loadP"></div>
+    </div>
+</div>
+</div>
+<div id="containerInput" class="container" style="z-index:-1" ;>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <h3>Profile</h3>
+        <br>
+        <h5>Username:</h5>
+        <p> {{usernome}}</p>
+
+        <h5>Email address:</h5>
+        <p> {{email}}</p>
+
+        <h5>Name:</h5>
+        <p> {{nome}}</p>
+
+        <h5>Last name:</h5>
+        <p> {{nome2}}</p>
+
+        <h5>Country:</h5>
+        <p> {{pais}}</p>
+        <form action="" class="formulario" method="post" style="z-index:-999999">
+            {%csrf_token%}
+            <h5>Projects:</h5>
+            <div style="display:flex">
+                <select class="selectpicker" name="pj" id="pj">
+    </select>
+                <button type="submit" name="pjbt" value="pjbtv" id="pjload" style="display:none;margin-left:10px" class="btn btn-dark float-sm-left" name="sym" type="submit">Load project</buttontype="submit" name="calcular" value="cal">
+    </div>
+    </form>
+    <br>
+    <br>
+    <a href="{% url 'testpage' %}">Change my password</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+</div>
+<style>
+    .sun {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 50px 50px, orange, white);
+        box-shadow: 0px 0px 40px 15px white;
+        z-index: 100
+    }
+    
+    .ray_box {
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 70px;
+        -webkit-animation: ray_anim 3s linear infinite;
+        animation: ray_anim 3s linear infinite;
+    }
+    
+    .ray {
+        animation: ray_anim2 2s linear infinite;
+        -webkit-animation: ray_anim2 2s linear infinite;
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+        margin-left: 10px;
+        border-radius: 80% 80% 0 0;
+        position: absolute;
+        opacity: 0.1;
+    }
+    
+    .ray1 {
+        height: 120px;
+        width: 30px;
+        -webkit-transform: rotate(200deg);
+        top: -115px;
+        left: 41px;
+    }
+    
+    .ray2 {
+        height: 100px;
+        width: 8px;
+        -webkit-transform: rotate(230deg);
+        top: -70px;
+        left: 84px;
+    }
+    
+    .ray3 {
+        height: 120px;
+        width: 50px;
+        -webkit-transform: rotate(262deg);
+        top: -35px;
+        left: 100px;
+    }
+    
+    .ray4 {
+        height: 100px;
+        width: 14px;
+        -webkit-transform: rotate(305deg);
+        top: 40px;
+        left: 100px;
+    }
+    
+    .ray5 {
+        height: 140px;
+        width: 30px;
+        -webkit-transform: rotate(-15deg);
+        top: 60px;
+        left: 40px;
+    }
+    
+    .ray6 {
+        height: 120px;
+        width: 50px;
+        -webkit-transform: rotate(30deg);
+        top: 60px;
+        left: -30px;
+    }
+    
+    .ray7 {
+        height: 120px;
+        width: 15px;
+        -webkit-transform: rotate(70deg);
+        top: 14px;
+        left: -70px;
+    }
+    
+    .ray8 {
+        height: 130px;
+        width: 30px;
+        -webkit-transform: rotate(110deg);
+        top: -62px;
+        left: -70px;
+    }
+    
+    .ray9 {
+        height: 115px;
+        width: 10px;
+        -webkit-transform: rotate(150deg);
+        top: -105px;
+        left: -32px;
+    }
+    
+    @-webkit-keyframes ray_anim {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    
+    @-webkit-keyframes ray_anim2 {
+        0% {
+            width: 10%;
+        }
+        50% {
+            width: 40%;
+        }
+        100% {
+            width: 10%;
+        }
+    }
+    
+    .loadP::after {
+        content: 'Calculating';
+        position: relative;
+        bottom: -100px;
+        right: 22px;
+        font-size: 22px;
+        animation: loadAction 1s linear infinite;
+    }
+    
+    @keyframes loadAction {
+        25% {
+            content: 'Calculating';
+        }
+        50% {
+            content: 'Calculating.';
+        }
+        75% {
+            content: 'Calculating..';
+        }
+        100% {
+            content: 'Calculating...';
+        }
+    }
+</style>
+{% endblock %}
