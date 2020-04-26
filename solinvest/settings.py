@@ -26,7 +26,7 @@ SECRET_KEY = 'REMOVED'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "sunsubversion.herokuapp.com","127.0.0.1"
+    "sunsubversion.herokuapp.com","127.0.0.1","sunnynvest.com"
 ]
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -34,7 +34,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'REMOVED'
 EMAIL_HOST_PASSWORD = 'REMOVED'
 # Application definition
-
+gentle-tickseed-wm3fwnonhoham17mtv8eqdsv.herokudns.com
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
