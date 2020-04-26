@@ -34,7 +34,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'REMOVED'
 EMAIL_HOST_PASSWORD = 'REMOVED'
 # Application definition
-gentle-tickseed-wm3fwnonhoham17mtv8eqdsv.herokudns.com
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
