@@ -26,7 +26,7 @@ SECRET_KEY = 'REMOVED'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "sunsubversion.herokuapp.com","127.0.0.1","sunnynvest.com"
+    "sunsubversion.herokuapp.com","127.0.0.1","sunnynvest.com","www.sunnynvest.com"
 ]
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
