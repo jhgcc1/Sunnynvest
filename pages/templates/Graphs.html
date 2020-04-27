@@ -325,7 +325,7 @@
                                     bargroupgap: 0.1
                                 };
                                 kpi1 = graphName.replace(/\s/g, '');
-                                string = '<div class="row"><div data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>";
+                                string = '<div class="row"><div data-aos="flip-up" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>";
                             } else {
                                 data2 = [{
                                     x: staticMaths_resultJ["Years"],
@@ -367,7 +367,7 @@
                                     bargroupgap: 0.1
                                 };
                                 kpi2 = graphName.replace(/\s/g, '');
-                                $("#start").after(string + '<div class="col-md-6"  data-aos="fade-left"><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                                $("#start").after(string + '<div class="col-md-6"  data-aos="flip-up"><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
                                 Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
                                 Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                             }
@@ -399,7 +399,7 @@
                             title: graphName
                         };
                         var str = graphName.replace(/\s/g, '');
-                        $("#pareto").after('<div data-aos="fade-left" class="col-md-6"><div id=' + "graphStarts" + str + "></div></div>");
+                        $("#pareto").after('<div data-aos="flip-up" class="col-md-6"><div id=' + "graphStarts" + str + "></div></div>");
                         Plotly.newPlot('graphStarts' + str, trace, _layout, config);
                     } else if (graphName === "Pareto chart") {
                         var list = staticMaths_resultJ[graphName];
@@ -451,7 +451,7 @@
 
                         var _str = graphName.replace(/\s/g, '');
 
-                        $("#start").after('<div  class="row"><div id="pareto"  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + _str + "></div></div></div>");
+                        $("#start").after('<div  class="row"><div id="pareto"  data-aos="flip-up" class="col-md-6"><div id=' + "graphStarts" + _str + "></div></div></div>");
                         Plotly.newPlot('graphStarts' + _str, data, _layout2, config);
                     }
                     /*else if (graphName.includes("Cashflow") || graphName.includes("Sum") || graphName.includes("Produced")) {
@@ -736,17 +736,17 @@
                         kpi1 = kpi.replace(/\s/g, '');
 
                         if (index === Object.keys(allSimGraph).length - 1) {
-                            $("#start").after('<div class="row"><div  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6" data-aos="fade-left"><div id="ponte"></div></div></div>');
+                            $("#start").after('<div class="row"><div  data-aos="flip-up" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6" data-aos="flip-up"><div id="ponte"></div></div></div>');
                             Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
                         } else {
-                            string = '<div class="row"><div class="col-md-6"  data-aos="fade-right"><div id=' + "graphStarts" + kpi1 + "></div></div>";
+                            string = '<div class="row"><div class="col-md-6"  data-aos="flip-up"><div id=' + "graphStarts" + kpi1 + "></div></div>";
                         }
                     } else {
                         console.log(kpi, "kpi");
                         kpi22 = kpi;
                         console.log(kpi22, "kpi");
                         kpi2 = kpi.replace(/\s/g, '');
-                        $("#start").after(string + '<div class="col-md-6"><div  data-aos="fade-left" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                        $("#start").after(string + '<div class="col-md-6"><div  data-aos="flip-up" id=' + "graphStarts" + kpi2 + "></div></div></div>");
                         Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
                         Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
                     }
@@ -846,7 +846,7 @@
                         if (index === Object.keys(graphsObj2).length - 1) {
                             Plotly.newPlot('ponte', data1, layout1, config);
                         } else {
-                            string = '<div class="row"><div  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>";
+                            string = '<div class="row"><div  data-aos="flip-up" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>";
                         }
                     } else {
                         var _layout3;
@@ -893,7 +893,7 @@
                             };
                         }
 
-                        $("#start").after(string + '<div class="col-md-6" data-aos="fade-left" ><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                        $("#start").after(string + '<div class="col-md-6" data-aos="flip-up" ><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
                         Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
                         Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                     }
