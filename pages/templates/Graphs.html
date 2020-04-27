@@ -161,6 +161,10 @@
         }
 
         $(document).ready(function() {
+
+            let config = {
+                responsive: true
+            }
             if (!String.prototype.includes) {
                 String.prototype.includes = function(search, start) {
                     'use strict';
@@ -364,8 +368,8 @@
                                 };
                                 kpi2 = graphName.replace(/\s/g, '');
                                 $("#start").after(string + '<div class="col-md-6"  data-aos="fade-left"><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                                Plotly.newPlot('graphStarts' + kpi1, data1, layout1);
-                                Plotly.newPlot('graphStarts' + kpi2, data2, layout2);
+                                Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                                Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                             }
                         }
                     } else if (graphName === "Discounted payback") {
@@ -396,7 +400,7 @@
                         };
                         var str = graphName.replace(/\s/g, '');
                         $("#pareto").after('<div data-aos="fade-left" class="col-md-6"><div id=' + "graphStarts" + str + "></div></div>");
-                        Plotly.newPlot('graphStarts' + str, trace, _layout);
+                        Plotly.newPlot('graphStarts' + str, trace, _layout, config);
                     } else if (graphName === "Pareto chart") {
                         var list = staticMaths_resultJ[graphName];
                         keysSorted = Object.keys(list).sort(function(a, b) {
@@ -448,7 +452,7 @@
                         var _str = graphName.replace(/\s/g, '');
 
                         $("#start").after('<div  class="row"><div id="pareto"  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + _str + "></div></div></div>");
-                        Plotly.newPlot('graphStarts' + _str, data, _layout2);
+                        Plotly.newPlot('graphStarts' + _str, data, _layout2, config);
                     }
                     /*else if (graphName.includes("Cashflow") || graphName.includes("Sum") || graphName.includes("Produced")) {
                                                    console.log("in2121");
@@ -733,7 +737,7 @@
 
                         if (index === Object.keys(allSimGraph).length - 1) {
                             $("#start").after('<div class="row"><div  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6" data-aos="fade-left"><div id="ponte"></div></div></div>');
-                            Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1]);
+                            Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
                         } else {
                             string = '<div class="row"><div class="col-md-6"  data-aos="fade-right"><div id=' + "graphStarts" + kpi1 + "></div></div>";
                         }
@@ -743,8 +747,8 @@
                         console.log(kpi22, "kpi");
                         kpi2 = kpi.replace(/\s/g, '');
                         $("#start").after(string + '<div class="col-md-6"><div  data-aos="fade-left" id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                        Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1]);
-                        Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1]);
+                        Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
+                        Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
                     }
                 });
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
@@ -840,7 +844,7 @@
                         }
 
                         if (index === Object.keys(graphsObj2).length - 1) {
-                            Plotly.newPlot('ponte', data1, layout1);
+                            Plotly.newPlot('ponte', data1, layout1, config);
                         } else {
                             string = '<div class="row"><div  data-aos="fade-right" class="col-md-6"><div id=' + "graphStarts" + kpi1 + "></div></div>";
                         }
@@ -890,8 +894,8 @@
                         }
 
                         $("#start").after(string + '<div class="col-md-6" data-aos="fade-left" ><div id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                        Plotly.newPlot('graphStarts' + kpi1, data1, layout1);
-                        Plotly.newPlot('graphStarts' + kpi2, data2, layout2);
+                        Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                        Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                     }
                 });
                 $("#loadingG").hide();
