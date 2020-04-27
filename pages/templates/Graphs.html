@@ -159,7 +159,6 @@
             }
             return obj;
         }
-        window.addEventListener('load', AOS.refresh);
         $(document).ready(function() {
 
             let config = {
@@ -2097,8 +2096,11 @@
     <script>
         $(document).ready(function() {
             AOS.init({
-                duration: 1200,
-            })
+                startEvent: 'load'
+            });
+            $(window).on('load', function() {
+                AOS.refresh();
+            });
             $("#logo").hover(
                 function() {
                     $("#logo").css("animation", "run3 3s linear infinite");
