@@ -5,10 +5,8 @@
 <br>
 <br>
 <script>
-    $(window).load(function() {
-        setTimeout(function() {
-            AOS.refresh();
-        }, 500);
+    $(window).on('load', function() {
+        AOS.refresh();
     });
     $(document).ready(function() {
         AOS.init({
