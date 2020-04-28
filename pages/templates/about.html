@@ -5,6 +5,11 @@
 <br>
 <br>
 <script>
+    $(window).load(function() {
+        setTimeout(function() {
+            AOS.refresh();
+        }, 500);
+    });
     $(document).ready(function() {
         AOS.init({
             duration: 1200,
