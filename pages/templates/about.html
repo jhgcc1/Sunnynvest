@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block inputs %}
+{% extends 'base.html' %} {% block inputs %} {%load static%}
 <br>
 <br>
 <br>
@@ -54,6 +54,49 @@
                 <div data-aos="flip-right" class="imgGold" style="width:560px;height:370px;background-image:url(/static/interface1-min.png);background-size:cover;"></div>
             </div>
             <br>
+            <br>
+
+            <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+            <div id="pc" style="display:flex;justify-content:space-between;" data-aos="fade-up">
+                <div style="margin-right:20px">
+                    <img width="150px" height="200px" style="margin-top:5px" src={% static 'eu.jpeg' %}><img>
+                    <div style="display:flex;justify-content:space-evenly;margin-top:4px">
+                        <a href="https://www.facebook.com/joao.h.cavalcanti.5"><i class="fab fa-facebook-f"style="color:black;font-size:45px"></i></a>
+                        <a href="https://www.linkedin.com/in/joao-henrique-cavalcanti-774b45a4/"><i class="fab fa-linkedin" style="color:black;font-size:45px"></i></a>
+                        <a href="https://wa.me/36702357237?text=I'm%20interested%20in%20Sunnynvest%20software"><i class="fab fa-whatsapp" style="color:black;font-size:45px"></i></a>
+                    </div>
+                    <p style="text-align:center;">My CV: <a href="{% static 'CV.pdf' %}">View CV</a></p>
+                </div>
+                <div>
+                    <h2><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
+                    <p>Hello i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project
+                        in Production engineering done in the Federal University of Rio Grande do Norte, and the web version is Msc thesis project in Engineering management completed in University of Debrecen. You can contact me on Linkedin/Whatsapp/Facebook
+                        clicking on the icons below or you can view my CV.</p>
+                </div>
+            </div>
+            <div id="celular" style="display:none">
+                <div style="display:flex;justify-content:space-between;" data-aos="fade-up">
+                    <div style="margin-right:20px">
+                        <img width="150px" height="200px" style="margin-top:5px" src={% static 'eu.jpeg' %}><img>
+                        <div style="display:flex;justify-content:space-evenly;margin-top:4px">
+                            <a href="https://www.facebook.com/joao.h.cavalcanti.5"><i class="fab fa-facebook-f"style="color:black;font-size:45px"></i></a>
+                            <a href="https://www.linkedin.com/in/joao-henrique-cavalcanti-774b45a4/"><i class="fab fa-linkedin" style="color:black;font-size:45px"></i></a>
+                            <a href="https://wa.me/36702357237?text=I'm%20interested%20in%20Sunnynvest%20software"><i class="fab fa-whatsapp" style="color:black;font-size:45px"></i></a>
+                        </div>
+                        <p style="text-align:center;">My CV: <a href="{% static 'CV.pdf' %}">View CV</a></p>
+                    </div>
+                    <div>
+                        <h2><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
+                    </div>
+                </div>
+                <p>Hello i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in
+                    Production engineering done in the Federal University of Rio Grande do Norte, and the web version is Msc thesis project in Engineering management completed in University of Debrecen. You can contact me on Linkedin/Whatsapp/Facebook
+                    clicking on the icons below or you can view my CV.</p>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
     </div>
     <div style="width:20%;margin-left:10%">
         <div class="sun">
@@ -75,6 +118,12 @@
     }
     
     @media only screen and (max-width: 700px) {
+        #celular {
+            display: initial !important;
+        }
+        #pc {
+            display: none !important;
+        }
         .sun {
             position: absolute !important;
             left: 45% !important;
