@@ -85,6 +85,7 @@ def login2(request):
 	nomeoulogin, logout, profile, email, pais, nome, nome2 = checarlogin(request)
 	args={'nomeoulogin':nomeoulogin,'logout':logout, 'profile':profile, 'email':email}
 	args=mandaremail(request,args)
+	args["errorLogin"]="none"
 	if request.method =='POST':
 		form = loginform(request.POST)
 		if form.is_valid():
@@ -96,6 +97,7 @@ def login2(request):
 				alogin(request,user)
 				return redirect('input')
 			else:
+				args["errorLogin"]="initial"
 				return render(request,"login.html",args)
 
 	else:
@@ -218,6 +220,7 @@ def input(request):
 			objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
 			objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
 			simMC_result=simMC(objIpunt)
+			print(simMC_result['inputs'])
 			args["modeloPJname"]=False
 			if objIpunt["distMaintenance"][0]=="Fixed value":
 				print(simMC_result)
@@ -258,7 +261,10 @@ def input(request):
 				objIpunt["plifespan"]=simMC_result["0"]["inputs"]["Panels lifespan"]["rawData"][0]
 			else:
 				objIpunt["plifespan"]=int(simMC_result["0"]["inputs"]["Panels lifespan"]["mean"])
-			
+			print("aqui")
+			print(objIpunt["plifespan"])
+			print("aqui")
+			print(objIpunt["ilifespan"])
 			spiderS_result=spiderS(objIpunt)
 			staticMaths_result=staticMaths(objIpunt)
 			args["spiderS_result"]=spiderS_result

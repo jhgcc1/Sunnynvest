@@ -1014,10 +1014,18 @@
         a[name='abt'] {
             cursor: pointer;
         }
+        
+        #logo {
+            animation: run3 3s linear infinite;
+            opacity: 80%;
+        }
     </style>
 
     <script>
         $(document).ready(function() {
+            $("#logo").css("animation", "run3 3s linear infinite");
+            $("#logo").css("animation-play-state", "running");
+            $("#logo").css("opacity", "80%");
             $("a[name='abt']").click(
                 function(e) {
                     let element = document.getElementById("gancho");
@@ -1025,7 +1033,7 @@
                         behavior: "smooth"
                     })
                 });
-            $("#logo").hover(
+            /*$("#logo").hover(
                 function() {
                     $("#logo").css("animation", "run3 3s linear infinite");
                     $("#logo").css("animation-play-state", "running");
@@ -1037,7 +1045,7 @@
                     $("#logo").css("background", "none");
                     $("#logo").css("opacity", "100%");
                 }
-            )
+            )*/
         })
         var prevScrollpos = window.pageYOffset;
         window.onscroll = function() {

@@ -8,7 +8,8 @@ def simMC(objIpunt):
     simMC_result={}
     #objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
     #objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
-    
+    print("2")
+    print(objIpunt["sim_year"])
     for SimulationYear in range(0,objIpunt["sim_year"]):
         rd_distMaintenance=rnd(objIpunt["distMaintenance"])
         rd_distPricePanel=rnd(objIpunt["distPricePanel"])
@@ -69,7 +70,7 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["inputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["inputs"][item]["rawData"]=auxList
-           
+    
             
     return simMC_result
         
