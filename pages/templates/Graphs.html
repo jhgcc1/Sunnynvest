@@ -890,7 +890,7 @@
                                         };
                                     }
 
-                                    $("#start").after(string + '<div class="col-md-6"><class="wow slideInLeft div id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                                    $("#start").after(string + '<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
                                     Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
                                     Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                                 }
