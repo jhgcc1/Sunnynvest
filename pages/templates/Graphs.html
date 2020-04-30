@@ -160,751 +160,752 @@
             return obj;
         }
         $(document).ready(function() {
-                    new WOW().init();
-                    let config = {
-                        responsive: true
+            new WOW().init();
+            let config = {
+                responsive: true
+            }
+            if (!String.prototype.includes) {
+                String.prototype.includes = function(search, start) {
+                    'use strict';
+
+                    if (search instanceof RegExp) {
+                        throw TypeError('first argument must not be a RegExp');
                     }
-                    if (!String.prototype.includes) {
-                        String.prototype.includes = function(search, start) {
-                            'use strict';
-
-                            if (search instanceof RegExp) {
-                                throw TypeError('first argument must not be a RegExp');
-                            }
-                            if (start === undefined) {
-                                start = 0;
-                            }
-                            return this.indexOf(search, start) !== -1;
-                        };
+                    if (start === undefined) {
+                        start = 0;
                     }
-                    if (!Object.keys) {
+                    return this.indexOf(search, start) !== -1;
+                };
+            }
+            if (!Object.keys) {
 
-                        Object.keys = (function() {
-                            var hasOwnProperty = Object.prototype.hasOwnProperty,
-                                hasDontEnumBug = !({
-                                    toString: null
-                                }).propertyIsEnumerable('toString'),
-                                dontEnums = [
-                                    'toString',
-                                    'toLocaleString',
-                                    'valueOf',
-                                    'hasOwnProperty',
-                                    'isPrototypeOf',
-                                    'propertyIsEnumerable',
-                                    'constructor'
-                                ],
-                                dontEnumsLength = dontEnums.length;
+                Object.keys = (function() {
+                    var hasOwnProperty = Object.prototype.hasOwnProperty,
+                        hasDontEnumBug = !({
+                            toString: null
+                        }).propertyIsEnumerable('toString'),
+                        dontEnums = [
+                            'toString',
+                            'toLocaleString',
+                            'valueOf',
+                            'hasOwnProperty',
+                            'isPrototypeOf',
+                            'propertyIsEnumerable',
+                            'constructor'
+                        ],
+                        dontEnumsLength = dontEnums.length;
 
-                            return function(obj) {
-                                if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+                    return function(obj) {
+                        if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
 
-                                var result = [];
+                        var result = [];
 
-                                for (var prop in obj) {
-                                    if (hasOwnProperty.call(obj, prop)) result.push(prop);
-                                }
+                        for (var prop in obj) {
+                            if (hasOwnProperty.call(obj, prop)) result.push(prop);
+                        }
 
-                                if (hasDontEnumBug) {
-                                    for (var i = 0; i < dontEnumsLength; i++) {
-                                        if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
-                                    }
-                                }
-                                return result;
+                        if (hasDontEnumBug) {
+                            for (var i = 0; i < dontEnumsLength; i++) {
+                                if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
                             }
-                        })()
-                    };
-                    setTimeout(function() {
+                        }
+                        return result;
+                    }
+                })()
+            };
+            setTimeout(function() {
 
-                            $("a[name='abt']").click(function(e) {
-                                var element = document.getElementById("gancho");
-                                element.scrollIntoView({
-                                    behavior: "smooth"
-                                });
-                            });
-                            var string;
-                            var kpi1;
-                            var kpi2;
-                            var layout1;
-                            var layout2;
-                            var data1;
-                            var data2;
-                            graphsObj = {};
-                            graphsObj2 = {};
-                            var spiderS_resultJ;
-                            var spiderS_result;
-                            var simMC_result;
-                            var simMC_resultJ;
-                            var staticMaths_result;
-                            var staticMaths_resultJ;
-                            var dictStringResult = "{{dictStringResult|safe}}";
+                $("a[name='abt']").click(function(e) {
+                    var element = document.getElementById("gancho");
+                    element.scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
+                var string;
+                var kpi1;
+                var kpi2;
+                var layout1;
+                var layout2;
+                var data1;
+                var data2;
+                graphsObj = {};
+                graphsObj2 = {};
+                var spiderS_resultJ;
+                var spiderS_result;
+                var simMC_result;
+                var simMC_resultJ;
+                var staticMaths_result;
+                var staticMaths_resultJ;
+                var dictStringResult = "{{dictStringResult|safe}}";
 
-                            if ('' !== dictStringResult) {
-                                dictStringResult = dictStringResult.replace(/'/g, '"');
-                                dictStringResult = $.parseJSON(dictStringResult);
-                                spiderS_resultJ = dictStringResult.spiderS_result;
-                                simMC_resultJ = dictStringResult.simMC_result;
-                                staticMaths_resultJ = dictStringResult.staticMaths_result;
+                if ('' !== dictStringResult) {
+                    dictStringResult = dictStringResult.replace(/'/g, '"');
+                    dictStringResult = $.parseJSON(dictStringResult);
+                    spiderS_resultJ = dictStringResult.spiderS_result;
+                    simMC_resultJ = dictStringResult.simMC_result;
+                    staticMaths_resultJ = dictStringResult.staticMaths_result;
+                } else {
+                    spiderS_result = "{{spiderS_result|safe}}";
+                    spiderS_result = spiderS_result.replace(/'/g, '"');
+                    console.log(spiderS_result, "spiderS_result");
+                    spiderS_resultJ = $.parseJSON(spiderS_result);
+                    simMC_result = "{{simMC_result|safe}}";
+                    simMC_result = simMC_result.replace(/'/g, '"');
+                    console.log(simMC_result, "simMC_result");
+                    simMC_resultJ = $.parseJSON(simMC_result);
+                    staticMaths_result = "{{staticMaths_result|safe}}";
+                    staticMaths_result = staticMaths_result.replace(/'/g, '"');
+                    console.log(staticMaths_result, "staticMaths_result");
+                    staticMaths_resultJ = $.parseJSON(staticMaths_result);
+                }
+
+                objLiteralBars = {
+                    "CO2 emition reduction": "Kg",
+                    "Annuity payment with inflation cashflow": "$",
+                    "Annuity payment without inflation cashflow": "$",
+                    "Annuity payment with inflation": "$",
+                    "Annuity payment without inflation": "$",
+                    "Fiscal Effects": "$",
+                    "Inverters depreciation": "$",
+                    "inverters reinvestments": "$",
+                    "panels depreciation": "$",
+                    "Maintenance expenses": "$",
+                    "Produced KWh per year": "KWh",
+                    "Sum of produced KWh per year": "KWh",
+                    "Sum of gross revenue without inflation": "$",
+                    "Sum of gross revenue with inflation": "$",
+                    "Cashflow without inflation": "$",
+                    "Cashflow with inflation": "$"
+                };
+                var colorArray = ['rgb(55, 83, 109,0.8)', 'rgb(8,181,156,0.8)', 'rgb(8,81,156,0.8)', 'rgb(180,81,156,0.8)', 'rgb(8,81,95,0.8)', 'rgb(83,81,56,0.8)', 'rgb(28,221,156,0.8)', 'rgb(68,81,143,0.8)', 'rgb(8,30,55,0.8)', 'rgb(255,81,156,0.8)', 'rgb(21,255,41,0.8)', 'rgb(20,75,20,0.8)', 'rgb(90,155,20,0.8)', 'rgb(40,105,26,0.8)', 'rgb(140,55,64,0.8)', 'rgb(20,90,26,0.8)', 'rgb(140,200,26,0.8)', 'rgb(40,155,26,0.8)', 'rgb(140,55,26,0.8)', 'rgb(40,5,226,0.8)'];
+                Object.keys(staticMaths_resultJ).forEach(function(graphName, index) {
+                    if (objLiteralBars[graphName]) {
+                        if (staticMaths_resultJ["paymentMethod"] == "cash" && graphName.includes("Annuity")) {} else {
+                            if (index % 2 != 0) {
+                                data1 = [{
+                                    x: staticMaths_resultJ["Years"],
+                                    y: staticMaths_resultJ[graphName],
+                                    name: graphName,
+                                    marker: {
+                                        color: colorArray[index]
+                                    },
+                                    type: 'bar'
+                                }];
+                                layout1 = {
+                                    title: graphName,
+                                    xaxis: {
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickangle: -75
+                                    },
+                                    yaxis: {
+                                        title: objLiteralBars[graphName],
+                                        titlefont: {
+                                            size: 16,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        }
+                                    },
+                                    legend: {
+                                        x: 0,
+                                        y: 1.0,
+                                        bgcolor: 'rgba(255, 255, 255, 0)',
+                                        bordercolor: 'rgba(255, 255, 255, 0)'
+                                    },
+                                    barmode: 'group',
+                                    bargap: 0.15,
+                                    bargroupgap: 0.1
+                                };
+                                kpi1 = graphName.replace(/\s/g, '');
+                                string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
                             } else {
-                                spiderS_result = "{{spiderS_result|safe}}";
-                                spiderS_result = spiderS_result.replace(/'/g, '"');
-                                console.log(spiderS_result, "spiderS_result");
-                                spiderS_resultJ = $.parseJSON(spiderS_result);
-                                simMC_result = "{{simMC_result|safe}}";
-                                simMC_result = simMC_result.replace(/'/g, '"');
-                                console.log(simMC_result, "simMC_result");
-                                simMC_resultJ = $.parseJSON(simMC_result);
-                                staticMaths_result = "{{staticMaths_result|safe}}";
-                                staticMaths_result = staticMaths_result.replace(/'/g, '"');
-                                console.log(staticMaths_result, "staticMaths_result");
-                                staticMaths_resultJ = $.parseJSON(staticMaths_result);
+                                data2 = [{
+                                    x: staticMaths_resultJ["Years"],
+                                    y: staticMaths_resultJ[graphName],
+                                    name: graphName,
+                                    marker: {
+                                        color: colorArray[index]
+                                    },
+                                    type: 'bar'
+                                }];
+                                layout2 = {
+                                    title: graphName,
+                                    xaxis: {
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickangle: -75
+                                    },
+                                    yaxis: {
+                                        title: objLiteralBars[graphName],
+                                        titlefont: {
+                                            size: 16,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        }
+                                    },
+                                    legend: {
+                                        x: 0,
+                                        y: 1.0,
+                                        bgcolor: 'rgba(255, 255, 255, 0)',
+                                        bordercolor: 'rgba(255, 255, 255, 0)'
+                                    },
+                                    barmode: 'group',
+                                    bargap: 0.15,
+                                    bargroupgap: 0.1
+                                };
+                                kpi2 = graphName.replace(/\s/g, '');
+                                $("#start").after(string + '<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                                Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                                Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                             }
-
-                            objLiteralBars = {
-                                "CO2 emition reduction": "Kg",
-                                "Annuity payment with inflation cashflow": "$",
-                                "Annuity payment without inflation cashflow": "$",
-                                "Annuity payment with inflation": "$",
-                                "Annuity payment without inflation": "$",
-                                "Fiscal Effects": "$",
-                                "Inverters depreciation": "$",
-                                "inverters reinvestments": "$",
-                                "panels depreciation": "$",
-                                "Maintenance expenses": "$",
-                                "Produced KWh per year": "KWh",
-                                "Sum of produced KWh per year": "KWh",
-                                "Sum of gross revenue without inflation": "$",
-                                "Sum of gross revenue with inflation": "$",
-                                "Cashflow without inflation": "$",
-                                "Cashflow with inflation": "$"
-                            };
-                            var colorArray = ['rgb(55, 83, 109,0.8)', 'rgb(8,181,156,0.8)', 'rgb(8,81,156,0.8)', 'rgb(180,81,156,0.8)', 'rgb(8,81,95,0.8)', 'rgb(83,81,56,0.8)', 'rgb(28,221,156,0.8)', 'rgb(68,81,143,0.8)', 'rgb(8,30,55,0.8)', 'rgb(255,81,156,0.8)', 'rgb(21,255,41,0.8)', 'rgb(20,75,20,0.8)', 'rgb(90,155,20,0.8)', 'rgb(40,105,26,0.8)', 'rgb(140,55,64,0.8)', 'rgb(20,90,26,0.8)', 'rgb(140,200,26,0.8)', 'rgb(40,155,26,0.8)', 'rgb(140,55,26,0.8)', 'rgb(40,5,226,0.8)'];
-                            Object.keys(staticMaths_resultJ).forEach(function(graphName, index) {
-                                if (objLiteralBars[graphName]) {
-                                    if (staticMaths_resultJ["paymentMethod"] == "cash" && graphName.includes("Annuity")) {} else {
-                                        if (index % 2 != 0) {
-                                            data1 = [{
-                                                x: staticMaths_resultJ["Years"],
-                                                y: staticMaths_resultJ[graphName],
-                                                name: graphName,
-                                                marker: {
-                                                    color: colorArray[index]
-                                                },
-                                                type: 'bar'
-                                            }];
-                                            layout1 = {
-                                                title: graphName,
-                                                xaxis: {
-                                                    tickfont: {
-                                                        size: 14,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    },
-                                                    tickangle: -75
-                                                },
-                                                yaxis: {
-                                                    title: objLiteralBars[graphName],
-                                                    titlefont: {
-                                                        size: 16,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    },
-                                                    tickfont: {
-                                                        size: 14,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    }
-                                                },
-                                                legend: {
-                                                    x: 0,
-                                                    y: 1.0,
-                                                    bgcolor: 'rgba(255, 255, 255, 0)',
-                                                    bordercolor: 'rgba(255, 255, 255, 0)'
-                                                },
-                                                barmode: 'group',
-                                                bargap: 0.15,
-                                                bargroupgap: 0.1
-                                            };
-                                            kpi1 = graphName.replace(/\s/g, '');
-                                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
-                                        } else {
-                                            data2 = [{
-                                                x: staticMaths_resultJ["Years"],
-                                                y: staticMaths_resultJ[graphName],
-                                                name: graphName,
-                                                marker: {
-                                                    color: colorArray[index]
-                                                },
-                                                type: 'bar'
-                                            }];
-                                            layout2 = {
-                                                title: graphName,
-                                                xaxis: {
-                                                    tickfont: {
-                                                        size: 14,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    },
-                                                    tickangle: -75
-                                                },
-                                                yaxis: {
-                                                    title: objLiteralBars[graphName],
-                                                    titlefont: {
-                                                        size: 16,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    },
-                                                    tickfont: {
-                                                        size: 14,
-                                                        color: 'rgb(107, 107, 107)'
-                                                    }
-                                                },
-                                                legend: {
-                                                    x: 0,
-                                                    y: 1.0,
-                                                    bgcolor: 'rgba(255, 255, 255, 0)',
-                                                    bordercolor: 'rgba(255, 255, 255, 0)'
-                                                },
-                                                barmode: 'group',
-                                                bargap: 0.15,
-                                                bargroupgap: 0.1
-                                            };
-                                            kpi2 = graphName.replace(/\s/g, '');
-                                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                                            Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
-                                            Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
-                                        }
-                                    }
-                                } else if (graphName === "Discounted payback") {
-                                    var trace = [{
-                                        x: staticMaths_resultJ["Years"],
-                                        y: staticMaths_resultJ[graphName],
-                                        mode: 'lines+markers',
-                                        type: 'scatter',
-                                        name: "Acumulated NPV"
-                                    }];
-                                    var _layout = {
-                                        yaxis: {
-                                            title: "NPV($)",
-                                            titlefont: {
-                                                size: 16,
-                                                color: 'rgb(107, 107, 107)'
-                                            },
-                                            tickfont: {
-                                                size: 14,
-                                                color: 'rgb(107, 107, 107)'
-                                            }
-                                        },
-                                        showlegend: true,
-                                        legend: {
-                                            "orientation": "h"
-                                        },
-                                        title: graphName
-                                    };
-                                    var str = graphName.replace(/\s/g, '');
-                                    $("#pareto").after('<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + str + "></div></div>");
-                                    Plotly.newPlot('graphStarts' + str, trace, _layout, config);
-                                } else if (graphName === "Pareto chart") {
-                                    var list = staticMaths_resultJ[graphName];
-                                    keysSorted = Object.keys(list).sort(function(a, b) {
-                                        return list[b] - list[a];
-                                    });
-                                    var sortedValues = [];
-                                    var sortedValuesSum = [];
-                                    keysSorted.forEach(function(item) {
-                                        sortedValues.push(staticMaths_resultJ[graphName][item]);
-                                        var sum = sortedValues.reduce(function(a, b) {
-                                            return a + b;
-                                        }, 0);
-                                        sortedValuesSum.push(sum);
-                                    });
-                                    var trace1 = {
-                                        x: keysSorted,
-                                        y: sortedValuesSum,
-                                        type: 'scatter',
-                                        name: "Cumulative percentage"
-                                    };
-                                    var trace2 = {
-                                        x: keysSorted,
-                                        y: sortedValues,
-                                        type: 'bar',
-                                        name: "Percentage of the investment"
-                                    };
-                                    var _layout2 = {
-                                        yaxis: {
-                                            title: "%",
-                                            titlefont: {
-                                                size: 16,
-                                                color: 'rgb(107, 107, 107)'
-                                            },
-                                            tickfont: {
-                                                size: 14,
-                                                color: 'rgb(107, 107, 107)'
-                                            }
-                                        },
-                                        showlegend: true,
-                                        legend: {
-                                            x: 0.5,
-                                            y: 0.5,
-                                            "orientation": "v"
-                                        },
-                                        title: graphName
-                                    };
-                                    var data = [trace1, trace2];
-
-                                    var _str = graphName.replace(/\s/g, '');
-
-                                    $("#start").after('<div  class="row"><div id="pareto" class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + _str + "></div></div></div>");
-                                    Plotly.newPlot('graphStarts' + _str, data, _layout2, config);
+                        }
+                    } else if (graphName === "Discounted payback") {
+                        var trace = [{
+                            x: staticMaths_resultJ["Years"],
+                            y: staticMaths_resultJ[graphName],
+                            mode: 'lines+markers',
+                            type: 'scatter',
+                            name: "Acumulated NPV"
+                        }];
+                        var _layout = {
+                            yaxis: {
+                                title: "NPV($)",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
                                 }
-                                /*else if (graphName.includes("Cashflow") || graphName.includes("Sum") || graphName.includes("Produced")) {
-                                                               console.log("in2121");
-                                                               let obj = {
-                                                                   "Produced KWh per year": "KWh",
-                                                                   "Sum of produced KWh per year": "KWh",
-                                                                   "Sum of gross revenue": "$",
-                                                                   "Sum of gross revenue with inflation": "$"
-                                                               }
-                                                               let data3 = [{
-                                                                   x: staticMaths_resultJ["Years"],
-                                                                   y: staticMaths_resultJ[graphName],
-                                                                   name: graphName,
-                                                                   marker: {
-                                                                       color: colorArray[index]
-                                                                   },
-                                                                   type: 'bar'
-                                                               }];
-                                                               let layout3 = {
-                                                                   title: graphName,
-                                                                   xaxis: {
-                                                                       tickfont: {
-                                                                           size: 14,
-                                                                           color: 'rgb(107, 107, 107)'
-                                                                       }
-                                                                   },
-                                                                   yaxis: {
-                                                                       title: obj[graphName],
-                                                                       titlefont: {
-                                                                           size: 16,
-                                                                           color: 'rgb(107, 107, 107)'
-                                                                       },
-                                                                       tickfont: {
-                                                                           size: 14,
-                                                                           color: 'rgb(107, 107, 107)'
-                                                                       }
-                                                                   },
-                                                                   legend: {
-                                                                       x: 0,
-                                                                       y: 1.0,
-                                                                       bgcolor: 'rgba(255, 255, 255, 0)',
-                                                                       bordercolor: 'rgba(255, 255, 255, 0)'
-                                                                   },
-                                                                   barmode: 'group',
-                                                                   bargap: 0.15,
-                                                                   bargroupgap: 0.1
-                                                               };
-                                                               let kpi3 = graphName.replace(/\s/g, '');
-                                                               let strin3 = '<div class="row"><div class="col-md-12"><div id=' + "graphStarts" + kpi3 + "></div></div></div>"
-                                                               $("#start").after(strin3);
-                                                               Plotly.newPlot('graphStarts' + kpi3, data3, layout3);
-                                    }*/
+                            },
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h"
+                            },
+                            title: graphName
+                        };
+                        var str = graphName.replace(/\s/g, '');
+                        $("#pareto").after('<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + str + "></div></div>");
+                        Plotly.newPlot('graphStarts' + str, trace, _layout, config);
+                    } else if (graphName === "Pareto chart") {
+                        var list = staticMaths_resultJ[graphName];
+                        keysSorted = Object.keys(list).sort(function(a, b) {
+                            return list[b] - list[a];
+                        });
+                        var sortedValues = [];
+                        var sortedValuesSum = [];
+                        keysSorted.forEach(function(item) {
+                            sortedValues.push(staticMaths_resultJ[graphName][item]);
+                            var sum = sortedValues.reduce(function(a, b) {
+                                return a + b;
+                            }, 0);
+                            sortedValuesSum.push(sum);
+                        });
+                        var trace1 = {
+                            x: keysSorted,
+                            y: sortedValuesSum,
+                            type: 'scatter',
+                            name: "Cumulative percentage"
+                        };
+                        var trace2 = {
+                            x: keysSorted,
+                            y: sortedValues,
+                            type: 'bar',
+                            name: "Percentage of the investment"
+                        };
+                        var _layout2 = {
+                            yaxis: {
+                                title: "%",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
+                                }
+                            },
+                            showlegend: true,
+                            legend: {
+                                x: 0.5,
+                                y: 0.5,
+                                "orientation": "v"
+                            },
+                            title: graphName
+                        };
+                        var data = [trace1, trace2];
 
-                            });
-                            var yearAux = [];
-                            Object.keys(simMC_resultJ).forEach(function(year) {
-                                var thisyear = new Date().getFullYear() + parseInt(year);
-                                yearAux.push(thisyear);
-                                Object.keys(simMC_resultJ[year]).forEach(function(inout) {
-                                    Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
-                                        if (kpi !== "pricepanel" && kpi !== "priceinverters") {
-                                            if (kpi !== "Discounted payback") {
-                                                if (!graphsObj[kpi + " box"]) {
-                                                    graphsObj[kpi + " box"] = [];
-                                                }
+                        var _str = graphName.replace(/\s/g, '');
 
-                                                var trace = {
-                                                    y: simMC_resultJ[year][inout][kpi]["rawData"],
-                                                    type: 'box',
-                                                    name: thisyear,
-                                                    marker: {
-                                                        color: colorArray[parseInt(year)]
-                                                    },
-                                                    boxmean: "sd"
-                                                };
-                                                graphsObj[kpi + " box"].push(trace);
-                                            }
+                        $("#start").after('<div  class="row"><div id="pareto" class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + _str + "></div></div></div>");
+                        Plotly.newPlot('graphStarts' + _str, data, _layout2, config);
+                    }
+                    /*else if (graphName.includes("Cashflow") || graphName.includes("Sum") || graphName.includes("Produced")) {
+                                                   console.log("in2121");
+                                                   let obj = {
+                                                       "Produced KWh per year": "KWh",
+                                                       "Sum of produced KWh per year": "KWh",
+                                                       "Sum of gross revenue": "$",
+                                                       "Sum of gross revenue with inflation": "$"
+                                                   }
+                                                   let data3 = [{
+                                                       x: staticMaths_resultJ["Years"],
+                                                       y: staticMaths_resultJ[graphName],
+                                                       name: graphName,
+                                                       marker: {
+                                                           color: colorArray[index]
+                                                       },
+                                                       type: 'bar'
+                                                   }];
+                                                   let layout3 = {
+                                                       title: graphName,
+                                                       xaxis: {
+                                                           tickfont: {
+                                                               size: 14,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           }
+                                                       },
+                                                       yaxis: {
+                                                           title: obj[graphName],
+                                                           titlefont: {
+                                                               size: 16,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           },
+                                                           tickfont: {
+                                                               size: 14,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           }
+                                                       },
+                                                       legend: {
+                                                           x: 0,
+                                                           y: 1.0,
+                                                           bgcolor: 'rgba(255, 255, 255, 0)',
+                                                           bordercolor: 'rgba(255, 255, 255, 0)'
+                                                       },
+                                                       barmode: 'group',
+                                                       bargap: 0.15,
+                                                       bargroupgap: 0.1
+                                                   };
+                                                   let kpi3 = graphName.replace(/\s/g, '');
+                                                   let strin3 = '<div class="row"><div class="col-md-12"><div id=' + "graphStarts" + kpi3 + "></div></div></div>"
+                                                   $("#start").after(strin3);
+                                                   Plotly.newPlot('graphStarts' + kpi3, data3, layout3);
+                        }*/
 
-                                            if (!graphsObj[kpi + " hist"]) {
-                                                graphsObj[kpi + " hist"] = [];
-                                            }
+                });
+                var yearAux = [];
+                Object.keys(simMC_resultJ).forEach(function(year) {
+                    var thisyear = new Date().getFullYear() + parseInt(year);
+                    yearAux.push(thisyear);
+                    Object.keys(simMC_resultJ[year]).forEach(function(inout) {
+                        Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
+                            if (kpi !== "pricepanel" && kpi !== "priceinverters") {
+                                if (kpi !== "Discounted payback") {
+                                    if (!graphsObj[kpi + " box"]) {
+                                        graphsObj[kpi + " box"] = [];
+                                    }
 
-                                            var x = simMC_resultJ[year][inout][kpi]["rawData"];
-                                            console.log(x, "aqui2");
-                                            var data = {
-                                                //histfunc: "count",
-                                                x: x,
-                                                type: "histogram",
-                                                histnorm: 'probability',
-                                                marker: {
-                                                    color: colorArray[year]
-                                                },
-                                                name: thisyear,
-                                                cumulative: {
-                                                    enabled: false
-                                                },
-                                                visible: thisyear === new Date().getFullYear() + 0
-                                            };
+                                    var trace = {
+                                        y: simMC_resultJ[year][inout][kpi]["rawData"],
+                                        type: 'box',
+                                        name: thisyear,
+                                        marker: {
+                                            color: colorArray[parseInt(year)]
+                                        },
+                                        boxmean: "sd"
+                                    };
+                                    graphsObj[kpi + " box"].push(trace);
+                                }
 
-                                            if (kpi === "Discounted payback") {
-                                                data["autobinx"] = false;
-                                                data["xbins"] = {
-                                                    size: 1
-                                                };
-                                            }
+                                if (!graphsObj[kpi + " hist"]) {
+                                    graphsObj[kpi + " hist"] = [];
+                                }
 
-                                            graphsObj[kpi + " hist"].push(data);
-                                        }
-                                    });
-                                });
-                            });
-                            var allSimGraph = {};
-                            Object.keys(graphsObj).forEach(function(kpi, index) {
-                                data1 = graphsObj[kpi];
-                                console.log(kpi.split(" ")[1], "kpi.split(");
-                                var obj = {
-                                    "Maintenance": "$",
-                                    "Cost": "%",
-                                    "Total": "$",
-                                    "LCOE": " $/KWh",
-                                    "Cost/kwh": " $/KWh",
-                                    "Equivalent": "$",
-                                    "MIRR": "%",
-                                    "NPV": "$",
-                                    "IRR": "%",
-                                    "Price": " $/W",
-                                    "Irradiation": " KWh/m2/day",
-                                    "Simple": " years",
-                                    "Inverters": " years",
-                                    "Panels": " years"
+                                var x = simMC_resultJ[year][inout][kpi]["rawData"];
+                                console.log(x, "aqui2");
+                                var data = {
+                                    //histfunc: "count",
+                                    x: x,
+                                    type: "histogram",
+                                    histnorm: 'probability',
+                                    marker: {
+                                        color: colorArray[year]
+                                    },
+                                    name: thisyear,
+                                    cumulative: {
+                                        enabled: false
+                                    },
+                                    visible: thisyear === new Date().getFullYear() + 0
                                 };
 
-                                if (kpi.split(" ")[kpi.split(" ").length - 1] === "hist") {
-                                    console.log("1");
-                                    console.log(kpi);
-                                    console.log(data1);
-                                    var year = [];
-                                    Object.keys(graphsObj[kpi]).forEach(function(y) {
-                                        year.push(graphsObj[kpi][y].name);
-                                    });
-                                    var buttons = [];
-                                    year.forEach(function(y) {
-                                        auxBol = [];
-                                        auxBol2 = [];
-                                        year.forEach(function(y2, index) {
-                                            if (y === y2) {
-                                                auxBol.push(true);
-                                            } else {
-                                                auxBol.push(false);
-                                            }
-
-                                            auxBol2.push(true);
-                                        });
-                                        var args = ["visible", auxBol];
-                                        var label = y;
-                                        buttons.push({
-                                            method: 'restyle',
-                                            args: args,
-                                            label: label.toString()
-                                        });
-                                    });
-                                    buttons.push({
-                                        method: 'restyle',
-                                        args: ["visible", auxBol2],
-                                        label: "Select all"
-                                    });
-                                    layout1 = {
-                                        updatemenus: [{
-                                            y: 1.12,
-                                            x: 1,
-                                            yanchor: 'top',
-                                            buttons: buttons
-                                        }],
-                                        yaxis: {
-                                            title: "probability",
-                                            titlefont: {
-                                                size: 16,
-                                                color: 'rgb(107, 107, 107)'
-                                            },
-                                            tickfont: {
-                                                size: 14,
-                                                color: 'rgb(107, 107, 107)'
-                                            }
-                                        },
-                                        xaxis: {
-                                            tickangle: -45
-                                        },
-                                        bargap: 0.15,
-                                        title: kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "probabilities of occurrence"
+                                if (kpi === "Discounted payback") {
+                                    data["autobinx"] = false;
+                                    data["xbins"] = {
+                                        size: 1
                                     };
-
-                                    if (kpi.split(" ")[0] !== "Discounted") {
-                                        layout1.updatemenus.push({
-                                            y: 1.12,
-                                            x: 0.2,
-                                            xaxis: {
-                                                tickmode: 'auto'
-                                            },
-                                            yanchor: 'top',
-                                            buttons: [{
-                                                method: 'update',
-                                                args: [{
-                                                    'cumulative.enabled': false
-                                                }, {
-                                                    'xaxis.showtickprefix': 'all',
-                                                    'xaxis.tickprefix': ""
-                                                }],
-                                                label: 'Histogram'
-                                            }, {
-                                                method: 'update',
-                                                args: [{
-                                                    'cumulative.enabled': true
-                                                }, {
-                                                    'xaxis.showtickprefix': 'all',
-                                                    'xaxis.tickprefix': "<="
-                                                }],
-                                                label: 'Cumulative'
-                                            }]
-                                        });
-                                    }
-
-                                    if (kpi.split(" ")[0] === "Simple" || kpi.split(" ")[0] === "Discounted" || kpi.split(" ")[0] === "Panels" || kpi.split(" ")[0] === "Inverters") {
-                                        layout1["xaxis"] = {
-                                            tickmode: 'auto',
-                                            showticksuffix: 'all',
-                                            ticksuffix: " years",
-                                            tickangle: -75
-                                        };
-                                    } else {
-                                        if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
-                                            layout1["xaxis"]["tickformat"] = ',.0%';
-                                        } else {
-                                            console.log(layout1);
-                                            layout1["xaxis"]["showticksuffix"] = 'all';
-                                            layout1["xaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
-                                        }
-                                    }
-
-                                    if (kpi.split(" ")[0] === "Irradiation") {
-                                        layout1["xaxis"]["tickfont"] = {
-                                            size: 8,
-                                            color: 'rgb(107, 107, 107)'
-                                        };
-                                    }
-                                } else {
-                                    if (kpi.split(" ")[0] !== "Discounted") {
-                                        layout1 = {
-                                            title: kpi + " simulation results",
-                                            xaxis: {},
-                                            yaxis: {}
-                                        };
-
-                                        if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
-                                            layout1["yaxis"]["tickformat"] = ',.0%';
-                                        } else {
-                                            console.log(layout1);
-                                            layout1["yaxis"]["showticksuffix"] = 'all';
-                                            layout1["yaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
-
-                                            if (kpi.split(" ")[0] === "Irradiation") {
-                                                layout1["yaxis"]["tickfont"] = {
-                                                    size: 8,
-                                                    color: 'rgb(107, 107, 107)'
-                                                };
-                                            }
-                                        }
-                                    }
-
-                                    layout1["title"] = kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "boxplot (simulation results)";
                                 }
 
-                                allSimGraph[kpi] = [data1, layout1];
-                            });
-                            var kpi11;
-                            var kpi22;
-                            Object.keys(allSimGraph).forEach(function(kpi, index) {
-                                if (index % 2 == 0) {
-                                    console.log(allSimGraph, "allSimGraph");
-                                    kpi11 = kpi;
-                                    console.log(kpi11, "kpi");
-                                    kpi1 = kpi.replace(/\s/g, '');
-
-                                    if (index === Object.keys(allSimGraph).length - 1) {
-                                        $("#start").after('<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6"><div class="wow slideInLeft" id="ponte"></div></div></div>');
-                                        Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
-                                    } else {
-                                        string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
-                                    }
-                                } else {
-                                    console.log(kpi, "kpi");
-                                    kpi22 = kpi;
-                                    console.log(kpi22, "kpi");
-                                    kpi2 = kpi.replace(/\s/g, '');
-                                    $("#start").after(string + '<div class="col-md-6"><div  class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                                    Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
-                                    Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
-                                }
-                            });
-                            Object.keys(spiderS_resultJ).forEach(function(graph) {
-                                if (graph !== "rangeSpider") {
-                                    Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                                        if (!graphsObj2[kpi]) {
-                                            graphsObj2[kpi] = {};
-                                        }
-
-                                        if (!graphsObj2[kpi][graph]) {
-                                            graphsObj2[kpi][graph] = [];
-                                        }
-
-                                        graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
-                                    });
-                                }
-                            });
-                            Object.keys(graphsObj2).forEach(function(graphKpi, index) {
-                                var data = [];
-                                Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
-                                    var trace = {
-                                        y: graphsObj2[graphKpi][kpi][0],
-                                        x: spiderS_resultJ["rangeSpider"],
-                                        mode: 'lines+markers',
-                                        type: 'scatter',
-                                        name: kpi,
-                                        marker: {
-                                            size: 0.1
-                                        }
-                                    };
-                                    data.push(trace);
-                                });
-                                /*
-                                                kpi1 = graphKpi
-                                                data1 = data;
-                                                layout1 = {
-                                                    showlegend: true,
-                                                    legend: {
-                                                        "orientation": "h"
-                                                    },
-                                                    xaxis: {
-                                                        range: [-60, 60]
-                                                    },
-                                                    xaxis: {
-                                                        range: [-60, 60]
-                                                    },
-                                                    title: kpi1
-                                                };
-                                                let str = kpi1.replace(/\s/g, '');
-                                                $("#start"). wow slideInLeft"><div class="col-md-12"><div  id=' + "graphStarts" + str + "></div></div></div>");
-                                                Plotly.newPlot('graphStarts' + str, data1, layout1);*/
-
-                                if (index % 2 == 0) {
-                                    data1 = [].concat(data);
-                                    kpi1 = graphKpi.replace(/\s/g, '');
-                                    layout1 = {
-                                        showlegend: true,
-                                        legend: {
-                                            "orientation": "h"
-                                        },
-                                        xaxis: {
-                                            range: [-0.55, 0.55],
-                                            tickformat: ',.0%'
-                                        },
-                                        yaxis: {},
-                                        title: graphKpi
-                                    };
-
-                                    if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
-                                        console.log("deu certo");
-                                        layout1["yaxis"]["tickformat"] = ',.0%';
-                                    }
-
-                                    if (kpi1 === "SensitivityanalysisLCOE" || kpi1 === "SensitivityanalysisCost/KWh") {
-                                        layout1["yaxis"] = {
-                                            showticksuffix: 'all',
-                                            ticksuffix: " $/KWh"
-                                        };
-                                    }
-
-                                    if (kpi1 === "SensitivityanalysisNPV" || kpi1 === "SensitivityanalysisEquivalentannualannuity") {
-                                        layout1["yaxis"] = {
-                                            showtickprefix: 'all',
-                                            tickprefix: " $"
-                                        };
-                                    }
-
-                                    if (kpi1 === "SensitivityanalysisSimplePayback") {
-                                        layout1["yaxis"] = {
-                                            showticksuffix: 'all',
-                                            ticksuffix: " years"
-                                        };
-                                    }
-
-                                    if (index === Object.keys(graphsObj2).length - 1) {
-                                        Plotly.newPlot('ponte', data1, layout1, config);
-                                    } else {
-                                        string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
-                                    }
-                                } else {
-                                    var _layout3;
-
-                                    data2 = [].concat(data);
-                                    kpi2 = graphKpi.replace(/\s/g, '');
-                                    layout2 = (_layout3 = {
-                                        showlegend: true,
-                                        legend: {
-                                            "orientation": "h"
-                                        },
-                                        xaxis: {
-                                            range: [-55, 55]
-                                        }
-                                    }, _defineProperty(_layout3, "xaxis", {
-                                        range: [-0.55, 0.55],
-                                        tickformat: ',.0%'
-                                    }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
-                                    console.log(kpi2, "deu certo");
-
-                                    if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
-                                        console.log("deu certo");
-                                        layout2["yaxis"]["tickformat"] = ',.0%';
-                                    }
-
-                                    if (kpi2 === "SensitivityanalysisLCOE" || kpi2 === "SensitivityanalysisCost/KWh") {
-                                        layout2["yaxis"] = {
-                                            showticksuffix: 'all',
-                                            ticksuffix: " $/KWh"
-                                        };
-                                    }
-
-                                    if (kpi2 === "SensitivityanalysisNPV" || kpi2 === "SensitivityanalysisEquivalentannualannuity") {
-                                        layout2["yaxis"] = {
-                                            showtickprefix: 'all',
-                                            tickprefix: " $"
-                                        };
-                                    }
-
-                                    if (kpi2 === "SensitivityanalysisSimplePayback") {
-                                        layout2["yaxis"] = {
-                                            showticksuffix: 'all',
-                                            ticksuffix: " years"
-                                        };
-                                    }
-
-                                    $("#start").after(string + '<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                                    Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
-                                    Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
-                                }
-                            });
-                            $("#loadingG").hide();
-                            if (window.document.documentMode) {
-                                $("#block").css("display", "");
-                                $("#block2").css("display", "");
-                            } else {
-                                $("#block").css("display", "initial");
-                                $("#block2").css("display", "initial");
-
-                            }, 5000);
+                                graphsObj[kpi + " hist"].push(data);
+                            }
+                        });
                     });
+                });
+                var allSimGraph = {};
+                Object.keys(graphsObj).forEach(function(kpi, index) {
+                    data1 = graphsObj[kpi];
+                    console.log(kpi.split(" ")[1], "kpi.split(");
+                    var obj = {
+                        "Maintenance": "$",
+                        "Cost": "%",
+                        "Total": "$",
+                        "LCOE": " $/KWh",
+                        "Cost/kwh": " $/KWh",
+                        "Equivalent": "$",
+                        "MIRR": "%",
+                        "NPV": "$",
+                        "IRR": "%",
+                        "Price": " $/W",
+                        "Irradiation": " KWh/m2/day",
+                        "Simple": " years",
+                        "Inverters": " years",
+                        "Panels": " years"
+                    };
+
+                    if (kpi.split(" ")[kpi.split(" ").length - 1] === "hist") {
+                        console.log("1");
+                        console.log(kpi);
+                        console.log(data1);
+                        var year = [];
+                        Object.keys(graphsObj[kpi]).forEach(function(y) {
+                            year.push(graphsObj[kpi][y].name);
+                        });
+                        var buttons = [];
+                        year.forEach(function(y) {
+                            auxBol = [];
+                            auxBol2 = [];
+                            year.forEach(function(y2, index) {
+                                if (y === y2) {
+                                    auxBol.push(true);
+                                } else {
+                                    auxBol.push(false);
+                                }
+
+                                auxBol2.push(true);
+                            });
+                            var args = ["visible", auxBol];
+                            var label = y;
+                            buttons.push({
+                                method: 'restyle',
+                                args: args,
+                                label: label.toString()
+                            });
+                        });
+                        buttons.push({
+                            method: 'restyle',
+                            args: ["visible", auxBol2],
+                            label: "Select all"
+                        });
+                        layout1 = {
+                            updatemenus: [{
+                                y: 1.12,
+                                x: 1,
+                                yanchor: 'top',
+                                buttons: buttons
+                            }],
+                            yaxis: {
+                                title: "probability",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
+                                }
+                            },
+                            xaxis: {
+                                tickangle: -45
+                            },
+                            bargap: 0.15,
+                            title: kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "probabilities of occurrence"
+                        };
+
+                        if (kpi.split(" ")[0] !== "Discounted") {
+                            layout1.updatemenus.push({
+                                y: 1.12,
+                                x: 0.2,
+                                xaxis: {
+                                    tickmode: 'auto'
+                                },
+                                yanchor: 'top',
+                                buttons: [{
+                                    method: 'update',
+                                    args: [{
+                                        'cumulative.enabled': false
+                                    }, {
+                                        'xaxis.showtickprefix': 'all',
+                                        'xaxis.tickprefix': ""
+                                    }],
+                                    label: 'Histogram'
+                                }, {
+                                    method: 'update',
+                                    args: [{
+                                        'cumulative.enabled': true
+                                    }, {
+                                        'xaxis.showtickprefix': 'all',
+                                        'xaxis.tickprefix': "<="
+                                    }],
+                                    label: 'Cumulative'
+                                }]
+                            });
+                        }
+
+                        if (kpi.split(" ")[0] === "Simple" || kpi.split(" ")[0] === "Discounted" || kpi.split(" ")[0] === "Panels" || kpi.split(" ")[0] === "Inverters") {
+                            layout1["xaxis"] = {
+                                tickmode: 'auto',
+                                showticksuffix: 'all',
+                                ticksuffix: " years",
+                                tickangle: -75
+                            };
+                        } else {
+                            if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
+                                layout1["xaxis"]["tickformat"] = ',.0%';
+                            } else {
+                                console.log(layout1);
+                                layout1["xaxis"]["showticksuffix"] = 'all';
+                                layout1["xaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
+                            }
+                        }
+
+                        if (kpi.split(" ")[0] === "Irradiation") {
+                            layout1["xaxis"]["tickfont"] = {
+                                size: 8,
+                                color: 'rgb(107, 107, 107)'
+                            };
+                        }
+                    } else {
+                        if (kpi.split(" ")[0] !== "Discounted") {
+                            layout1 = {
+                                title: kpi + " simulation results",
+                                xaxis: {},
+                                yaxis: {}
+                            };
+
+                            if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
+                                layout1["yaxis"]["tickformat"] = ',.0%';
+                            } else {
+                                console.log(layout1);
+                                layout1["yaxis"]["showticksuffix"] = 'all';
+                                layout1["yaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
+
+                                if (kpi.split(" ")[0] === "Irradiation") {
+                                    layout1["yaxis"]["tickfont"] = {
+                                        size: 8,
+                                        color: 'rgb(107, 107, 107)'
+                                    };
+                                }
+                            }
+                        }
+
+                        layout1["title"] = kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "boxplot (simulation results)";
+                    }
+
+                    allSimGraph[kpi] = [data1, layout1];
+                });
+                var kpi11;
+                var kpi22;
+                Object.keys(allSimGraph).forEach(function(kpi, index) {
+                    if (index % 2 == 0) {
+                        console.log(allSimGraph, "allSimGraph");
+                        kpi11 = kpi;
+                        console.log(kpi11, "kpi");
+                        kpi1 = kpi.replace(/\s/g, '');
+
+                        if (index === Object.keys(allSimGraph).length - 1) {
+                            $("#start").after('<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6"><div class="wow slideInLeft" id="ponte"></div></div></div>');
+                            Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
+                        } else {
+                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
+                        }
+                    } else {
+                        console.log(kpi, "kpi");
+                        kpi22 = kpi;
+                        console.log(kpi22, "kpi");
+                        kpi2 = kpi.replace(/\s/g, '');
+                        $("#start").after(string + '<div class="col-md-6"><div  class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                        Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
+                        Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
+                    }
+                });
+                Object.keys(spiderS_resultJ).forEach(function(graph) {
+                    if (graph !== "rangeSpider") {
+                        Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
+                            if (!graphsObj2[kpi]) {
+                                graphsObj2[kpi] = {};
+                            }
+
+                            if (!graphsObj2[kpi][graph]) {
+                                graphsObj2[kpi][graph] = [];
+                            }
+
+                            graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
+                        });
+                    }
+                });
+                Object.keys(graphsObj2).forEach(function(graphKpi, index) {
+                    var data = [];
+                    Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
+                        var trace = {
+                            y: graphsObj2[graphKpi][kpi][0],
+                            x: spiderS_resultJ["rangeSpider"],
+                            mode: 'lines+markers',
+                            type: 'scatter',
+                            name: kpi,
+                            marker: {
+                                size: 0.1
+                            }
+                        };
+                        data.push(trace);
+                    });
+                    /*
+                                    kpi1 = graphKpi
+                                    data1 = data;
+                                    layout1 = {
+                                        showlegend: true,
+                                        legend: {
+                                            "orientation": "h"
+                                        },
+                                        xaxis: {
+                                            range: [-60, 60]
+                                        },
+                                        xaxis: {
+                                            range: [-60, 60]
+                                        },
+                                        title: kpi1
+                                    };
+                                    let str = kpi1.replace(/\s/g, '');
+                                    $("#start"). wow slideInLeft"><div class="col-md-12"><div  id=' + "graphStarts" + str + "></div></div></div>");
+                                    Plotly.newPlot('graphStarts' + str, data1, layout1);*/
+
+                    if (index % 2 == 0) {
+                        data1 = [].concat(data);
+                        kpi1 = graphKpi.replace(/\s/g, '');
+                        layout1 = {
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h"
+                            },
+                            xaxis: {
+                                range: [-0.55, 0.55],
+                                tickformat: ',.0%'
+                            },
+                            yaxis: {},
+                            title: graphKpi
+                        };
+
+                        if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
+                            console.log("deu certo");
+                            layout1["yaxis"]["tickformat"] = ',.0%';
+                        }
+
+                        if (kpi1 === "SensitivityanalysisLCOE" || kpi1 === "SensitivityanalysisCost/KWh") {
+                            layout1["yaxis"] = {
+                                showticksuffix: 'all',
+                                ticksuffix: " $/KWh"
+                            };
+                        }
+
+                        if (kpi1 === "SensitivityanalysisNPV" || kpi1 === "SensitivityanalysisEquivalentannualannuity") {
+                            layout1["yaxis"] = {
+                                showtickprefix: 'all',
+                                tickprefix: " $"
+                            };
+                        }
+
+                        if (kpi1 === "SensitivityanalysisSimplePayback") {
+                            layout1["yaxis"] = {
+                                showticksuffix: 'all',
+                                ticksuffix: " years"
+                            };
+                        }
+
+                        if (index === Object.keys(graphsObj2).length - 1) {
+                            Plotly.newPlot('ponte', data1, layout1, config);
+                        } else {
+                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi1 + "></div></div>";
+                        }
+                    } else {
+                        var _layout3;
+
+                        data2 = [].concat(data);
+                        kpi2 = graphKpi.replace(/\s/g, '');
+                        layout2 = (_layout3 = {
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h"
+                            },
+                            xaxis: {
+                                range: [-55, 55]
+                            }
+                        }, _defineProperty(_layout3, "xaxis", {
+                            range: [-0.55, 0.55],
+                            tickformat: ',.0%'
+                        }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
+                        console.log(kpi2, "deu certo");
+
+                        if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
+                            console.log("deu certo");
+                            layout2["yaxis"]["tickformat"] = ',.0%';
+                        }
+
+                        if (kpi2 === "SensitivityanalysisLCOE" || kpi2 === "SensitivityanalysisCost/KWh") {
+                            layout2["yaxis"] = {
+                                showticksuffix: 'all',
+                                ticksuffix: " $/KWh"
+                            };
+                        }
+
+                        if (kpi2 === "SensitivityanalysisNPV" || kpi2 === "SensitivityanalysisEquivalentannualannuity") {
+                            layout2["yaxis"] = {
+                                showtickprefix: 'all',
+                                tickprefix: " $"
+                            };
+                        }
+
+                        if (kpi2 === "SensitivityanalysisSimplePayback") {
+                            layout2["yaxis"] = {
+                                showticksuffix: 'all',
+                                ticksuffix: " years"
+                            };
+                        }
+
+                        $("#start").after(string + '<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                        Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                        Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
+                    }
+                });
+                $("#loadingG").hide();
+                if (window.document.documentMode) {
+                    $("#block").css("display", "");
+                    $("#block2").css("display", "");
+                } else {
+                    $("#block").css("display", "initial");
+                    $("#block2").css("display", "initial");
+                }
+
+            }, 5000);
+        });
     </script>
 
 
@@ -990,10 +991,10 @@
                 <p class="text-center">Copyright @2020 | Solinvest</p>
 
                 <ul class="social_footer_ul">
-                    <li><a href=><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
                     <!--<li><a href=><i class="fab fa-twitter"></i></a></li>-->
-                    <li><a href=><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href=><i class="fab fa-instagram"></i></a></li>
+                    <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                    <li><a href=""><i class="fab fa-instagram"></i></a></li>
                     <li><a href="https://wa.me/36702357237?text=I'm%20interested%20in%20Sunnynvest%20software"><i class="fab fa-whatsapp"></i></a></li>
                 </ul>
                 <!--social_footer_ul ends here-->
