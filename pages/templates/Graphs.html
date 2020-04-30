@@ -639,7 +639,7 @@
                                 tickangle: -45
                             },
                             bargap: 0.15,
-                            title: kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "probabilities of occurrence"
+                            title: kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "probabilities"
                         };
 
                         if (kpi.split(" ")[0] !== "Discounted") {
@@ -719,7 +719,7 @@
                             }
                         }
 
-                        layout1["title"] = kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ");
+                        layout1["title"] = kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + ' boxplot';
                     }
 
                     allSimGraph[kpi] = [data1, layout1];
