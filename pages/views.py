@@ -220,7 +220,7 @@ def input(request):
 			objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
 			objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
 			simMC_result=simMC(objIpunt)
-			print(simMC_result['inputs'])
+			print(simMC_result["0"]["inputs"])
 			args["modeloPJname"]=False
 			if objIpunt["distMaintenance"][0]=="Fixed value":
 				print(simMC_result)

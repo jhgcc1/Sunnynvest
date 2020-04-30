@@ -70,8 +70,6 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["inputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["inputs"][item]["rawData"]=auxList
-    
-            
     return simMC_result
         
 
