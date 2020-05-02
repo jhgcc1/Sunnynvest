@@ -34,5 +34,7 @@ def staticMaths(objIpunt):
     "panels depreciation":array_depreciation_painels.tolist(),
     "Maintenance expenses":array_maintenance.tolist(),
     "Years":label_year,
-    "paymentMethod":objIpunt["paymentMethod"]}
+    "paymentMethod":objIpunt["paymentMethod"],
+    "ndeplacas":ndeplacas,
+    "maxeconomy":maxeconomy}
     return resultStatic

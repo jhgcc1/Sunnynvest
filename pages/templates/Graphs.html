@@ -57,7 +57,7 @@
                         <a class="nav-link" href="{% url 'input' %}">Start analyses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" name="abt">Contact us</a>
+                        <a class="nav-link" id="contact" name="abt">Contact us</a>
                     </li>
 
 
@@ -903,6 +903,40 @@
                         Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                     }
                 });
+                let npanels = staticMaths_resultJ["ndeplacas"];
+                let maxEconomy = staticMaths_resultJ["maxeconomy"];
+                ("#start").after('<div class="row"><div class="col-md-6"><p>Number of panels needed:' + npanels + '</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div></div>');
+                var data = [{
+                    domain: {
+                        x: [0, 1],
+                        y: [0, 1]
+                    },
+                    value: maxEconomy,
+                    title: {
+                        text: "Estimated economy achieved in power bills"
+                    },
+                    type: "indicator",
+                    mode: "gauge+number",
+                    gauge: {
+                        axis: {
+                            range: [null, 1],
+                            tickformat: ',.0%'
+                        }
+                    },
+                    number: {
+                        valueformat: ',.0%'
+                    }
+                }];
+
+                var layout = {
+                    width: 600,
+                    height: 500,
+                    margin: {
+                        t: 0,
+                        b: 0
+                    }
+                };
+                Plotly.newPlot('myDivG', data, layout);
                 $("#loadingG").hide();
                 if (window.document.documentMode) {
                     $("#block").css("display", "");
@@ -911,7 +945,6 @@
                     $("#block").css("display", "initial");
                     $("#block2").css("display", "initial");
                 }
-
             }, 5000);
         });
     </script>
@@ -2102,6 +2135,10 @@
         #logo {
             animation: run3 3s linear infinite;
             opacity: 80%;
+        }
+        
+        #contact {
+            cursor: pointer;
         }
     </style>
     <script>
