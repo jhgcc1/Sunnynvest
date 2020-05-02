@@ -904,7 +904,7 @@
                     }
                 });
                 let npanels = staticMaths_resultJ["ndeplacas"];
-                let maxEconomy = staticMaths_resultJ["maxeconomy"];
+                let maxEconomy = staticMaths_resultJ["maxeconomy"].replace("%", "");
                 console.log(staticMaths_resultJ, "staticMaths_resultJ");
                 $("#start").after('<div class="row"><div class="col-md-6"><p>Number of panels needed:' + npanels + '</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div></div>');
                 var data = [{
@@ -914,7 +914,7 @@
                     },
                     value: maxEconomy,
                     title: {
-                        text: "Estimated economy achieved in power bills"
+                        text: "Estimated economy"
                     },
                     type: "indicator",
                     mode: "gauge+number",
@@ -930,8 +930,8 @@
                 }];
 
                 var layout = {
-                    width: 600,
-                    height: 500,
+                    width: 300,
+                    height: 300,
                     margin: {
                         t: 0,
                         b: 0
