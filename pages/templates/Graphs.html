@@ -904,9 +904,9 @@
                     }
                 });
                 let npanels = staticMaths_resultJ["ndeplacas"];
-                let maxEconomy = staticMaths_resultJ["maxeconomy"].replace("%", "");
+                let maxEconomy = parseInt(staticMaths_resultJ["maxeconomy"].replace("%", "")) / 100;
                 console.log(staticMaths_resultJ, "staticMaths_resultJ");
-                $("#start").after('<div class="row"><div class="col-md-6"><p style="font-size:20px">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div></div>');
+                $("#start").after('<div class="row"><div class="col-md-6"><p style="font-size:20px;padding-top:30%;padding-left:20%;">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div></div>');
                 var data = [{
                     domain: {
                         x: [0, 1],
@@ -930,8 +930,8 @@
                 }];
 
                 var layout = {
-                    width: 300,
-                    height: 300,
+                    width: 400,
+                    height: 400,
                     margin: {
                         t: 0,
                         b: 0
