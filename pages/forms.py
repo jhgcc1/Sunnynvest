@@ -58,6 +58,8 @@ class registrationform(UserCreationForm):
 		for fieldname in ['username', 'password1', 'password2']:
 			ajaja=1
 			#self.fields[fieldname].help_text =
+		for x in self.fields:
+			self.fields[x].widget.attrs.update({'class' : 'form-control'})
 
 
 	def clean_email(self):
