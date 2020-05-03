@@ -354,7 +354,7 @@ def register(request):
 			mudanca.save()
 			modelo2 = True
 			args['modelo2']=modelo2
-			return render(request,"login.html",args)
+			return redirect('login')
 		else:
 			return render(request,"register.html",args)
 
