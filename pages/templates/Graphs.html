@@ -403,7 +403,7 @@
                             title: graphName
                         };
                         var str = graphName.replace(/\s/g, '');
-                        $("#pareto").after('<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + str + "></div></div>");
+                        $("#pareto").after('<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + str + "></div></div>");
                         Plotly.newPlot('graphStarts' + str, trace, _layout, config);
                     } else if (graphName === "Pareto chart") {
                         var list = staticMaths_resultJ[graphName];
@@ -905,7 +905,7 @@
                 let npanels = staticMaths_resultJ["ndeplacas"];
                 let maxEconomy = parseInt(staticMaths_resultJ["maxeconomy"].replace("%", "")) / 100;
                 console.log(staticMaths_resultJ, "staticMaths_resultJ");
-                $("#start").after('<div class="row"><div class="col-md-6"><p id="npanels" style="text-align:center;font-size:20px;padding-right:10%;padding-top:30%">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" style="position:relative" class="wow slideInRight"></div></div></div>');
+                $("#start").after('<div class="row"><div class="col-md-6"><p class="wow slideInLeft" id="npanels" style="text-align:center;font-size:20px;padding-right:10%;padding-top:30%">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight" style="position:relative" class="wow slideInRight"></div></div></div>');
                 var data = [{
                     domain: {
                         x: [0, 1],
