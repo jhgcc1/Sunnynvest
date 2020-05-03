@@ -17,15 +17,15 @@
         <div class="carousel-inner">
             <div class="carousel-item active" id="imagem">
                 <img class="carroIMG" src={% static 'carrousel1.jpg' %} alt="Los Angeles">
-                <div class="carousel-caption" id="titulo2">
+                <div class="carousel-caption" id="titulo1">
 
                     <div class="col-sm-6" id="titulo" style="background-color:black; opacity: 0.75;">
                         <br>
                         <h2>Sunnynvest</h2>
                         <br>
                         <p>Artificial inteligence applied to investment analysis</p>
-                        <br>
-                        <br>
+                        <br class="brt">
+                        <br class="brt">
                         <br>
                     </div>
                     <div class="col-sm-6">
@@ -42,8 +42,8 @@
                         <h2>Impress your customer</h2>
                         <br>
                         <p>Advanced financial report of potential investments photovoltaic energy</p>
-                        <br>
-                        <br>
+                        <br class="brt">
+                        <br class="brt">
                         <br>
                     </div>
                     <div class="col-sm-6">
@@ -52,15 +52,15 @@
             </div>
             <div class="carousel-item" id="imagem">
                 <img class="carroIMG" src={% static 'carrousel3.jpg' %} alt="New York">
-                <div class="carousel-caption" id="titulo2">
+                <div class="carousel-caption" id="titulo3">
 
                     <div class="col-sm-6" id="titulo" style="background-color:black; opacity: 0.75;">
                         <br>
                         <h2>Free</h2>
                         <br>
                         <p>Completly free web-based software</p>
-                        <br>
-                        <br>
+                        <br class="brt">
+                        <br class="brt">
                         <br>
                     </div>
                     <div class="col-sm-6">
@@ -90,6 +90,15 @@
         .carousel-caption {
             display: initial !important
         }
+        #titulo3 {
+            padding-bottom: 20%;
+        }
+        #titulo1 {
+            padding-bottom: 20%;
+        }
+        .brt {
+            display: none;
+        }
     }
     
     .carroIMG {
@@ -100,7 +109,7 @@
         margin: auto;
     }
     
-    #titulo2 {
+    #titulo3 {
         padding-bottom: 10%;
     }
 </style>
