@@ -905,7 +905,7 @@
                 let npanels = staticMaths_resultJ["ndeplacas"];
                 let maxEconomy = parseInt(staticMaths_resultJ["maxeconomy"].replace("%", "")) / 100;
                 console.log(staticMaths_resultJ, "staticMaths_resultJ");
-                $("#start").after('<div class="row"><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div><div class="col-md-6"><p style="font-size:20px;padding-top:30%;padding-left:20%;">Number of panels needed: ' + npanels + ' solar panels</p><br></div></div>');
+                $("#start").after('<div class="row"><div class="col-md-6"><p id="npanels" style="font-size:20px;padding-top:30%;padding-left:20%;">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight"></div></div></div>');
                 var data = [{
                     domain: {
                         x: [0, 1],
@@ -913,7 +913,7 @@
                     },
                     value: maxEconomy,
                     title: {
-                        text: "Estimated economy<br>N panels needed: " + npanels
+                        text: "Estimated economy"
                     },
                     type: "indicator",
                     mode: "gauge+number",
@@ -1044,6 +1044,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <style>
+        @media only screen and (max-width: 700px) {
+            #npanels {
+                padding-top: 0;
+                padding-left: 0;
+            }
+        }
+        
         #loadingG2::after {
             content: 'Loading graphs';
             padding-left: 20px;
