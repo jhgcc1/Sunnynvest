@@ -88,17 +88,17 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Home </a>
+                    <a class="nav-link hvr-grow-shadow" href="{% url 'home' %}">Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About us</a>
+                    <a class="nav-link hvr-grow-shadow" href="{% url 'about' %}">About us</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'input' %}">Start analyses</a>
+                    <a class="nav-link hvr-grow-shadow" href="{% url 'input' %}">Start analyses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="contact" name="abt">Contact us</a>
+                    <a class="nav-link hvr-grow-shadow" id="contact" name="abt">Contact us</a>
                 </li>
 
 
@@ -107,25 +107,25 @@
 
                 {% if profile == 'Profile' %}
                 <li>
-                    <a href="{% url 'profile' %}" class="nav-link"><span>{{profile}}</a>
+                    <a href="{% url 'profile' %}" class="nav-link hvr-grow-shadow"><span>{{profile}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin == '' %}
                 <li class="nav-item">
-                    <a href="{% url 'login' %}" class="nav-link">{{logout}}</a>
+                    <a href="{% url 'login' %}" class="nav-link hvr-grow-shadow">{{logout}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin != '' %}
 
 
                 <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="nav-link">{{logout}}</a>
+                    <a href="{% url 'logout' %}" class="nav-link hvr-grow-shadow">{{logout}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin != '' %}
                 <li class="nav-item">
-                    <span class="nav-link" style="color:white">{{nomeoulogin}}</span>
+                    <span class="nav-link hvr-grow-shadow" style="color:white">{{nomeoulogin}}</span>
                 </li>
                 {% endif %} {% if nomeoulogin == '' %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link hvr-grow-shadow" href="{% url 'register' %}">Register</a>
                 </li>
                 {% endif %}
             </ul>
@@ -405,6 +405,27 @@
         
         #navbar {
             transition: top 1s;
+        }
+        /* Grow Shadow */
+        
+        .hvr-grow-shadow {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-property: box-shadow, transform;
+            transition-property: box-shadow, transform;
+        }
+        
+        .hvr-grow-shadow:hover,
+        .hvr-grow-shadow:focus,
+        .hvr-grow-shadow:active {
+            box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
         }
         
         @keyframes run3 {
