@@ -4,33 +4,23 @@
 
 <head>
 
-    <!-- Required meta tags -->
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <script src="https://cdn.boomcdn.com/libs/wow-js/1.3.0/wow.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
     <script>
-        /**
-         * Polyfill for Object.keys
-         *
-         * @see: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/keys
-         */
         $(document).ready(function() {
             if (!Object.keys) {
 
@@ -88,17 +78,17 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link hvr-grow-shadow" href="{% url 'home' %}">Home </a>
+                    <a class="nav-link menuItem" href="{% url 'home' %}">Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link hvr-grow-shadow" href="{% url 'about' %}">About us</a>
+                    <a class="nav-link menuItem" href="{% url 'about' %}">About us</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link hvr-grow-shadow" href="{% url 'input' %}">Start analyses</a>
+                    <a class="nav-link menuItem" href="{% url 'input' %}">Start analyses</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link hvr-grow-shadow" id="contact" name="abt">Contact us</a>
+                    <a class="nav-link menuItem" id="contact" name="abt">Contact us</a>
                 </li>
 
 
@@ -107,25 +97,25 @@
 
                 {% if profile == 'Profile' %}
                 <li>
-                    <a href="{% url 'profile' %}" class="nav-link hvr-grow-shadow"><span>{{profile}}</a>
+                    <a href="{% url 'profile' %}" class="nav-link menuItem"><span>{{profile}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin == '' %}
                 <li class="nav-item">
-                    <a href="{% url 'login' %}" class="nav-link hvr-grow-shadow">{{logout}}</a>
+                    <a href="{% url 'login' %}" class="nav-link menuItem">{{logout}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin != '' %}
 
 
                 <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="nav-link hvr-grow-shadow">{{logout}}</a>
+                    <a href="{% url 'logout' %}" class="nav-link menuItem">{{logout}}</a>
                 </li>
                 {% endif %} {% if nomeoulogin != '' %}
                 <li class="nav-item">
-                    <span class="nav-link hvr-grow-shadow" style="color:white">{{nomeoulogin}}</span>
+                    <span class="nav-link menuItem" style="color:white">{{nomeoulogin}}</span>
                 </li>
                 {% endif %} {% if nomeoulogin == '' %}
                 <li class="nav-item">
-                    <a class="nav-link hvr-grow-shadow" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link menuItem" href="{% url 'register' %}">Register</a>
                 </li>
                 {% endif %}
             </ul>
@@ -183,16 +173,6 @@
 
 
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
 
     <!--footer starts from here-->
     <footer id="foot" class="footer">
@@ -235,12 +215,6 @@
 
                 </div>
 
-
-
-
-
-
-
                 <div class=" col-sm-4 col-md  col-12 col">
 
                     <!--footer_ul2_amrc ends here-->
@@ -268,9 +242,6 @@
         </div>
 
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <style>
         #logo {}
         
@@ -404,28 +375,31 @@
         }
         
         #navbar {
-            transition: top 1s;
+            transition: top 0.5s;
         }
-        /* Grow Shadow */
         
-        .hvr-grow-shadow {
-            display: inline-block;
-            vertical-align: middle;
-            -webkit-transform: perspective(1px) translateZ(0);
-            transform: perspective(1px) translateZ(0);
-            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-            -webkit-transition-duration: 0.3s;
+        .menuItem {
+            position: relative;
+        }
+        
+        .menuItem:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 50%;
+            right: 50%;
+            bottom: 15%;
+            background: #FFFFF0;
+            height: 1.8px;
+            -webkit-transition-duration: 0.2s;
             transition-duration: 0.3s;
-            -webkit-transition-property: box-shadow, transform;
-            transition-property: box-shadow, transform;
         }
         
-        .hvr-grow-shadow:hover,
-        .hvr-grow-shadow:focus,
-        .hvr-grow-shadow:active {
-            box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-            -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+        .menuItem:hover:before,
+        .menuItem:focus:before,
+        .menuItem:active:before {
+            left: 7.5%;
+            right: 5%;
         }
         
         @keyframes run3 {
