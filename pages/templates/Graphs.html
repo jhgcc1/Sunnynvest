@@ -39,8 +39,8 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-            <div id="logo" style="margin-right:10px;width:235px;height:43px;background:none;opacity:100%;border-radius: 15px 15px 15px 15px;">
-                <a style="background:url(/static/lOGO.png);width:230px;height:50px;background-size: cover;background-repeat: no-repeat;" class="navbar-brand" href="{% url 'home' %}"></a>
+            <div id="logo" style="margin-right:1%;margin-left:1%;width:225px;height:43px;background:none;opacity:100%;border-radius: 15px 15px 15px 15px;">
+                <a style="background:url(/static/lOGO.png);width:220px;height:47px;background-size:cover" class="navbar-brand" href="{% url 'home' %}"></a>
             </div>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -1544,6 +1544,15 @@
         .menuItem:active:before {
             left: 7.5%;
             right: 5%;
+        }
+        
+        @media only screen and (max-width: 700px) {
+            .menuItem:hover:before,
+            .menuItem:focus:before,
+            .menuItem:active:before {
+                left: 50%;
+                right: 50%;
+            }
         }
         
         @keyframes run3 {

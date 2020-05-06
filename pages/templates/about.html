@@ -93,7 +93,7 @@
                     <p style="text-align:center;">My CV: <a href="{% static 'CV.pdf' %}"><i class="fa fa-address-card" style="color:black;font-size:38px"></i></a></p>
                 </div>
                 <div>
-                    <h2><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
+                    <h2 id="meuHEad"><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
                 </div>
             </div>
             <p>Hello i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in Production
@@ -141,7 +141,25 @@
             transform: scale(2.8);
         }
         
+        #imgGold {
+            transform: scale(1);
+            transition: .2s ease;
+            /* Animation */
+            -webkit-transition: .2s ease;
+            /* Animation */
+        }
+        
+        #imgGold:hover,
+        #imgGold:focus,
+        #imgGold:active {
+            z-index: 100;
+            transform: scale(2.8);
+        }
+        
         @media only screen and (max-width: 700px) {
+            #meuHEad {
+                font-size: 22px;
+            }
             #img {
                 width: 150px;
                 height: 115px;
@@ -160,6 +178,12 @@
                 z-index: 100;
                 transform: scale(1.5);
             }
+            #imgGold:hover,
+            #imgGold:focus,
+            #imgGold:active {
+                z-index: 100;
+                transform: scale(1.5);
+            }
             #celular {
                 display: initial !important;
             }
@@ -175,14 +199,22 @@
                 display: none;
             }
             #jhjh {
-                width: 90% !important;
+                width: 95% !important;
             }
             .imgGold {
                 width: 250px !important;
                 height: 162px !important;
+                transform: scale(1);
+                transition: .2s ease;
+                /* Animation */
+                -webkit-transition: .2s ease;
             }
             #bigContainer {
                 display: initial !important;
+            }
+            #containerIMG {
+                justify-content: center !important;
+                padding-right: 5%;
             }
         }
         
