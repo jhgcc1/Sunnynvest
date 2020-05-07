@@ -19,11 +19,26 @@
 <div id="bigContainer" style="display:flex;justify-content:space-between">
 
     <div id="jhjh" style="width:60%;margin-left:5%">
-        <h2 class="wow bounceInUp">Sunnynvest: <b>artificial inteligence applied to investment analysis</b></h2>
-        <br>
+        <div style="display:flex">
+            <div>
+                <br>
+                <h2 classs="titu" class="wow bounceInUp">Sunnynvest: <b>artificial<br style="display:none" class="brs"> inteligence applied to<br style="display:none" class="brs"> investment analysis</b></h2>
+                <br>
+            </div>
+            <div id="sun2" style="display:none">
+                <div class="sun">
+                    <div class="ray_box">
+                        <div class="ray ray6"></div>
+                        <div class="ray ray7"></div>
+                        <div class="ray ray8"></div>
+                        <div class="ray ray9"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h5 class="wow bounceInUp">the perfect tool for financial analysis of investments in solar power plants.</h5>
         <br>
-        <h5 class="wow bounceInUp">impress your customer with an advanced financial report of potential investments in photovoltaic energy</h5>
+        <h5 style="margin-bottom:7%" class="wow bounceInUp">impress your customer with an advanced financial report of potential investments in photovoltaic energy</h5>
         <br>
         <div id="containerIMG" style="display:flex;flex-wrap:wrap;">
             <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph1.png);background-size:cover; "></div>
@@ -39,7 +54,7 @@
             <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph11.png);background-size:cover; "></div>
             <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph12.png);background-size:cover;"></div>
         </div>
-        <p class="wow bounceInUp">For a robust investment analysis and feasibility study, various tools can be used. The most common financial tools such as cash flow, intern return rate, modified intern return rate, net present value, equivalent annual annuity, traditional payback,
+        <p style="margin-top:7%" class="wow bounceInUp">For a robust investment analysis and feasibility study, various tools can be used. The most common financial tools such as cash flow, intern return rate, modified intern return rate, net present value, equivalent annual annuity, traditional payback,
             discounted payback and Pareto chart are considered a must regarding to any kind of investment analysis.</p>
         <p class="wow bounceInUp">In addition to the traditional financial tools, statistics tools such as time series regressions, probability theory and Monte Carlo simulation together with sensitive analysis can be used to predict returns and measure risks. Sunnynvest makes
             inferences in case you decide to postpone when you do the investment, it considers that the price of photovoltaic energy has been changing with time, consequently giving a better overview of how an investment will perform if postponements
@@ -105,7 +120,7 @@
         <br>
         <br>
     </div>
-    <div style="width:20%;margin-left:10%">
+    <div id="sun" style="width:20%;margin-left:10%">
         <div class="sun">
             <div class="ray_box">
                 <div class="ray ray6"></div>
@@ -115,7 +130,7 @@
             </div>
             <div class="loadP"></div>
         </div>
-        <div id="logo2" style="background:url(/static/lOGO.png);width:330px;height:70px;background-size: cover;background-repeat: no-repeat;"></div>
+        <img id="logo2" src={% static 'lOGO.png' %} style="width:330px;height:70px"></img>
     </div>
 </div>
 <div>
@@ -124,8 +139,6 @@
         #img {
             width: 150px;
             height: 115px;
-            margin-top: 5%;
-            margin-bottom: 5%;
             margin-right: 2%;
             transform: scale(1);
             transition: .2s ease;
@@ -138,25 +151,30 @@
         #img:focus,
         #img:active {
             z-index: 100;
-            transform: scale(2.8);
+            transform: scale(2.5);
         }
         
-        #imgGold {
-            transform: scale(1);
-            transition: .2s ease;
+        .imgGold {
+            transition: .2s ease !important;
             /* Animation */
-            -webkit-transition: .2s ease;
+            -webkit-transition: .2s ease !important;
             /* Animation */
         }
         
-        #imgGold:hover,
-        #imgGold:focus,
-        #imgGold:active {
-            z-index: 100;
-            transform: scale(2.8);
+        .imgGold:hover,
+        .imgGold:focus,
+        .imgGold:active {
+            width: 792px !important;
+            height: 468px !important;
         }
         
         @media only screen and (max-width: 700px) {
+            .titu {
+                white-space: nowrap;
+            }
+            .brs {
+                display: initial;
+            }
             #meuHEad {
                 font-size: 22px;
             }
@@ -178,11 +196,11 @@
                 z-index: 100;
                 transform: scale(1.5);
             }
-            #imgGold:hover,
-            #imgGold:focus,
-            #imgGold:active {
+            .imgGold:hover,
+            .imgGold:focus,
+            .imgGold:active {
                 z-index: 100;
-                transform: scale(1.5);
+                transform: scale(1.3);
             }
             #celular {
                 display: initial !important;
@@ -191,11 +209,31 @@
                 display: none !important;
             }
             .sun {
-                position: absolute !important;
-                left: 45% !important;
-                top: -25vh !important;
+                position: relative !important;
+                top: 10% !important;
+                left: 0 !important;
+            }
+            #sun2 {
+                display: initial !important;
+                transform: translatey(-10%) translateX(-100%);
+                z-index: -99999999999;
+            }
+            .ray_box {
+                position: relative;
+                margin: auto;
+                top: 0px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 70px;
+                -webkit-animation: ray_anim 3s linear infinite;
+                animation: ray_anim 3s linear infinite;
+                z-index: -99999999;
             }
             #logo2 {
+                display: none;
+            }
+            #sun {
                 display: none;
             }
             #jhjh {
