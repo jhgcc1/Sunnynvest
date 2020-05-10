@@ -298,6 +298,7 @@
                                     type: 'bar'
                                 }];
                                 layout1 = {
+                                    dragmode: 'pan',
                                     title: graphName,
                                     xaxis: {
                                         tickfont: {
@@ -340,6 +341,7 @@
                                     type: 'bar'
                                 }];
                                 layout2 = {
+                                    dragmode: 'pan',
                                     title: graphName,
                                     xaxis: {
                                         tickfont: {
@@ -384,6 +386,7 @@
                             name: "Acumulated NPV"
                         }];
                         var _layout = {
+                            dragmode: 'pan',
                             yaxis: {
                                 title: "NPV($)",
                                 titlefont: {
@@ -431,6 +434,7 @@
                             name: "Percentage of the investment"
                         };
                         var _layout2 = {
+                            dragmode: 'pan',
                             yaxis: {
                                 title: "%",
                                 titlefont: {
@@ -623,6 +627,7 @@
                             label: "Select all"
                         });
                         layout1 = {
+                            dragmode: 'pan',
                             updatemenus: [{
                                 y: 1.16,
                                 x: 1,
@@ -703,6 +708,7 @@
                     } else {
                         if (kpi.split(" ")[0] !== "Discounted") {
                             layout1 = {
+                                dragmode: 'pan',
                                 title: kpi,
                                 xaxis: {},
                                 yaxis: {}
@@ -808,6 +814,8 @@
                         data1 = [].concat(data);
                         kpi1 = graphKpi.replace(/\s/g, '');
                         layout1 = {
+                            dragmode: 'pan',
+
                             showlegend: true,
                             legend: {
                                 "orientation": "h"
@@ -857,6 +865,7 @@
                         data2 = [].concat(data);
                         kpi2 = graphKpi.replace(/\s/g, '');
                         layout2 = (_layout3 = {
+                            dragmode: 'pan',
                             showlegend: true,
                             legend: {
                                 "orientation": "h"
@@ -928,6 +937,7 @@
                 }];
 
                 var layout = {
+                    dragmode: 'pan',
                     height: 285,
                     autosize: true,
                     margin: {
