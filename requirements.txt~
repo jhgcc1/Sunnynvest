@@ -18,6 +18,3 @@ urllib3==1.25.7
 wrapt==1.11.2
 whitenoise==5.0.1
 python_dotenv==0.13.0
-django_heroku==0.3.1
-psycopg2==2.8.5
-
