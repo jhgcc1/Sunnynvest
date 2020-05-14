@@ -21,7 +21,7 @@ var helpT = {
     type5: "LCOE Boxplot",
     type6: "Discounted Payback",
     type7: "NPV boxplot",
-    type8: "IRR Histogram",
+    type8: "Simple payback sensitivity analysis",
     type9: "Sum of produced energy",
     type10: "CO2 saved",
     type11: "Non-inflated cash flow",
