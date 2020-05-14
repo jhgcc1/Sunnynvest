@@ -1,22 +1,55 @@
 {% extends 'base.html' %} {% block inputs %} {%load static%}
-<br>
-<br>
-<br>
-<br>
-<br>
+<br style="display:none" class="initialbr">
+<br style="display:none" class="initialbr">
+<br style="display:none" class="initialbr">
+<br style="display:none" class="initialbr">
+<script src={% static 'literals.js' %}></script>
 <script>
-    window.addEventListener("load", function(event) {
-
-    })
     $(document).ready(function() {
+        console.log(help);
+        $(".close").click(function() {
+
+            $("#helpCell").css("opacity", "0");
+            setTimeout(function() {
+                $("#helpCell").css("display", "none");
+            }, 1500)
+        });
+
         $("#img").hover(
             function() {
                 $(this).addClass("hover");
             },
             function() {
                 $(this).removeClass("hover");
-            }
-        );
+            })
+        if ($(window).width() > 700) {
+            $(".imgG").hover(
+                function() {
+                    let type = $(this).attr('class').split(" ")[3];
+                    $("#help").text(help[type]);
+                    $("#helpTitle").text(helpT[type]);
+                    $("#expl").css("opacity", "1");
+                },
+                function() {
+                    $("#expl").css("opacity", "0");
+                }
+            )
+
+        } else {
+            $("#spanlateral").text("Click on the pictures to see explanations")
+            $(".imgG").click(
+                function() {
+                    let type = $(this).attr('class').split(" ")[3];
+                    $("#helpCell").css("display", "initial")
+                    setTimeout(function() {
+                        $("#helpTitleCell").text(helpT[type]);
+                        $("#helpCellContent").text(help[type]);
+                        $("#helpCell").css("opacity", "1");
+                    }, 100);
+
+                }
+            )
+        }
         wow = new WOW({
             boxClass: 'wow', // default
             animateClass: 'animated', // default
@@ -32,7 +65,19 @@
         }, 1000);
     })
 </script>
-<div class="load" style="display:flex;justify-content:center;align-items:center;background-color:silver;z-index:99999999;overflow:hidden;position:absolute;left:0;top:0;bottom:0;right:0">
+
+
+<div id="helpCell" style="display:none;overflow-y: scroll;transition:1.5s ease;opacity:0;background-color:#333;z-index:99999999;position:fixed;top:0;bottom:0;width:100%;height:100%">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a style="float:right;padding-top: 10%;" href="#" class="close"></a>
+    <h3 style="text-align:center;color:white;top:10%;margin-left:2%;margin-right:2%" id="helpTitleCell"></h3>
+    <p style="color:white;top:20%;margin-left:10%;margin-right:10%" id="helpCellContent"></p>
+</div>
+<div class="load" style="display:flex;justify-content:center;align-items:center;background-color:#333;z-index:99999999;overflow:hidden;position:absolute;left:0;top:0;bottom:0;right:0">
     <div style="display:initial" class="lds-roller">
         <div></div>
         <div></div>
@@ -46,7 +91,7 @@
 </div>
 <div id="bigContainer" style="display:none;justify-content:space-between">
 
-    <div id="jhjh" style="width:60%;margin-left:5%">
+    <div id="jhjh" style="margin-top:5%;width:60%;margin-left:5%">
         <div style="display:flex">
             <div>
                 <br>
@@ -67,20 +112,21 @@
         <h5 class="wow bounceInUp">the perfect tool for financial analysis of investments in solar power plants.</h5>
         <br>
         <h5 style="margin-bottom:7%" class="wow bounceInUp">impress your customer with an advanced financial report of potential investments in photovoltaic energy</h5>
-        <br>
+        <p id="spanlateral" class="wow bounceInUp"><b>Pass your mouse over the pictures to see explanations</b></p>
         <div id="containerIMG" style="display:flex;flex-wrap:wrap;">
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph1.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph2.png);background-size:cover;"></div>
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph3.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph4.png);background-size:cover;"></div>
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph5.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp" style="background-image:url(/static/graph6.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph7.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph8.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph9.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph10.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph11.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG" style="background-image:url(/static/graph12.png);background-size:cover;"></div>
+
+            <div id="img" class="imgG wow bounceInUp type1" style="background-image:url(/static/graph1.png);background-size:cover; "></div>
+            <div id="img" class="imgG wow bounceInUp type2" style="background-image:url(/static/graph2.png);background-size:cover;"></div>
+            <div id="img" class="imgG wow bounceInUp type3" style="background-image:url(/static/graph3.png);background-size:cover; "></div>
+            <div id="img" class="imgG wow bounceInUp type4" style="background-image:url(/static/graph4.png);background-size:cover;"></div>
+            <div id="img" class="imgG wow bounceInUp type5" style="background-image:url(/static/graph5.png);background-size:cover; "></div>
+            <div id="img" class="imgG wow bounceInUp type6" style="background-image:url(/static/graph6.png);background-size:cover;"></div>
+            <div id="img" class="wow bounceInUp imgG type7" style="background-image:url(/static/graph7.png);background-size:cover; "></div>
+            <div id="img" class="wow bounceInUp imgG type8" style="background-image:url(/static/graph8.png);background-size:cover;"></div>
+            <div id="img" class="wow bounceInUp imgG type9" style="background-image:url(/static/graph9.png);background-size:cover; "></div>
+            <div id="img" class="wow bounceInUp imgG type10" style="background-image:url(/static/graph10.png);background-size:cover;"></div>
+            <div id="img" class="wow bounceInUp imgG type11" style="background-image:url(/static/graph11.png);background-size:cover; "></div>
+            <div id="img" class="wow bounceInUp imgG type12" style="background-image:url(/static/graph12.png);background-size:cover;"></div>
         </div>
         <p style="margin-top:7%" class="wow bounceInUp">For a robust investment analysis and feasibility study, various tools can be used. The most common financial tools such as cash flow, intern return rate, modified intern return rate, net present value, equivalent annual annuity, traditional payback,
             discounted payback and Pareto chart are considered a must regarding to any kind of investment analysis.</p>
@@ -147,8 +193,14 @@
         <br>
         <br>
         <br>
+        <br>
     </div>
-    <div id="sun" style="width:20%;margin-left:10%">
+
+    <div id="sun" style="width:30%;">
+        <div id="expl" style="background-color: 	#303030;opacity:0;width:100%;height:100%;transition:1.5s ease">
+            <h3 style="text-align:center;color:white;position:fixed;top:10%;margin-left:2%;margin-right:2%" id="helpTitle"></h3>
+            <p style="color:white;position:fixed;top:20%;margin-left:2%;margin-right:2%" id="help"></p>
+        </div>
         <div class="sun">
             <div class="ray_box">
                 <div class="ray ray6"></div>
@@ -195,11 +247,17 @@
         height: 468px !important;
     }
     
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 550px) {
+        .brs {
+            display: initial !important;
+        }
         .titu {
             white-space: nowrap !important;
         }
-        .brs {
+    }
+    
+    @media only screen and (max-width: 700px) {
+        .initialbr {
             display: initial !important;
         }
         #meuHEad {
@@ -482,6 +540,37 @@
         100% {
             transform: rotate(360deg);
         }
+    }
+    
+    .close {
+        position: absolute;
+        right: 32px;
+        top: 32px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+    }
+    
+    .close:hover {
+        opacity: 1;
+    }
+    
+    .close:before,
+    .close:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: white;
+    }
+    
+    .close:before {
+        transform: rotate(45deg);
+    }
+    
+    .close:after {
+        transform: rotate(-45deg);
     }
 </style>
 {% endblock %}
