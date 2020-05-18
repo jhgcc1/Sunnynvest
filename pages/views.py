@@ -103,6 +103,9 @@ def login2(request):
 	else:
 		return render(request,"login.html",args)
 def share(request,idpjn):
+		nomeoulogin, logout, profile, email, pais, nome, nome2 = checarlogin(request)
+		args={'nomeoulogin':nomeoulogin,'logout':logout, 'profile':profile}
+		args=mandaremail(request,args)
 		try:
 			clientShare=dadosmodels.objects.get(clientShare=idpjn)
 		except:
@@ -112,7 +115,7 @@ def share(request,idpjn):
 			args["dictStringResult"]=dictStringResult
 			return render(request,"Graphs.html",args)
 		else:
-			return render(request,"ErrorProject.html")
+			return render(request,"ErrorProject.html",args)
 
 
 def input(request):

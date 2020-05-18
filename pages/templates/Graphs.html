@@ -952,8 +952,7 @@
                     }
                 };
                 Plotly.newPlot('myDivG', data, layout, config);
-                $("#start").after("<a>www.sunnynvest.com/share/" + clientShare + "</a>")
-                $("#start").after("<br><br><p><b>share this project with anyone by using the following url:</b></p>")
+                $("#start").after("<div class='row'><div class='col-sm-6'><a>www.sunnynvest.com/share/" + clientShare + "</a>" + "<br><br><p><b>share this project with anyone by using the following url:</b></p></div><div class='col-sm-6'><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px'></img></div></div>");
                 $("#loadingG").hide();
                 if (window.document.documentMode) {
                     $("#block").css("display", "");
