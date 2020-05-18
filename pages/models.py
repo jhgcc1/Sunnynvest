@@ -15,6 +15,7 @@ post_save.connect(create_profile,sender=User)
 	
 
 class dadosmodels(models.Model):
+	clientShare=models.TextField(default='')
 	dictStringResult=models.TextField(default='')
 	paymentMethod = models.CharField(max_length=100,default='')
 	yearsTopay = models.FloatField(default=0)

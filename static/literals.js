@@ -28,5 +28,56 @@ var helpT = {
     type12: "Pareto chart",
 }
 
+var tabl = {
+    linha1: ["Category", "Data Type", "Histogram", "Cumulative histogram", "Boxplot"],
+    linha2: ["Maintenance", "Input", "X", "X", "X"],
+    linha3: ["Cost of debit", "Input", "X", "X", "X"],
+    linha4: ["Irradiation", "Input", "X", "X", "X"],
+    linha5: ["Cost of equity", "Input", "X", "X", "X"],
+    linha6: ["Inverters lifespan ", "Input", "X", "X", "X"],
+    linha7: ["Panels lifespan", "Input", "X", "X", "X"],
+    linha8: ["Total investment ", "Input", "X", "X", "X"],
+    linha9: ["IRR", "Output", "X", "X", "X"],
+    linha10: ["Price per KWp", "Output", "X", "X", "X"],
+    linha11: ["NPV", "Output", "X", "X", "X"],
+    linha12: ["MIRR", "Output", "X", "X", "X"],
+    linha13: ["Equivalent annual annuity", "Output", "X", "X", "X"],
+    linha14: ["Cost/kwh", "Output", "X", "X", "X"],
+    linha15: ["LCOE", "Output", "X", "X", "X"],
+    linha16: ["Discounted payback ", "Output", "X", "No", "No"],
+    linha17: ["MIRR", "Output", "X", "X", "X"],
+}
+console.log(tabl, "table1");
+var table2 = ["Sensitivity analysis IRR",
+    "Sensitivity analysis NPV",
+    "Sensitivity analysis MIRR",
+    "Sensitivity analysis Simple Payback",
+    "Sensitivity analysis Equivalent annual annuity",
+    "Sensitivity analysis LCOE",
+    "Sensitivity analysis Cost/KWh"
+]
 
-console.log("in2");
+var table3 = [
+    "Pareto chart",
+    "Produced KWh per year",
+    "CO2 emition reduction",
+    "Sum of produced KWh per year",
+    "Sum of gross revenue without inflation",
+    "Sum of gross revenue with inflation",
+    "Simple payback",
+    "Discounted payback",
+    "Annuity payment with inflation cashflow",
+    "Annuity payment without inflation cashflow",
+    "Annuity payment with inflation",
+    "Annuity payment without inflation",
+    "Cashflow without inflation",
+    "Cashflow with inflation",
+    "Fiscal Effects",
+    "Inverters depreciation",
+    "inverters reinvestments",
+    "panels depreciation",
+    "Maintenance expenses",
+    "Number of panels needed",
+    "Maximum economy achieved"
+]
+console.log("in6");

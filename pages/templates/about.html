@@ -50,6 +50,59 @@
                 }
             )
         }
+        let stringTable1 = ""
+        stringTable1 = '<br id="brs"><br id="brs"><div style="width:95% !important"class="table-responsive"id="mcTable"><table class="table"><thead class="thead-dark"><tr><th scope="col"></th><th scope="col">' + tabl["linha1"][0] + '</th><th scope="col">' + tabl["linha1"][1] + '</th><th scope="col">' + tabl["linha1"][2] + '</th><th scope="col">' + tabl["linha1"][3] + '</th><th scope="col">' + tabl["linha1"][4] + '</th></tr></thead><tbody>';
+        Object.keys(tabl).forEach((line, index) => {
+            if (index !== 0) {
+
+                stringTable1 = stringTable1 + "<tr class='wow bounceInUp'><th scope='row'>" + index + "</th>"
+                tabl[line].forEach(item => {
+                    stringTable1 = stringTable1 + "<td>" + item + "</td>"
+                })
+                stringTable1 = stringTable1 + "</tr>";
+            }
+
+        })
+
+        stringTable1 = stringTable1 + "</tbody></table></div>";
+        console.log(stringTable1)
+        $("#hook").after(stringTable1);
+
+        stringSensitivity = "<br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><h2 class='wow bounceInUp'>Sensitivity analysis created by sunnynvest:</h2><br><div style='display:flex;justify-content:space-between;align-items:center'><ul style='width:35%' class='list-group'>";
+        table2.forEach((item, index) => {
+            if (index <= 4) {
+                stringSensitivity = stringSensitivity + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
+            }
+        })
+        stringSensitivity = stringSensitivity + '</ul><div><i class="fa fa-angle-double-right wow bounceInUp" style="font-size:36px"></i><p>More...</p></div><ul style="width:35%"" class="list-group">';
+        table2.forEach((item, index) => {
+            if (index >= 3) {
+                stringSensitivity = stringSensitivity + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
+            }
+        })
+        stringSensitivity = stringSensitivity + '</ul></div><br><br id="senseAbout">';
+
+        /*stringSensitivity = "<br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><h2 class='wow bounceInUp'>Sensitivity analysis created by sunnynvest:</h2><br><ul style='width:35%'class='list-group'>"
+        table2.forEach((item, index) => {
+            stringSensitivity = stringSensitivity + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
+        })
+        stringSensitivity = stringSensitivity + '</ul><br><br id="senseAbout">';*/
+        $("#mcTable").after(stringSensitivity);
+
+        staticAbout = "<br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><h2 class='wow bounceInUp'>WoW! thats it? NO!<br>sunnynvest also makes the following deterministic analysis:</h2><br><div style='display:flex;justify-content:space-between;align-items:center'><ul style='width:35%' class='list-group'>";
+        table3.forEach((item, index) => {
+            if (index <= 9) {
+                staticAbout = staticAbout + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
+            }
+        })
+        staticAbout = staticAbout + '</ul><div><i class="fa fa-angle-double-right wow bounceInUp" style="font-size:36px"></i><p>And more...</p></div><ul style="width:35%"" class="list-group">';
+        table3.forEach((item, index) => {
+            if (index >= 10) {
+                staticAbout = staticAbout + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
+            }
+        })
+        staticAbout = staticAbout + '</ul></div><br><br>';
+        $("#senseAbout").after(staticAbout);
         wow = new WOW({
             boxClass: 'wow', // default
             animateClass: 'animated', // default
@@ -111,8 +164,15 @@
         </div>
         <h5 class="wow bounceInUp">the perfect tool for financial analysis of investments in solar power plants.</h5>
         <br>
-        <h5 style="margin-bottom:7%" class="wow bounceInUp">impress your customer with an advanced financial report of potential investments in photovoltaic energy</h5>
+        <h5 style="margin-bottom:3%" class="wow bounceInUp">impress your customer with an advanced financial report of potential investments in photovoltaic energy</h5>
+        <hr style='height:1px;border:none;color:#333;background-color:#333;' />
+        <h2 class="wow bounceInUp">What is sunnynvest?</h2>
+        <p style="margin-top:3%" class="wow bounceInUp">For a robust investment analysis and feasibility study, various tools can be used. The most common financial tools such as cash flow, intern return rate, modified intern return rate, net present value, equivalent annual annuity, traditional payback,
+            discounted payback and Pareto chart are considered a must regarding to any kind of investment analysis.</p>
+        <p class="wow bounceInUp">In addition to the traditional financial tools, statistics tools such as time series regressions, probability theory and Monte Carlo simulation together with sensitive analysis can be used to predict returns and measure risks. Sunnynvest makes
+            use of all this mentioned tools and provides a full report generated by a <b>Artificial Inteligence engine.</b></p><br>
         <h5 id="spanlateral" class="wow bounceInUp"><b>Pass your mouse over the pictures to see what sunnynvest can do for you</b></h5>
+        <br>
         <br>
         <div id="containerIMG" style="display:flex;flex-wrap:wrap;">
 
@@ -129,13 +189,20 @@
             <div id="img" class="wow bounceInUp imgG type11" style="background-image:url(/static/graph11.png);background-size:cover; "></div>
             <div id="img" class="wow bounceInUp imgG type12" style="background-image:url(/static/graph12.png);background-size:cover;"></div>
         </div>
-        <p style="margin-top:7%" class="wow bounceInUp">For a robust investment analysis and feasibility study, various tools can be used. The most common financial tools such as cash flow, intern return rate, modified intern return rate, net present value, equivalent annual annuity, traditional payback,
-            discounted payback and Pareto chart are considered a must regarding to any kind of investment analysis.</p>
-        <p class="wow bounceInUp">In addition to the traditional financial tools, statistics tools such as time series regressions, probability theory and Monte Carlo simulation together with sensitive analysis can be used to predict returns and measure risks. Sunnynvest makes
-            use of all this mentioned tools and provides a full report generated by a <b>Artificial Inteligence engine.</b></p><br>
         <hr style="height:1px;border:none;color:#333;background-color:#333;" />
         <br>
-        <h2 class="wow bounceInUp">Why Sunnynvest?</h2>
+        <h2 class="wow bounceInUp">And more...</h2>
+        <br>
+        <div id="hook">
+            <h5 class="wow bounceInUp">Monte Carlo simulation graphs resulted from sunnynvest analysis.</h5>
+            <div id="cellTableMC" style="display:none;justify-content:space-between">
+                <p>scroll to the right to see table</p>
+                <i class="fa fa-angle-double-right wow bounceInUp" style="font-size:36px;margin-right:40px;"></i>
+            </div>
+        </div>
+        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+        <br>
+        <h2 class="wow bounceInUp">But why Sunnynvest?</h2>
         <br>
         <p class="wow bounceInUp">With the growing demand for solar energy, motivated mainly by the movement against the use of fossil fuels, thousands of entrepreneurs venture into this field to sell photovoltaic energy systems. To make life easier for companies in the industry,
             software for projects and simulation of energy production were created and disseminated in the market. However, when doing research with several companies in the solar panel sales industry, it was noticed that the software on the market did
@@ -186,7 +253,7 @@
             </div>
             <div>
                 <h2><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
-                <p>Hello i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in
+                <p>Hello! i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in
                     Production engineering done in the Federal University of Rio Grande do Norte, and the web version is Msc thesis project in Engineering management completed in University of Debrecen. You can contact me on Linkedin/Whatsapp/Facebook
                     or view my cv by clicking on the icons below my picture.
             </div>
@@ -207,7 +274,7 @@
                     <h2 id="meuHEad"><b>Joao Henrique Cavalcanti, developer and Sunnynvest creator</b></h2>
                 </div>
             </div>
-            <p>Hello i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in Production
+            <p>Hello! i am Joao Henrique, Engineer, with academic and professional experience in data analytics, data science, finances, solar energy and web devlopment. The desktop version of this software is resulted from a conclusion Bsc project in Production
                 engineering done in the Federal University of Rio Grande do Norte, and the web version is a Msc thesis project in Engineering management completed at University of Debrecen. You can contact me on Linkedin/Whatsapp/Facebook or view my CV
                 by clicking on the icons below my pictire.</p>
         </div>
@@ -269,6 +336,19 @@
         height: 468px !important;
     }
     
+    .fa-angle-double-right {
+        animation: move 0.5s infinite alternate
+    }
+    
+    @keyframes move {
+        from {
+            transform: translateX(0px);
+        }
+        to {
+            transform: translateX(20px);
+        }
+    }
+    
     @media only screen and (max-width: 550px) {
         .brs {
             display: initial !important;
@@ -276,14 +356,23 @@
         .titu {
             white-space: nowrap !important;
         }
+        #cellTableMC {
+            display: flex !important;
+        }
+        #brs {
+            display: none;
+        }
+        #meuHEad {
+            font-size: 32px !important;
+        }
     }
     
     @media only screen and (max-width: 700px) {
+        #meuHEad {
+            font-size: 50px;
+        }
         .initialbr {
             display: initial !important;
-        }
-        #meuHEad {
-            font-size: 22px;
         }
         #img {
             width: 150px;

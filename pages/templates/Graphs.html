@@ -243,13 +243,16 @@
                 var staticMaths_result;
                 var staticMaths_resultJ;
                 var dictStringResult = "{{dictStringResult|safe}}";
+                var clientShare
 
                 if ('' !== dictStringResult) {
+
                     dictStringResult = dictStringResult.replace(/'/g, '"');
                     dictStringResult = $.parseJSON(dictStringResult);
                     spiderS_resultJ = dictStringResult.spiderS_result;
                     simMC_resultJ = dictStringResult.simMC_result;
                     staticMaths_resultJ = dictStringResult.staticMaths_result;
+                    clientShare = dictStringResult.clientShare;
                 } else {
                     spiderS_result = "{{spiderS_result|safe}}";
                     spiderS_result = spiderS_result.replace(/'/g, '"');
@@ -263,6 +266,9 @@
                     staticMaths_result = staticMaths_result.replace(/'/g, '"');
                     console.log(staticMaths_result, "staticMaths_result");
                     staticMaths_resultJ = $.parseJSON(staticMaths_result);
+
+                    clientShare = "{{clientShare|safe}}";
+                    console.log(clientShare, "clientShare");
                 }
 
                 objLiteralBars = {
@@ -946,6 +952,8 @@
                     }
                 };
                 Plotly.newPlot('myDivG', data, layout, config);
+                $("#start").after("<a>www.sunnynvest.com/share/" + clientShare + "</a>")
+                $("#start").after("<br><br><p><b>share this project with anyone by using the following url:</b></p>")
                 $("#loadingG").hide();
                 if (window.document.documentMode) {
                     $("#block").css("display", "");

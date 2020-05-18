@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^password_reset/done/$',PasswordResetDoneView.as_view(template_name='passwordresetsent.html'), name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',PasswordResetConfirmView.as_view(template_name='forgotpassword2.html'), name='password_reset_confirm'),
     url(r'^reset/done/$', PasswordResetCompleteView.as_view(template_name='forgotpassword3.html'), name='password_reset_complete'),
+    url(r'^share/(?P<idpjn>\d+)/$', views.share, name='share')
    ]

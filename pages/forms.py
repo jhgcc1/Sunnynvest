@@ -83,6 +83,7 @@ class registrationform(UserCreationForm):
 			
 			return user
 class dadosform(forms.Form):
+	clientShare=forms.CharField()
 	dictStringResult=forms.CharField()
 	usuario= forms.CharField()
 	paymentMethod = forms.CharField()
