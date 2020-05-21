@@ -256,19 +256,19 @@
                 } else {
                     spiderS_result = "{{spiderS_result|safe}}";
                     spiderS_result = spiderS_result.replace(/'/g, '"');
-                    console.log(spiderS_result, "spiderS_result");
+
                     spiderS_resultJ = $.parseJSON(spiderS_result);
                     simMC_result = "{{simMC_result|safe}}";
                     simMC_result = simMC_result.replace(/'/g, '"');
-                    console.log(simMC_result, "simMC_result");
+
                     simMC_resultJ = $.parseJSON(simMC_result);
                     staticMaths_result = "{{staticMaths_result|safe}}";
                     staticMaths_result = staticMaths_result.replace(/'/g, '"');
-                    console.log(staticMaths_result, "staticMaths_result");
+
                     staticMaths_resultJ = $.parseJSON(staticMaths_result);
 
                     clientShare = "{{clientShare|safe}}";
-                    console.log(clientShare, "clientShare");
+
                 }
 
                 objLiteralBars = {
@@ -528,6 +528,7 @@
                         Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
                             if (simMC_resultJ[year][inout][kpi]["mean"] === "IRR with multiple roots") {
                                 console.log("so entra aqui");
+                                console.log(simMC_resultJ);
                             } else {
                                 if (kpi !== "pricepanel" && kpi !== "priceinverters") {
                                     if (kpi !== "Discounted payback") {
@@ -552,7 +553,7 @@
                                     }
 
                                     var x = simMC_resultJ[year][inout][kpi]["rawData"];
-                                    console.log(x, "aqui2");
+
                                     var data = {
                                         //histfunc: "count",
                                         x: x,
@@ -583,8 +584,9 @@
                 });
                 var allSimGraph = {};
                 Object.keys(graphsObj).forEach(function(kpi, index) {
+                    console.log(graphsObj, "so entra aqui graph")
                     data1 = graphsObj[kpi];
-                    console.log(kpi.split(" ")[1], "kpi.split(");
+
                     var obj = {
                         "Maintenance": "$",
                         "Cost": "%",
@@ -603,9 +605,6 @@
                     };
 
                     if (kpi.split(" ")[kpi.split(" ").length - 1] === "hist") {
-                        console.log("1");
-                        console.log(kpi);
-                        console.log(data1);
                         var year = [];
                         Object.keys(graphsObj[kpi]).forEach(function(y) {
                             year.push(graphsObj[kpi][y].name);
@@ -703,7 +702,6 @@
                             if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
                                 layout1["xaxis"]["tickformat"] = ',.0%';
                             } else {
-                                console.log(layout1);
                                 layout1["xaxis"]["showticksuffix"] = 'all';
                                 layout1["xaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
                             }
@@ -727,7 +725,7 @@
                             if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
                                 layout1["yaxis"]["tickformat"] = ',.0%';
                             } else {
-                                console.log(layout1);
+
                                 layout1["yaxis"]["showticksuffix"] = 'all';
                                 layout1["yaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
 
@@ -749,9 +747,9 @@
                 var kpi22;
                 Object.keys(allSimGraph).forEach(function(kpi, index) {
                     if (index % 2 == 0) {
-                        console.log(allSimGraph, "allSimGraph");
+
                         kpi11 = kpi;
-                        console.log(kpi11, "kpi");
+
                         kpi1 = kpi.replace(/\s/g, '');
 
                         if (index === Object.keys(allSimGraph).length - 1) {
@@ -761,9 +759,9 @@
                             string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
                         }
                     } else {
-                        console.log(kpi, "kpi");
+
                         kpi22 = kpi;
-                        console.log(kpi22, "kpi");
+
                         kpi2 = kpi.replace(/\s/g, '');
                         $("#start").after(string + '<div class="col-md-6"><div  class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
                         Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
@@ -846,7 +844,7 @@
                             };
 
                             if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
-                                console.log("deu certo");
+
                                 layout1["yaxis"]["tickformat"] = ',.0%';
                             }
 
@@ -894,10 +892,10 @@
                                 range: [-0.55, 0.55],
                                 tickformat: ',.0%'
                             }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
-                            console.log(kpi2, "deu certo");
+
 
                             if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
-                                console.log("deu certo");
+
                                 layout2["yaxis"]["tickformat"] = ',.0%';
                             }
 
@@ -936,7 +934,7 @@
                 });
                 let npanels = staticMaths_resultJ["ndeplacas"];
                 let maxEconomy = parseInt(staticMaths_resultJ["maxeconomy"].replace("%", "")) / 100;
-                console.log(staticMaths_resultJ, "staticMaths_resultJ");
+
                 $("#start").after('<div class="row"><div class="col-md-6"><p class="wow slideInLeft" id="npanels" style="text-align:center;font-size:20px;padding-right:10%;padding-top:30%">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight" style="position:relative" class="wow slideInRight"></div></div></div>');
                 var data = [{
                     domain: {
