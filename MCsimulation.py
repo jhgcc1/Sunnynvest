@@ -63,9 +63,9 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["outputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"]=auxList
-        if boleanIRR=True:
-            simMC_result[SimulationYearString]["outputs"][item]["mean"]="Irr with multiple roots"
-            simMC_result[SimulationYearString]["outputs"][item]["std"]="Irr with multiple roots"
+        if boleanIRR==True:
+            simMC_result[SimulationYearString]["outputs"][item]["mean"]="IRR with multiple roots"
+            simMC_result[SimulationYearString]["outputs"][item]["std"]="IRR with multiple roots"
         for index,item in enumerate(simMC_result[SimulationYearString]["inputs"]):
             simMC_result[SimulationYearString]["inputs"][item]["rawData"]=temporary_list_inputs[index]
             simMC_result[SimulationYearString]["inputs"][item]["mean"]=np.mean(temporary_list_inputs[index])
