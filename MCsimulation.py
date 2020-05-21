@@ -62,17 +62,18 @@ def simMC(objIpunt):
             for index,item in enumerate(simMC_result[SimulationYearString]["outputs"]):
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"].append(temporary_list_outputs[index])
         for item in simMC_result[SimulationYearString]["outputs"]:
-            if(item!="Discounted payback" and boleanIRR==False):
-                simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
-                simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
+            if(item!="Discounted payback"):
+                if item=="IRR" and boleanIRR==True:
+                    simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
+                    simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
+                else:
+                    simMC_result[SimulationYearString]["outputs"][item]["mean"]="IRR with multiple roots"
+                    simMC_result[SimulationYearString]["outputs"][item]["std"]="IRR with multiple roots"
             else:
                 print(item)
                 auxList=simMC_result[SimulationYearString]["outputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"]=auxList
-        if boleanIRR==True:
-            simMC_result[SimulationYearString]["outputs"][item]["mean"]="IRR with multiple roots"
-            simMC_result[SimulationYearString]["outputs"][item]["std"]="IRR with multiple roots"
         for index,item in enumerate(simMC_result[SimulationYearString]["inputs"]):
             simMC_result[SimulationYearString]["inputs"][item]["rawData"]=temporary_list_inputs[index]
             simMC_result[SimulationYearString]["inputs"][item]["mean"]=np.mean(temporary_list_inputs[index])
