@@ -14,13 +14,13 @@ def simMC(objIpunt):
     for SimulationYear in range(0,objIpunt["sim_year"]):
         rd_distMaintenance=rnd(objIpunt["distMaintenance"])
         rd_distPricePanel=rnd(objIpunt["distPricePanel"])# cant be negative
-        if rd_distPricePanel[np.where(rd_distPricePanel<0)]:
+        if rd_distPricePanel[np.where(np.array(rd_distPricePanel)<0)]:
             return False
         rd_distPriceInv=rnd(objIpunt["distPriceInv"])# cant be negative
-        if rd_distPricePanel[np.where(rd_distPricePanel<0)]:
+        if rd_distPricePanel[np.where(np.array(rd_distPricePanel)<0)]:
             return False
         rd_distRad=rnd(objIpunt["distRad"]) # cant be negative
-        if rd_distPricePanel[np.where(rd_distPricePanel<0)]:
+        if rd_distPricePanel[np.where(np.array(rd_distPricePanel)<0)]:
             return False
         rd_distWcpp=rnd(objIpunt["distccp"])
         rd_distWcct=rnd(objIpunt["distcct"])
