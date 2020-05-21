@@ -768,12 +768,11 @@
                         Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
                     }
                 });
+                let IRRflag = false;
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
                     if (graph !== "rangeSpider") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
                             if (spiderS_resultJ[graph]["Sensitivity analysis IRR"] !== "IRR with multiple roots") {
-
-
                                 if (!graphsObj2[kpi]) {
                                     graphsObj2[kpi] = {};
                                 }
@@ -784,14 +783,15 @@
 
                                 graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
                             } else {
-                                graphsObj2["Sensitivity analysis IRR"] = "IRR with multiple roots"
+                                IRRflag = true;
                             }
                         });
                     }
                 });
+                console.log(graphsObj2);
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
-                    if (graphsObj2[graphKpi] !== "IRR with multiple roots") {
+                    if (IRRflag === false) {
                         Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
                             var trace = {
                                 y: graphsObj2[graphKpi][kpi][0],
@@ -2237,5 +2237,9 @@
             prevScrollpos = currentScrollPos;
         }
     </script>
+
+</html>
+
+</html>
 
 </html>
