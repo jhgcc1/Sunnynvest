@@ -771,7 +771,7 @@
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
                     if (graph !== "rangeSpider" && graph !== "IRRflag") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                            if (kpi == "Sensitivity analysis IRR" && IRRflag == "True") {} else {
+                            if (kpi == "Sensitivity analysis IRR" && IRRflag === "True") {} else {
                                 if (!graphsObj2[kpi]) {
                                     graphsObj2[kpi] = {};
                                 }
@@ -789,7 +789,14 @@
                 console.log(IRRflag, "IRRflag");
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
-                    if (IRRflag === "False") {
+                    if (graphKpi == "Sensitivity analysis IRR" && IRRflag === "True") {
+                        if (index % 2 == 0) {
+                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "><p>IRR with multiple roots</p></div></div>";
+                        } else {
+                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "><p>IRR with multiple roots</p></div></div></div>");
+                        }
+                    } else {
+
                         Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
                             var trace = {
                                 y: graphsObj2[graphKpi][kpi][0],
@@ -921,12 +928,6 @@
                             $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
                             Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
                             Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
-                        }
-                    } else {
-                        if (index % 2 == 0) {
-                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "><p>IRR with multiple roots</p></div></div>";
-                        } else {
-                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "><p>IRR with multiple roots</p></div></div></div>");
                         }
                     }
                 });
