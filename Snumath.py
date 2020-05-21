@@ -207,13 +207,21 @@ def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflatio
 
 def FinancialSimulation(result_wacc_no_inflation,plifespan,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation):
     array_discounted_payback=np.array([np.npv(result_wacc,array_total_cashflow_inflation[0:x]) for x in range(1,plifespan+2)])
-    lenght=len(array_discounted_payback)
-    pb=0
-    for index,npv in enumerate(reversed(array_discounted_payback)):
-        if npv>=0 and array_discounted_payback[::-1][index+1]<0 and index!=0:
-            pb=lenght-index-1
-            break
-    return pb
+    if array_discounted_payback[0]>0:
+        return "first input of cash flow cant be negative"
+    else:
+        array_discounted_payback_reversed=array_discounted_payback[::-1]
+        lenght=len(array_discounted_payback)
+        pb=0
+        for index,npv in enumerate(array_discounted_payback_reversed):
+            if index!=lenght-1:
+                if npv>=0  and array_discounted_payback_reversed[index+1]<0:
+                    discounted_payback_after_last_sign_change = np.array(array_discounted_payback_reversed[0:index])
+                    supportArray=discounted_payback_after_last_sign_change[np.where( discounted_payback_after_last_sign_change < 0 )]
+                    if len(supportArray)==0:
+                        pb=lenght-index-1
+                    break
+        return pb
 
 def Static(invest_painels,priceinverters,pricestringbox,priceproject,pricewiring,pricess,pricelabor,priceothers,entry,carbon_red,array_KWhenergy_per_year,plifespan,array_gross_revenue,inflation,array_total_cashflow_noinflation,result_wacc,array_total_cashflow_inflation,numberofyears_topay,result_wacc_no_inflation):
     #carbonsaved 0.932 kg of carbon dioxide emission reduction per KWh

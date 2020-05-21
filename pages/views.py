@@ -235,74 +235,77 @@ def input(request):
 			objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
 			objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
 			simMC_result=simMC(objIpunt)
-			print(simMC_result["0"]["inputs"])
-			args["modeloPJname"]=False
-			if objIpunt["distMaintenance"][0]=="Fixed value":
-				print(simMC_result)
-				objIpunt["maintenance"]=simMC_result["0"]["inputs"]["Maintenance"]["rawData"][0]
+			if simMC_result== False:
+				return render(request,'Negative.html',args)
 			else:
-				objIpunt["maintenance"]=simMC_result["0"]["inputs"]["Maintenance"]["mean"]
+				print(simMC_result["0"]["inputs"])
+				args["modeloPJname"]=False
+				if objIpunt["distMaintenance"][0]=="Fixed value":
+					print(simMC_result)
+					objIpunt["maintenance"]=simMC_result["0"]["inputs"]["Maintenance"]["rawData"][0]
+				else:
+					objIpunt["maintenance"]=simMC_result["0"]["inputs"]["Maintenance"]["mean"]
 
-			if objIpunt["distPricePanel"][0]=="Fixed value":
-				objIpunt["pricepainel"]=simMC_result["0"]["inputs"]["pricepanel"]["rawData"][0]
-			else:
-				objIpunt["pricepainel"]=simMC_result["0"]["inputs"]["pricepanel"]["mean"]
+				if objIpunt["distPricePanel"][0]=="Fixed value":
+					objIpunt["pricepainel"]=simMC_result["0"]["inputs"]["pricepanel"]["rawData"][0]# cant be negative
+				else:
+					objIpunt["pricepainel"]=simMC_result["0"]["inputs"]["pricepanel"]["mean"]# cant be negative
 
-			if objIpunt["distPriceInv"][0]=="Fixed value":
-				objIpunt["priceinverters"]=simMC_result["0"]["inputs"]["priceinverters"]["rawData"][0]
-			else:
-				objIpunt["priceinverters"]=simMC_result["0"]["inputs"]["priceinverters"]["mean"]
+				if objIpunt["distPriceInv"][0]=="Fixed value":
+					objIpunt["priceinverters"]=simMC_result["0"]["inputs"]["priceinverters"]["rawData"][0]
+				else:
+					objIpunt["priceinverters"]=simMC_result["0"]["inputs"]["priceinverters"]["mean"]
 
-			if objIpunt["distRad"][0]=="Fixed value":
-				objIpunt["Irradiation"]=simMC_result["0"]["inputs"]["Irradiation"]["rawData"][0]
-			else:
-				objIpunt["Irradiation"]=simMC_result["0"]["inputs"]["Irradiation"]["mean"]
+				if objIpunt["distRad"][0]=="Fixed value":
+					objIpunt["Irradiation"]=simMC_result["0"]["inputs"]["Irradiation"]["rawData"][0]
+				else:
+					objIpunt["Irradiation"]=simMC_result["0"]["inputs"]["Irradiation"]["mean"]
 
-			if objIpunt["distccp"][0]=="Fixed value":
-				objIpunt["ccp"]=simMC_result["0"]["inputs"]["Cost of equity"]["rawData"][0]
-			else:
-				objIpunt["ccp"]=simMC_result["0"]["inputs"]["Cost of equity"]["mean"]
+				if objIpunt["distccp"][0]=="Fixed value":
+					objIpunt["ccp"]=simMC_result["0"]["inputs"]["Cost of equity"]["rawData"][0]
+				else:
+					objIpunt["ccp"]=simMC_result["0"]["inputs"]["Cost of equity"]["mean"]
 
-			if objIpunt["distcct"][0]=="Fixed value":
-				objIpunt["cct"]=simMC_result["0"]["inputs"]["Cost of debit"]["rawData"][0]
-			else:
-				objIpunt["cct"]=simMC_result["0"]["inputs"]["Cost of debit"]["mean"]
+				if objIpunt["distcct"][0]=="Fixed value":
+					objIpunt["cct"]=simMC_result["0"]["inputs"]["Cost of debit"]["rawData"][0]
+				else:
+					objIpunt["cct"]=simMC_result["0"]["inputs"]["Cost of debit"]["mean"]
 
-			if objIpunt["distIlifespan"][0]!="Custom probabilities":
-				objIpunt["ilifespan"]=simMC_result["0"]["inputs"]["Inverters lifespan"]["rawData"][0]
-			else:
-				objIpunt["ilifespan"]=int(simMC_result["0"]["inputs"]["Inverters lifespan"]["mean"])
-			if objIpunt["distPlifespan"][0]!="Custom probabilities":
-				objIpunt["plifespan"]=simMC_result["0"]["inputs"]["Panels lifespan"]["rawData"][0]
-			else:
-				objIpunt["plifespan"]=int(simMC_result["0"]["inputs"]["Panels lifespan"]["mean"])
-			print("aqui")
-			print(objIpunt["plifespan"])
-			print("aqui")
-			print(objIpunt["ilifespan"])
-			spiderS_result=spiderS(objIpunt)
-			staticMaths_result=staticMaths(objIpunt)
-			args["spiderS_result"]=spiderS_result
-			args["simMC_result"]=simMC_result
-			args["staticMaths_result"]=staticMaths_result
+				if objIpunt["distIlifespan"][0]!="Custom probabilities":
+					objIpunt["ilifespan"]=simMC_result["0"]["inputs"]["Inverters lifespan"]["rawData"][0]
+				else:
+					objIpunt["ilifespan"]=int(simMC_result["0"]["inputs"]["Inverters lifespan"]["mean"])
+				if objIpunt["distPlifespan"][0]!="Custom probabilities":
+					objIpunt["plifespan"]=simMC_result["0"]["inputs"]["Panels lifespan"]["rawData"][0]
+				else:
+					objIpunt["plifespan"]=int(simMC_result["0"]["inputs"]["Panels lifespan"]["mean"])
+				print("aqui")
+				print(objIpunt["plifespan"])
+				print("aqui")
+				print(objIpunt["ilifespan"])
+				spiderS_result=spiderS(objIpunt)
+				staticMaths_result=staticMaths(objIpunt)
+				args["spiderS_result"]=spiderS_result
+				args["simMC_result"]=simMC_result
+				args["staticMaths_result"]=staticMaths_result
 
-			clientShare=str(request.user)+"&"+projeto
-			args["clientShare"]=clientShare
+				clientShare=str(request.user)+"&"+projeto
+				args["clientShare"]=clientShare
 
-			dictStringResult={"clientShare":clientShare,"spiderS_result":spiderS_result,"simMC_result":simMC_result,"staticMaths_result":staticMaths_result}
-			json.dumps(dictStringResult)
-			
-			dadosmodels_obj= dadosmodels(clientShare=clientShare,entry=entry,yearsTopay=yearsTopay,paymentMethod=paymentMethod,energyconsume=energyconsume, usuario=request.user,radiation1=radiation1,radiation2=radiation2,radiation3=radiation3,pricekwh=pricekwh,
-			economy=economy,painelpower =painelpower,panelprice1=panelprice1,panelprice2=panelprice2,panelprice3=panelprice3,priceproject=priceproject,pricewiring=pricewiring,
-			pricess=pricess,pricelabor=pricelabor,energy_production_tax=energy_production_tax,depreciation_years_inverters=depreciation_years_inverters,
-			depreciation_years_painels=depreciation_years_painels,person_or_business_or_sellenergy=person_or_business_or_sellenergy,incometax=incometax,sim_year=sim_year,
-			maintenance3=maintenance3,maintenance1=maintenance1,maintenance2=maintenance2,inflation=inflation,ccp1=ccp1,ccp2=ccp2,ccp3=ccp3,cct1=cct1,cct2=cct2,cct3=cct3,pccp=pccp,pcct=pcct,
-			plifespan1=plifespan1,plifespan2=plifespan2,plifespan3=plifespan3,plifespan4=plifespan4,plifespan5=plifespan5,plifespan6=plifespan6,plifespan7=plifespan7,
-			ilifespan1=ilifespan1,ilifespan2=ilifespan2,ilifespan3=ilifespan3,ilifespan4=ilifespan4,ilifespan5=ilifespan5,ilifespan6=ilifespan6,ilifespan7=ilifespan7,
-			preduction=preduction,projeto=projeto,priceinverters1=priceinverters1,priceinverters2=priceinverters2,priceinverters3=priceinverters3,
-			pricestringbox=pricestringbox,dictStringResult=dictStringResult)
-			dadosmodels_obj.save()
-			return render(request,'Graphs.html',args)
+				dictStringResult={"clientShare":clientShare,"spiderS_result":spiderS_result,"simMC_result":simMC_result,"staticMaths_result":staticMaths_result}
+				json.dumps(dictStringResult)
+				
+				dadosmodels_obj= dadosmodels(clientShare=clientShare,entry=entry,yearsTopay=yearsTopay,paymentMethod=paymentMethod,energyconsume=energyconsume, usuario=request.user,radiation1=radiation1,radiation2=radiation2,radiation3=radiation3,pricekwh=pricekwh,
+				economy=economy,painelpower =painelpower,panelprice1=panelprice1,panelprice2=panelprice2,panelprice3=panelprice3,priceproject=priceproject,pricewiring=pricewiring,
+				pricess=pricess,pricelabor=pricelabor,energy_production_tax=energy_production_tax,depreciation_years_inverters=depreciation_years_inverters,
+				depreciation_years_painels=depreciation_years_painels,person_or_business_or_sellenergy=person_or_business_or_sellenergy,incometax=incometax,sim_year=sim_year,
+				maintenance3=maintenance3,maintenance1=maintenance1,maintenance2=maintenance2,inflation=inflation,ccp1=ccp1,ccp2=ccp2,ccp3=ccp3,cct1=cct1,cct2=cct2,cct3=cct3,pccp=pccp,pcct=pcct,
+				plifespan1=plifespan1,plifespan2=plifespan2,plifespan3=plifespan3,plifespan4=plifespan4,plifespan5=plifespan5,plifespan6=plifespan6,plifespan7=plifespan7,
+				ilifespan1=ilifespan1,ilifespan2=ilifespan2,ilifespan3=ilifespan3,ilifespan4=ilifespan4,ilifespan5=ilifespan5,ilifespan6=ilifespan6,ilifespan7=ilifespan7,
+				preduction=preduction,projeto=projeto,priceinverters1=priceinverters1,priceinverters2=priceinverters2,priceinverters3=priceinverters3,
+				pricestringbox=pricestringbox,dictStringResult=dictStringResult)
+				dadosmodels_obj.save()
+				return render(request,'Graphs.html',args)
 		else:
 			paymentMethod = request.POST.get('paymentMethod')
 			if paymentMethod=="cash":
