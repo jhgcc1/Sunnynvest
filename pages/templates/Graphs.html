@@ -785,143 +785,153 @@
                                 }
 
                                 graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
+                            } else {
+                                graphsObj2["Sensitivity analysis IRR"] = "IRR with multiple roots"
                             }
                         });
                     }
                 });
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
-                    Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
-                        var trace = {
-                            y: graphsObj2[graphKpi][kpi][0],
-                            x: spiderS_resultJ["rangeSpider"],
-                            mode: 'lines+markers',
-                            type: 'scatter',
-                            name: kpi,
-                            marker: {
-                                size: 0.1
+                    if (graphsObj2[graphKpi] !== "IRR with multiple roots") {
+                        Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
+                            var trace = {
+                                y: graphsObj2[graphKpi][kpi][0],
+                                x: spiderS_resultJ["rangeSpider"],
+                                mode: 'lines+markers',
+                                type: 'scatter',
+                                name: kpi,
+                                marker: {
+                                    size: 0.1
+                                }
+                            };
+                            data.push(trace);
+                        });
+                        /*
+                                        kpi1 = graphKpi
+                                        data1 = data;
+                                        layout1 = {
+                                            showlegend: true,
+                                            legend: {
+                                                "orientation": "h"
+                                            },
+                                            xaxis: {
+                                                range: [-60, 60]
+                                            },
+                                            xaxis: {
+                                                range: [-60, 60]
+                                            },
+                                            title: kpi1
+                                        };
+                                        let str = kpi1.replace(/\s/g, '');
+                                        $("#start"). wow slideInRight"><div class="col-md-12"><div  id=' + "graphStarts" + str + "></div></div></div>");
+                                        Plotly.newPlot('graphStarts' + str, data1, layout1);*/
+
+                        if (index % 2 == 0) {
+                            data1 = [].concat(data);
+                            kpi1 = graphKpi.replace(/\s/g, '');
+                            layout1 = {
+                                dragmode: 'pan',
+
+                                showlegend: true,
+                                legend: {
+                                    "orientation": "h"
+                                },
+                                xaxis: {
+                                    range: [-0.55, 0.55],
+                                    tickformat: ',.0%'
+                                },
+                                yaxis: {},
+                                title: graphKpi
+                            };
+
+                            if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
+                                console.log("deu certo");
+                                layout1["yaxis"]["tickformat"] = ',.0%';
                             }
-                        };
-                        data.push(trace);
-                    });
-                    /*
-                                    kpi1 = graphKpi
-                                    data1 = data;
-                                    layout1 = {
-                                        showlegend: true,
-                                        legend: {
-                                            "orientation": "h"
-                                        },
-                                        xaxis: {
-                                            range: [-60, 60]
-                                        },
-                                        xaxis: {
-                                            range: [-60, 60]
-                                        },
-                                        title: kpi1
-                                    };
-                                    let str = kpi1.replace(/\s/g, '');
-                                    $("#start"). wow slideInRight"><div class="col-md-12"><div  id=' + "graphStarts" + str + "></div></div></div>");
-                                    Plotly.newPlot('graphStarts' + str, data1, layout1);*/
 
-                    if (index % 2 == 0) {
-                        data1 = [].concat(data);
-                        kpi1 = graphKpi.replace(/\s/g, '');
-                        layout1 = {
-                            dragmode: 'pan',
+                            if (kpi1 === "SensitivityanalysisLCOE" || kpi1 === "SensitivityanalysisCost/KWh") {
+                                layout1["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " $/KWh"
+                                };
+                            }
 
-                            showlegend: true,
-                            legend: {
-                                "orientation": "h"
-                            },
-                            xaxis: {
+                            if (kpi1 === "SensitivityanalysisNPV" || kpi1 === "SensitivityanalysisEquivalentannualannuity") {
+                                layout1["yaxis"] = {
+                                    showtickprefix: 'all',
+                                    tickprefix: " $"
+                                };
+                            }
+
+                            if (kpi1 === "SensitivityanalysisSimplePayback") {
+                                layout1["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " years"
+                                };
+                            }
+
+                            if (index === Object.keys(graphsObj2).length - 1) {
+                                Plotly.newPlot('ponte', data1, layout1, config);
+                            } else {
+                                string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
+                            }
+                        } else {
+                            var _layout3;
+
+                            data2 = [].concat(data);
+                            kpi2 = graphKpi.replace(/\s/g, '');
+                            layout2 = (_layout3 = {
+                                dragmode: 'pan',
+                                showlegend: true,
+                                legend: {
+                                    "orientation": "h"
+                                },
+                                xaxis: {
+                                    range: [-55, 55]
+                                }
+                            }, _defineProperty(_layout3, "xaxis", {
                                 range: [-0.55, 0.55],
                                 tickformat: ',.0%'
-                            },
-                            yaxis: {},
-                            title: graphKpi
-                        };
+                            }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
+                            console.log(kpi2, "deu certo");
 
-                        if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
-                            console.log("deu certo");
-                            layout1["yaxis"]["tickformat"] = ',.0%';
-                        }
+                            if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
+                                console.log("deu certo");
+                                layout2["yaxis"]["tickformat"] = ',.0%';
+                            }
 
-                        if (kpi1 === "SensitivityanalysisLCOE" || kpi1 === "SensitivityanalysisCost/KWh") {
-                            layout1["yaxis"] = {
-                                showticksuffix: 'all',
-                                ticksuffix: " $/KWh"
-                            };
-                        }
+                            if (kpi2 === "SensitivityanalysisLCOE" || kpi2 === "SensitivityanalysisCost/KWh") {
+                                layout2["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " $/KWh"
+                                };
+                            }
 
-                        if (kpi1 === "SensitivityanalysisNPV" || kpi1 === "SensitivityanalysisEquivalentannualannuity") {
-                            layout1["yaxis"] = {
-                                showtickprefix: 'all',
-                                tickprefix: " $"
-                            };
-                        }
+                            if (kpi2 === "SensitivityanalysisNPV" || kpi2 === "SensitivityanalysisEquivalentannualannuity") {
+                                layout2["yaxis"] = {
+                                    showtickprefix: 'all',
+                                    tickprefix: " $"
+                                };
+                            }
 
-                        if (kpi1 === "SensitivityanalysisSimplePayback") {
-                            layout1["yaxis"] = {
-                                showticksuffix: 'all',
-                                ticksuffix: " years"
-                            };
-                        }
+                            if (kpi2 === "SensitivityanalysisSimplePayback") {
+                                layout2["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " years"
+                                };
+                            }
 
-                        if (index === Object.keys(graphsObj2).length - 1) {
-                            Plotly.newPlot('ponte', data1, layout1, config);
-                        } else {
-                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
+                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                            Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                            Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                         }
                     } else {
-                        var _layout3;
-
-                        data2 = [].concat(data);
-                        kpi2 = graphKpi.replace(/\s/g, '');
-                        layout2 = (_layout3 = {
-                            dragmode: 'pan',
-                            showlegend: true,
-                            legend: {
-                                "orientation": "h"
-                            },
-                            xaxis: {
-                                range: [-55, 55]
-                            }
-                        }, _defineProperty(_layout3, "xaxis", {
-                            range: [-0.55, 0.55],
-                            tickformat: ',.0%'
-                        }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
-                        console.log(kpi2, "deu certo");
-
-                        if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
-                            console.log("deu certo");
-                            layout2["yaxis"]["tickformat"] = ',.0%';
+                        if (index % 2 == 0) {
+                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "><p>IRR with multiple roots</p></div></div>";
+                        } else {
+                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "><p>IRR with multiple roots</p></div></div></div>");
                         }
-
-                        if (kpi2 === "SensitivityanalysisLCOE" || kpi2 === "SensitivityanalysisCost/KWh") {
-                            layout2["yaxis"] = {
-                                showticksuffix: 'all',
-                                ticksuffix: " $/KWh"
-                            };
-                        }
-
-                        if (kpi2 === "SensitivityanalysisNPV" || kpi2 === "SensitivityanalysisEquivalentannualannuity") {
-                            layout2["yaxis"] = {
-                                showtickprefix: 'all',
-                                tickprefix: " $"
-                            };
-                        }
-
-                        if (kpi2 === "SensitivityanalysisSimplePayback") {
-                            layout2["yaxis"] = {
-                                showticksuffix: 'all',
-                                ticksuffix: " years"
-                            };
-                        }
-
-                        $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
-                        Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
-                        Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
                     }
                 });
                 let npanels = staticMaths_resultJ["ndeplacas"];
