@@ -526,9 +526,9 @@
                     yearAux.push(thisyear);
                     Object.keys(simMC_resultJ[year]).forEach(function(inout) {
                         Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
-                            if (simMC_resultJ[year][inout][kpi] !== "IRR with multiple roots") {
-
-
+                            if (simMC_resultJ[year][inout][kpi]["mean"] === "IRR with multiple roots") {
+                                console.log("so entra aqui");
+                            } else {
                                 if (kpi !== "pricepanel" && kpi !== "priceinverters") {
                                     if (kpi !== "Discounted payback") {
                                         if (!graphsObj[kpi + " box"]) {
