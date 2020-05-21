@@ -1,0 +1,2246 @@
+{%load static%}
+<!doctype html>
+<html lang="pt">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <script src="https://cdn.boomcdn.com/libs/wow-js/1.3.0/wow.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+    <title>Sunnynvest</title>
+
+</head>
+
+<body>
+    <div id=loadingG style="z-index:99999999;display:initial;position:absolute;left:0;right:0;top:0;bottom:0;background-color:darkgrey;">
+        <div id="loadingG2" style="display:flex;align-items:center;justify-content:center;flex-direction:column;height:100%;">
+            <div id="loadingGraphd" style="display:flex;align-items:flex-end;height:100px">
+                <div style="background-color:red;width:12px;height:50px;margin-left:5px" class="bar bar1"></div>
+                <div class="bar bar2" style="background-color:green;width:12px;height:30px;margin-left:5px"></div>
+                <div class="bar bar3" style="background-color:yellow;width:12px;height:15px;margin-left:5px"></div>
+            </div>
+        </div>
+    </div>
+    <div id="block" style="display:initial">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar" style="position:fixed;width:100%;z-index:9999999999;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div id="logo" style="margin-right:1%;margin-left:1%;width:225px;height:43px;background:none;opacity:100%;border-radius: 15px 15px 15px 15px;">
+                <a style="background:url(/static/lOGO.png);width:220px;height:47px;background-size:cover" class="navbar-brand" href="{% url 'home' %}"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link menuItem" href="{% url 'home' %}">Home </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menuItem" href="{% url 'about' %}">About us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menuItem" href="{% url 'input' %}">Start analyses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menuItem" id="contact" name="abt">Contact us</a>
+                    </li>
+
+
+                </ul>
+                <ul class="navbar-nav ml-auto">
+
+                    {% if profile == 'Profile' %}
+                    <li>
+                        <a href="{% url 'profile' %}" class="nav-link menuItem"><span>{{profile}}</a>
+                    </li>
+                    {% endif %} {% if nomeoulogin == '' %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link menuItem">{{logout}}</a>
+                    </li>
+                    {% endif %} {% if nomeoulogin != '' %}
+
+
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link menuItem">{{logout}}</a>
+                    </li>
+                    {% endif %} {% if nomeoulogin != '' %}
+                    <li class="nav-item">
+                        <span class="nav-link menuItem" style="color:white">{{nomeoulogin}}</span>
+                    </li>
+                    {% endif %} {% if nomeoulogin == '' %}
+                    <li class="nav-item">
+                        <a class="nav-link menuItem" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+
+
+            </div>
+        </nav>
+
+
+
+        <style>
+
+        </style>
+        {% if modelo %}
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Menssage sent</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        We will contact you very soon with an answer
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark float-sm-right" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .modal-dialog {
+            position: relative;
+            top: 100px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 999999999;
+            overflow: auto;
+            overflow-y: auto;
+        }
+    </style>
+    <script>
+        $('#myModal').modal('show');
+    </script>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <div id="containerInput" class="container">
+        <div id="start"></div>
+    </div>
+    <script>
+        function _defineProperty(obj, key, value) {
+            if (key in obj) {
+                Object.defineProperty(obj, key, {
+                    value: value,
+                    enumerable: true,
+                    configurable: true,
+                    writable: true
+                });
+            } else {
+                obj[key] = value;
+            }
+            return obj;
+        }
+        $(document).ready(function() {
+            wow = new WOW({
+                boxClass: 'wow', // default
+                animateClass: 'animated', // default
+                offset: 0, // default
+                mobile: false, // default
+                live: true // default
+            })
+            wow.init();
+            let config = {
+                responsive: true
+            }
+            if (!String.prototype.includes) {
+                String.prototype.includes = function(search, start) {
+                    'use strict';
+
+                    if (search instanceof RegExp) {
+                        throw TypeError('first argument must not be a RegExp');
+                    }
+                    if (start === undefined) {
+                        start = 0;
+                    }
+                    return this.indexOf(search, start) !== -1;
+                };
+            }
+            if (!Object.keys) {
+
+                Object.keys = (function() {
+                    var hasOwnProperty = Object.prototype.hasOwnProperty,
+                        hasDontEnumBug = !({
+                            toString: null
+                        }).propertyIsEnumerable('toString'),
+                        dontEnums = [
+                            'toString',
+                            'toLocaleString',
+                            'valueOf',
+                            'hasOwnProperty',
+                            'isPrototypeOf',
+                            'propertyIsEnumerable',
+                            'constructor'
+                        ],
+                        dontEnumsLength = dontEnums.length;
+
+                    return function(obj) {
+                        if (typeof obj !== 'object' && typeof obj !== 'function' || obj === null) throw new TypeError('Object.keys called on non-object');
+
+                        var result = [];
+
+                        for (var prop in obj) {
+                            if (hasOwnProperty.call(obj, prop)) result.push(prop);
+                        }
+
+                        if (hasDontEnumBug) {
+                            for (var i = 0; i < dontEnumsLength; i++) {
+                                if (hasOwnProperty.call(obj, dontEnums[i])) result.push(dontEnums[i]);
+                            }
+                        }
+                        return result;
+                    }
+                })()
+            };
+            setTimeout(function() {
+
+                $("a[name='abt']").click(function(e) {
+                    var element = document.getElementById("gancho");
+                    element.scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
+                var string;
+                var kpi1;
+                var kpi2;
+                var layout1;
+                var layout2;
+                var data1;
+                var data2;
+                graphsObj = {};
+                graphsObj2 = {};
+                var spiderS_resultJ;
+                var spiderS_result;
+                var simMC_result;
+                var simMC_resultJ;
+                var staticMaths_result;
+                var staticMaths_resultJ;
+                var dictStringResult = "{{dictStringResult|safe}}";
+                var clientShare
+
+                if ('' !== dictStringResult) {
+
+                    dictStringResult = dictStringResult.replace(/'/g, '"');
+                    dictStringResult = $.parseJSON(dictStringResult);
+                    spiderS_resultJ = dictStringResult.spiderS_result;
+                    simMC_resultJ = dictStringResult.simMC_result;
+                    staticMaths_resultJ = dictStringResult.staticMaths_result;
+                    clientShare = dictStringResult.clientShare;
+                } else {
+                    spiderS_result = "{{spiderS_result|safe}}";
+                    spiderS_result = spiderS_result.replace(/'/g, '"');
+
+                    spiderS_resultJ = $.parseJSON(spiderS_result);
+                    simMC_result = "{{simMC_result|safe}}";
+                    simMC_result = simMC_result.replace(/'/g, '"');
+
+                    simMC_resultJ = $.parseJSON(simMC_result);
+                    staticMaths_result = "{{staticMaths_result|safe}}";
+                    staticMaths_result = staticMaths_result.replace(/'/g, '"');
+
+                    staticMaths_resultJ = $.parseJSON(staticMaths_result);
+
+                    clientShare = "{{clientShare|safe}}";
+
+                }
+
+                objLiteralBars = {
+                    "CO2 emition reduction": "Kg",
+                    "Annuity payment with inflation cashflow": "$",
+                    "Annuity payment without inflation cashflow": "$",
+                    "Annuity payment with inflation": "$",
+                    "Annuity payment without inflation": "$",
+                    "Fiscal Effects": "$",
+                    "Inverters depreciation": "$",
+                    "inverters reinvestments": "$",
+                    "panels depreciation": "$",
+                    "Maintenance expenses": "$",
+                    "Produced KWh per year": "KWh",
+                    "Sum of produced KWh per year": "KWh",
+                    "Sum of gross revenue without inflation": "$",
+                    "Sum of gross revenue with inflation": "$",
+                    "Cashflow without inflation": "$",
+                    "Cashflow with inflation": "$"
+                };
+                var colorArray = ['rgb(55, 83, 109,0.8)', 'rgb(8,181,156,0.8)', 'rgb(8,81,156,0.8)', 'rgb(180,81,156,0.8)', 'rgb(8,81,95,0.8)', 'rgb(83,81,56,0.8)', 'rgb(28,221,156,0.8)', 'rgb(68,81,143,0.8)', 'rgb(8,30,55,0.8)', 'rgb(255,81,156,0.8)', 'rgb(21,255,41,0.8)', 'rgb(20,75,20,0.8)', 'rgb(90,155,20,0.8)', 'rgb(40,105,26,0.8)', 'rgb(140,55,64,0.8)', 'rgb(20,90,26,0.8)', 'rgb(140,200,26,0.8)', 'rgb(40,155,26,0.8)', 'rgb(140,55,26,0.8)', 'rgb(40,5,226,0.8)'];
+                Object.keys(staticMaths_resultJ).forEach(function(graphName, index) {
+                    if (objLiteralBars[graphName]) {
+                        if (staticMaths_resultJ["paymentMethod"] == "cash" && graphName.includes("Annuity")) {} else {
+                            if (index % 2 != 0) {
+                                data1 = [{
+                                    x: staticMaths_resultJ["Years"],
+                                    y: staticMaths_resultJ[graphName],
+                                    name: graphName,
+                                    marker: {
+                                        color: colorArray[index]
+                                    },
+                                    type: 'bar'
+                                }];
+                                layout1 = {
+                                    dragmode: 'pan',
+                                    title: graphName,
+                                    xaxis: {
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickangle: -75
+                                    },
+                                    yaxis: {
+                                        title: objLiteralBars[graphName],
+                                        titlefont: {
+                                            size: 16,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        }
+                                    },
+                                    legend: {
+                                        x: 0,
+                                        y: 1.0,
+                                        bgcolor: 'rgba(255, 255, 255, 0)',
+                                        bordercolor: 'rgba(255, 255, 255, 0)'
+                                    },
+                                    barmode: 'group',
+                                    bargap: 0.15,
+                                    bargroupgap: 0.1
+                                };
+                                kpi1 = graphName.replace(/\s/g, '');
+                                string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
+                            } else {
+                                data2 = [{
+                                    x: staticMaths_resultJ["Years"],
+                                    y: staticMaths_resultJ[graphName],
+                                    name: graphName,
+                                    marker: {
+                                        color: colorArray[index]
+                                    },
+                                    type: 'bar'
+                                }];
+                                layout2 = {
+                                    dragmode: 'pan',
+                                    title: graphName,
+                                    xaxis: {
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickangle: -75
+                                    },
+                                    yaxis: {
+                                        title: objLiteralBars[graphName],
+                                        titlefont: {
+                                            size: 16,
+                                            color: 'rgb(107, 107, 107)'
+                                        },
+                                        tickfont: {
+                                            size: 14,
+                                            color: 'rgb(107, 107, 107)'
+                                        }
+                                    },
+                                    legend: {
+                                        x: 0,
+                                        y: 1.0,
+                                        bgcolor: 'rgba(255, 255, 255, 0)',
+                                        bordercolor: 'rgba(255, 255, 255, 0)'
+                                    },
+                                    barmode: 'group',
+                                    bargap: 0.15,
+                                    bargroupgap: 0.1
+                                };
+                                kpi2 = graphName.replace(/\s/g, '');
+                                $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                                Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                                Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
+                            }
+                        }
+                    } else if (graphName === "Discounted payback") {
+                        var trace = [{
+                            x: staticMaths_resultJ["Years"],
+                            y: staticMaths_resultJ[graphName],
+                            mode: 'lines+markers',
+                            type: 'scatter',
+                            name: "Acumulated NPV"
+                        }];
+                        var _layout = {
+                            dragmode: 'pan',
+                            yaxis: {
+                                title: "NPV($)",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
+                                }
+                            },
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h"
+                            },
+                            title: graphName
+                        };
+                        var str = graphName.replace(/\s/g, '');
+                        $("#pareto").after('<div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + str + "></div></div>");
+                        Plotly.newPlot('graphStarts' + str, trace, _layout, config);
+                    } else if (graphName === "Pareto chart") {
+                        var list = staticMaths_resultJ[graphName];
+                        keysSorted = Object.keys(list).sort(function(a, b) {
+                            return list[b] - list[a];
+                        });
+                        var sortedValues = [];
+                        var sortedValuesSum = [];
+                        keysSorted.forEach(function(item) {
+                            sortedValues.push(staticMaths_resultJ[graphName][item]);
+                            var sum = sortedValues.reduce(function(a, b) {
+                                return a + b;
+                            }, 0);
+                            sortedValuesSum.push(sum);
+                        });
+                        var trace1 = {
+                            x: keysSorted,
+                            y: sortedValuesSum,
+                            type: 'scatter',
+                            name: "Cumulative percentage"
+                        };
+                        var trace2 = {
+                            x: keysSorted,
+                            y: sortedValues,
+                            type: 'bar',
+                            name: "Percentage of the investment"
+                        };
+                        var _layout2 = {
+                            dragmode: 'pan',
+                            yaxis: {
+                                title: "%",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
+                                }
+                            },
+                            showlegend: true,
+                            legend: {
+                                x: 0.5,
+                                y: 0.5,
+                                "orientation": "v"
+                            },
+                            title: graphName
+                        };
+                        var data = [trace1, trace2];
+
+                        var _str = graphName.replace(/\s/g, '');
+
+                        $("#start").after('<div  class="row"><div id="pareto" class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + _str + "></div></div></div>");
+                        Plotly.newPlot('graphStarts' + _str, data, _layout2, config);
+                    }
+                    /*else if (graphName.includes("Cashflow") || graphName.includes("Sum") || graphName.includes("Produced")) {
+                                                   console.log("in2121");
+                                                   let obj = {
+                                                       "Produced KWh per year": "KWh",
+                                                       "Sum of produced KWh per year": "KWh",
+                                                       "Sum of gross revenue": "$",
+                                                       "Sum of gross revenue with inflation": "$"
+                                                   }
+                                                   let data3 = [{
+                                                       x: staticMaths_resultJ["Years"],
+                                                       y: staticMaths_resultJ[graphName],
+                                                       name: graphName,
+                                                       marker: {
+                                                           color: colorArray[index]
+                                                       },
+                                                       type: 'bar'
+                                                   }];
+                                                   let layout3 = {
+                                                       title: graphName,
+                                                       xaxis: {
+                                                           tickfont: {
+                                                               size: 14,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           }
+                                                       },
+                                                       yaxis: {
+                                                           title: obj[graphName],
+                                                           titlefont: {
+                                                               size: 16,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           },
+                                                           tickfont: {
+                                                               size: 14,
+                                                               color: 'rgb(107, 107, 107)'
+                                                           }
+                                                       },
+                                                       legend: {
+                                                           x: 0,
+                                                           y: 1.0,
+                                                           bgcolor: 'rgba(255, 255, 255, 0)',
+                                                           bordercolor: 'rgba(255, 255, 255, 0)'
+                                                       },
+                                                       barmode: 'group',
+                                                       bargap: 0.15,
+                                                       bargroupgap: 0.1
+                                                   };
+                                                   let kpi3 = graphName.replace(/\s/g, '');
+                                                   let strin3 = '<div class="row"><div class="col-md-12"><div id=' + "graphStarts" + kpi3 + "></div></div></div>"
+                                                   $("#start").after(strin3);
+                                                   Plotly.newPlot('graphStarts' + kpi3, data3, layout3);
+                        }*/
+
+                });
+                var yearAux = [];
+                Object.keys(simMC_resultJ).forEach(function(year) {
+                    var thisyear = new Date().getFullYear() + parseInt(year);
+                    yearAux.push(thisyear);
+                    Object.keys(simMC_resultJ[year]).forEach(function(inout) {
+                        Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
+                            if (simMC_resultJ[year][inout][kpi]["mean"] === "IRR with multiple roots") {
+
+                            } else {
+                                if (kpi !== "pricepanel" && kpi !== "priceinverters") {
+                                    if (kpi !== "Discounted payback") {
+                                        if (!graphsObj[kpi + " box"]) {
+                                            graphsObj[kpi + " box"] = [];
+                                        }
+
+                                        var trace = {
+                                            y: simMC_resultJ[year][inout][kpi]["rawData"],
+                                            type: 'box',
+                                            name: thisyear,
+                                            marker: {
+                                                color: colorArray[parseInt(year)]
+                                            },
+                                            boxmean: "sd"
+                                        };
+                                        graphsObj[kpi + " box"].push(trace);
+                                    }
+
+                                    if (!graphsObj[kpi + " hist"]) {
+                                        graphsObj[kpi + " hist"] = [];
+                                    }
+
+                                    var x = simMC_resultJ[year][inout][kpi]["rawData"];
+
+                                    var data = {
+                                        //histfunc: "count",
+                                        x: x,
+                                        type: "histogram",
+                                        histnorm: 'probability',
+                                        marker: {
+                                            color: colorArray[year]
+                                        },
+                                        name: thisyear,
+                                        cumulative: {
+                                            enabled: false
+                                        },
+                                        visible: thisyear === new Date().getFullYear() + 0
+                                    };
+
+                                    if (kpi === "Discounted payback") {
+                                        data["autobinx"] = false;
+                                        data["xbins"] = {
+                                            size: 1
+                                        };
+                                    }
+
+                                    graphsObj[kpi + " hist"].push(data);
+                                }
+                            }
+                        });
+                    });
+                });
+                var allSimGraph = {};
+                console.log(graphsObj, "graphsObj")
+                Object.keys(graphsObj).forEach(function(kpi, index) {
+
+                    data1 = graphsObj[kpi];
+
+                    var obj = {
+                        "Maintenance": "$",
+                        "Cost": "%",
+                        "Total": "$",
+                        "LCOE": " $/KWh",
+                        "Cost/kwh": " $/KWh",
+                        "Equivalent": "$",
+                        "MIRR": "%",
+                        "NPV": "$",
+                        "IRR": "%",
+                        "Price": " $/W",
+                        "Irradiation": " KWh/m2/day",
+                        "Simple": " years",
+                        "Inverters": " years",
+                        "Panels": " years"
+                    };
+
+                    if (kpi.split(" ")[kpi.split(" ").length - 1] === "hist") {
+                        var year = [];
+                        Object.keys(graphsObj[kpi]).forEach(function(y) {
+                            year.push(graphsObj[kpi][y].name);
+                        });
+                        var buttons = [];
+                        year.forEach(function(y) {
+                            auxBol = [];
+                            auxBol2 = [];
+                            year.forEach(function(y2, index) {
+                                if (y === y2) {
+                                    auxBol.push(true);
+                                } else {
+                                    auxBol.push(false);
+                                }
+
+                                auxBol2.push(true);
+                            });
+                            var args = ["visible", auxBol];
+                            var label = y;
+                            buttons.push({
+                                method: 'restyle',
+                                args: args,
+                                label: label.toString()
+                            });
+                        });
+                        buttons.push({
+                            method: 'restyle',
+                            args: ["visible", auxBol2],
+                            label: "Select all"
+                        });
+                        layout1 = {
+                            dragmode: 'pan',
+                            updatemenus: [{
+                                y: 1.16,
+                                x: 1,
+                                yanchor: 'top',
+                                buttons: buttons
+                            }],
+                            yaxis: {
+                                title: "probability",
+                                titlefont: {
+                                    size: 16,
+                                    color: 'rgb(107, 107, 107)'
+                                },
+                                tickfont: {
+                                    size: 14,
+                                    color: 'rgb(107, 107, 107)'
+                                }
+                            },
+                            xaxis: {
+                                tickangle: -45
+                            },
+                            bargap: 0.15,
+                            title: kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + "probabilities"
+                        };
+
+                        if (kpi.split(" ")[0] !== "Discounted") {
+                            layout1.updatemenus.push({
+                                y: 1.16,
+                                x: 0.2,
+                                xaxis: {
+                                    tickmode: 'auto'
+                                },
+                                yanchor: 'top',
+                                buttons: [{
+                                    method: 'update',
+                                    args: [{
+                                        'cumulative.enabled': false
+                                    }, {
+                                        'xaxis.showtickprefix': 'all',
+                                        'xaxis.tickprefix': ""
+                                    }],
+                                    label: 'Histogram'
+                                }, {
+                                    method: 'update',
+                                    args: [{
+                                        'cumulative.enabled': true
+                                    }, {
+                                        'xaxis.showtickprefix': 'all',
+                                        'xaxis.tickprefix': "<="
+                                    }],
+                                    label: 'Cumulative'
+                                }]
+                            });
+                        }
+
+                        if (kpi.split(" ")[0] === "Simple" || kpi.split(" ")[0] === "Discounted" || kpi.split(" ")[0] === "Panels" || kpi.split(" ")[0] === "Inverters") {
+                            layout1["xaxis"] = {
+                                tickmode: 'auto',
+                                showticksuffix: 'all',
+                                ticksuffix: " years",
+                                tickangle: -75
+                            };
+                        } else {
+                            if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
+                                layout1["xaxis"]["tickformat"] = ',.0%';
+                            } else {
+                                layout1["xaxis"]["showticksuffix"] = 'all';
+                                layout1["xaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
+                            }
+                        }
+
+                        if (kpi.split(" ")[0] === "Irradiation") {
+                            layout1["xaxis"]["tickfont"] = {
+                                size: 8,
+                                color: 'rgb(107, 107, 107)'
+                            };
+                        }
+                    } else {
+                        if (kpi.split(" ")[0] !== "Discounted") {
+                            layout1 = {
+                                dragmode: 'pan',
+                                title: kpi,
+                                xaxis: {},
+                                yaxis: {}
+                            };
+
+                            if (kpi.split(" ")[0] === "Cost" || kpi.split(" ")[0] === "MIRR" || kpi.split(" ")[0] === "IRR") {
+                                layout1["yaxis"]["tickformat"] = ',.0%';
+                            } else {
+
+                                layout1["yaxis"]["showticksuffix"] = 'all';
+                                layout1["yaxis"]["ticksuffix"] = obj[kpi.split(" ")[0]];
+
+                                if (kpi.split(" ")[0] === "Irradiation") {
+                                    layout1["yaxis"]["tickfont"] = {
+                                        size: 8,
+                                        color: 'rgb(107, 107, 107)'
+                                    };
+                                }
+                            }
+                        }
+
+                        layout1["title"] = kpi.replace('box', '').replace("hist", "").replace(/\s\s/gi, " ") + ' boxplot';
+                    }
+
+                    allSimGraph[kpi] = [data1, layout1];
+                });
+                var kpi11;
+                var kpi22;
+                Object.keys(allSimGraph).forEach(function(kpi, index) {
+                    if (index % 2 == 0) {
+
+                        kpi11 = kpi;
+
+                        kpi1 = kpi.replace(/\s/g, '');
+
+                        if (index === Object.keys(allSimGraph).length - 1) {
+                            $("#start").after('<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>" + '<div class="col-md-6"><div class="wow slideInRight" id="ponte"></div></div></div>');
+                            Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
+                        } else {
+                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
+                        }
+                    } else {
+
+                        kpi22 = kpi;
+
+                        kpi2 = kpi.replace(/\s/g, '');
+                        $("#start").after(string + '<div class="col-md-6"><div  class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                        Plotly.newPlot('graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config);
+                        Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
+                    }
+                });
+                let IRRflag = spiderS_resultJ["IRRflag"];
+                Object.keys(spiderS_resultJ).forEach(function(graph) {
+                    if (graph !== "rangeSpider" && graph !== "IRRflag") {
+                        Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
+                            if (kpi == "Sensitivity analysis IRR" && IRRflag === "True") {} else {
+                                if (!graphsObj2[kpi]) {
+                                    graphsObj2[kpi] = {};
+                                }
+
+                                if (!graphsObj2[kpi][graph]) {
+                                    graphsObj2[kpi][graph] = [];
+                                }
+
+                                graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
+                            }
+                        });
+                    }
+                });
+                console.log(graphsObj2, "aqui");
+                console.log(IRRflag, "IRRflag");
+                Object.keys(graphsObj2).forEach(function(graphKpi, index) {
+                    var data = [];
+                    var objlength = Object.keys(graphsObj2).length - 1;
+                    console.log(index, objlength);
+                    if (index == objlength && IRRflag === "True") {
+                        console.log("in ponte");
+                        $("#ponte").append("<br><div style='padding-top:31%;display:flex;align-items:center;justify-content:center;'><div><p>Multiple IRRs found use, MIRR instead.<br>Sensitivity analysis histograms and boxplots not available</p><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px;margin-left:8%;'></img></div></div><br>");
+                        //multiple irr
+                    } else {
+
+
+                        Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
+                            var trace = {
+                                y: graphsObj2[graphKpi][kpi][0],
+                                x: spiderS_resultJ["rangeSpider"],
+                                mode: 'lines+markers',
+                                type: 'scatter',
+                                name: kpi,
+                                marker: {
+                                    size: 0.1
+                                }
+                            };
+                            data.push(trace);
+                        });
+                        /*
+                                        kpi1 = graphKpi 
+                                        data1 = data;
+                                        layout1 = {
+                                            showlegend: true,
+                                            legend: {
+                                                "orientation": "h"
+                                            },
+                                            xaxis: {
+                                                range: [-60, 60]
+                                            },
+                                            xaxis: {
+                                                range: [-60, 60]
+                                            },
+                                            title: kpi1
+                                        };
+                                        let str = kpi1.replace(/\s/g, '');
+                                        $("#start"). wow slideInRight"><div class="col-md-12"><div  id=' + "graphStarts" + str + "></div></div></div>");
+                                        Plotly.newPlot('graphStarts' + str, data1, layout1);*/
+
+                        if (index % 2 == 0) {
+                            data1 = [].concat(data);
+                            kpi1 = graphKpi.replace(/\s/g, '');
+                            layout1 = {
+                                dragmode: 'pan',
+
+                                showlegend: true,
+                                legend: {
+                                    "orientation": "h"
+                                },
+                                xaxis: {
+                                    range: [-0.55, 0.55],
+                                    tickformat: ',.0%'
+                                },
+                                yaxis: {},
+                                title: graphKpi
+                            };
+
+                            if (kpi1 === "SensitivityanalysisIRR" || kpi1 === "SensitivityanalysisMIRR") {
+
+                                layout1["yaxis"]["tickformat"] = ',.0%';
+                            }
+
+                            if (kpi1 === "SensitivityanalysisLCOE" || kpi1 === "SensitivityanalysisCost/KWh") {
+                                layout1["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " $/KWh"
+                                };
+                            }
+
+                            if (kpi1 === "SensitivityanalysisNPV" || kpi1 === "SensitivityanalysisEquivalentannualannuity") {
+                                layout1["yaxis"] = {
+                                    showtickprefix: 'all',
+                                    tickprefix: " $"
+                                };
+                            }
+
+                            if (kpi1 === "SensitivityanalysisSimplePayback") {
+                                layout1["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " years"
+                                };
+                            }
+
+                            if (index === Object.keys(graphsObj2).length - 1) {
+                                Plotly.newPlot('ponte', data1, layout1, config);
+                            } else {
+                                string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "></div></div>";
+                            }
+                        } else {
+                            var _layout3;
+
+                            data2 = [].concat(data);
+                            kpi2 = graphKpi.replace(/\s/g, '');
+                            layout2 = (_layout3 = {
+                                dragmode: 'pan',
+                                showlegend: true,
+                                legend: {
+                                    "orientation": "h"
+                                },
+                                xaxis: {
+                                    range: [-55, 55]
+                                }
+                            }, _defineProperty(_layout3, "xaxis", {
+                                range: [-0.55, 0.55],
+                                tickformat: ',.0%'
+                            }), _defineProperty(_layout3, "yaxis", {}), _defineProperty(_layout3, "title", graphKpi), _layout3);
+
+
+                            if (kpi2 === "SensitivityanalysisIRR" || kpi2 === "SensitivityanalysisMIRR") {
+
+                                layout2["yaxis"]["tickformat"] = ',.0%';
+                            }
+
+                            if (kpi2 === "SensitivityanalysisLCOE" || kpi2 === "SensitivityanalysisCost/KWh") {
+                                layout2["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " $/KWh"
+                                };
+                            }
+
+                            if (kpi2 === "SensitivityanalysisNPV" || kpi2 === "SensitivityanalysisEquivalentannualannuity") {
+                                layout2["yaxis"] = {
+                                    showtickprefix: 'all',
+                                    tickprefix: " $"
+                                };
+                            }
+
+                            if (kpi2 === "SensitivityanalysisSimplePayback") {
+                                layout2["yaxis"] = {
+                                    showticksuffix: 'all',
+                                    ticksuffix: " years"
+                                };
+                            }
+
+                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "></div></div></div>");
+                            Plotly.newPlot('graphStarts' + kpi1, data1, layout1, config);
+                            Plotly.newPlot('graphStarts' + kpi2, data2, layout2, config);
+                        }
+                    }
+                });
+                let npanels = staticMaths_resultJ["ndeplacas"];
+                let maxEconomy = parseInt(staticMaths_resultJ["maxeconomy"].replace("%", "")) / 100;
+
+                $("#start").after('<div class="row"><div class="col-md-6"><p class="wow slideInLeft" id="npanels" style="text-align:center;font-size:20px;padding-right:10%;padding-top:30%">Number of panels needed: ' + npanels + ' solar panels</p></div><div class="col-md-6"><div id="myDivG" class="wow slideInRight" style="position:relative" class="wow slideInRight"></div></div></div>');
+                var data = [{
+                    domain: {
+                        x: [0, 1],
+                        y: [0, 1]
+                    },
+                    value: maxEconomy,
+                    title: {
+                        text: "Estimated economy"
+                    },
+                    type: "indicator",
+                    mode: "gauge+number",
+                    gauge: {
+                        axis: {
+                            range: [null, 1],
+                            tickformat: ',.0%'
+                        }
+                    },
+                    number: {
+                        valueformat: ',.0%'
+                    }
+                }];
+
+                var layout = {
+                    dragmode: 'pan',
+                    height: 285,
+                    autosize: true,
+                    margin: {
+                        t: 0,
+                        b: 0
+                    }
+                };
+                Plotly.newPlot('myDivG', data, layout, config);
+                var url_mask = "{% url 'share' idpjn=12345 %}".replace(/12345/, clientShare.toString());
+                $("#start").after("<div style='margin-top: 12%;'class='row'><div style='padding-left:3%;margin-bottom: 5%;' class='col-md-6'><p><b>share this project with anyone by using the following url:</b></p><a href='" + url_mask + "'>www.sunnynvest.com/share/" + clientShare + "</a>" + "</div><div class='col-md-6'><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px;margin-left:15%'></img></div></div><br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><br>");
+                $("#loadingG").hide();
+                if (window.document.documentMode) {
+                    $("#block").css("display", "");
+                    $("#block2").css("display", "");
+                } else {
+                    $("#block").css("display", "initial");
+                    $("#block2").css("display", "initial");
+                }
+            }, 5000);
+        });
+    </script>
+
+
+
+    <div id="block2" style="display:none;width:100%;position:absolute">
+        <!--footer starts from here-->
+        <br>
+        <br>
+        <br>
+        <br>
+        <footer id="foot" class="footer">
+            <div class="container bottom_border">
+                <div class="row">
+                    <div class=" col-sm-6">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+                        <!--headin5_amrc-->
+                        <p class="mb10">Sunnynvest is a perfect tool for detailed robust investment analysis for photovoltaic power plants. if you want to impress your customer with a robust report that includes advanced statistics and simulations sunnynvest is the perfect
+                            tool for you.</p>
+                        <p><i class="fa fa-location-arrow"></i> Pillangó park, 16a, APT 40</p>
+                        <p><i class="fa fa-phone"></i> +36-702357237</p>
+                        <p><i class="fa fa fa-envelope"></i> jh_gcc@hotmail.com </p>
+
+
+
+                    </div>
+
+                    <div class=" col-sm-6">
+                        <form method="get">
+                            <h5 class="headin5_amrc col_white_amrc pt2">Contact us</h5>
+                            <!--headin5_amrc-->
+                            <p>Your email:</p>
+                            <div class="form-group">
+                                <div class="input-group sm-3">
+
+                                    <input type="text" class="form-control input-sm" id="apower" name="emailend" required name="price" min="0" value="" step=".01">
+                                </div>
+                            </div>
+                            <p>Mensage:</p>
+
+                            <div class="form-group">
+                                <div class="input-group sm-3">
+
+                                    <textarea class="form-control rounded-0" name="emailtext" id="exampleFormControlTextarea1" rows="6" required></textarea>
+                                    <button class="btn btn-dark float-sm-left" type="submit" name="mybtn" value="cal">Send</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class=" col-sm-4 col-md  col-12 col">
+
+                        <!--footer_ul2_amrc ends here-->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container" id="gancho">
+                <ul class="foote_bottom_ul_amrc">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'input' %}">Start analyses</a></li>
+                </ul>
+                <!--foote_bottom_ul_amrc ends here-->
+                <p class="text-center">Copyright @2020 | Solinvest</p>
+
+                <ul class="social_footer_ul">
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                    <!--<li><a href=><i class="fab fa-twitter"></i></a></li>-->
+                    <li><a href="https://www.linkedin.com/company/sunnynvest-software"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a href="https://wa.me/36702357237?text=I'm%20interested%20in%20Sunnynvest%20software"><i class="fab fa-whatsapp"></i></a></li>
+                </ul>
+                <!--social_footer_ul ends here-->
+            </div>
+
+        </footer>
+    </div>
+
+    <style>
+        @media only screen and (max-width: 800px) {
+            #npanels {
+                padding-left: 10% !important;
+                padding-top: 20% !important;
+            }
+        }
+        
+        @media only screen and (max-width: 500px) {
+            #logo2 {
+                margin-left: 0 !important;
+            }
+        }
+        
+        #loadingG2::after {
+            content: 'Loading graphs';
+            padding-left: 20px;
+            width: 150px;
+            animation: loadAction2 1s linear infinite;
+        }
+        
+        .loadActionGraph {
+            animation: loadAction2 2s linear infinite;
+        }
+        
+        .bar {
+            border-radius: 10px;
+        }
+        
+        .bar1 {
+            animation: run4 2s linear infinite;
+        }
+        
+        .bar2 {
+            animation: run4 2s linear infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .bar3 {
+            animation: run4 2s linear infinite;
+            animation-delay: 1s;
+        }
+        
+        @keyframes run4 {
+            0% {
+                height: 0px;
+            }
+            1% {
+                height: 1px;
+            }
+            2% {
+                height: 2px;
+            }
+            3% {
+                height: 3px;
+            }
+            4% {
+                height: 4px;
+            }
+            5% {
+                height: 5px;
+            }
+            6% {
+                height: 6px;
+            }
+            7% {
+                height: 7px;
+            }
+            8% {
+                height: 8px;
+            }
+            9% {
+                height: 9px;
+            }
+            10% {
+                height: 10px;
+            }
+            11% {
+                height: 11px;
+            }
+            12% {
+                height: 12px;
+            }
+            13% {
+                height: 13px;
+            }
+            14% {
+                height: 14px;
+            }
+            15% {
+                height: 15px;
+            }
+            16% {
+                height: 16px;
+            }
+            17% {
+                height: 17px;
+            }
+            18% {
+                height: 18px;
+            }
+            19% {
+                height: 19px;
+            }
+            20% {
+                height: 20px;
+            }
+            21% {
+                height: 21px;
+            }
+            22% {
+                height: 22px;
+            }
+            23% {
+                height: 23px;
+            }
+            24% {
+                height: 24px;
+            }
+            25% {
+                height: 25px;
+            }
+            26% {
+                height: 26px;
+            }
+            27% {
+                height: 27px;
+            }
+            28% {
+                height: 28px;
+            }
+            29% {
+                height: 29px;
+            }
+            30% {
+                height: 30px;
+            }
+            31% {
+                height: 31px;
+            }
+            32% {
+                height: 32px;
+            }
+            33% {
+                height: 33px;
+            }
+            34% {
+                height: 34px;
+            }
+            35% {
+                height: 35px;
+            }
+            36% {
+                height: 36px;
+            }
+            37% {
+                height: 37px;
+            }
+            38% {
+                height: 38px;
+            }
+            39% {
+                height: 39px;
+            }
+            40% {
+                height: 40px;
+            }
+            41% {
+                height: 41px;
+            }
+            42% {
+                height: 42px;
+            }
+            43% {
+                height: 43px;
+            }
+            44% {
+                height: 44px;
+            }
+            45% {
+                height: 45px;
+            }
+            46% {
+                height: 46px;
+            }
+            47% {
+                height: 47px;
+            }
+            48% {
+                height: 48px;
+            }
+            49% {
+                height: 49px;
+            }
+            50% {
+                height: 50px;
+            }
+            51% {
+                height: 49px;
+            }
+            52% {
+                height: 48px;
+            }
+            53% {
+                height: 47px;
+            }
+            54% {
+                height: 46px;
+            }
+            55% {
+                height: 45px;
+            }
+            56% {
+                height: 44px;
+            }
+            57% {
+                height: 43px;
+            }
+            58% {
+                height: 42px;
+            }
+            59% {
+                height: 41px;
+            }
+            60% {
+                height: 40px;
+            }
+            61% {
+                height: 39px;
+            }
+            62% {
+                height: 38px;
+            }
+            63% {
+                height: 37px;
+            }
+            64% {
+                height: 36px;
+            }
+            65% {
+                height: 35px;
+            }
+            66% {
+                height: 34px;
+            }
+            67% {
+                height: 33px;
+            }
+            68% {
+                height: 32px;
+            }
+            69% {
+                height: 31px;
+            }
+            70% {
+                height: 30px;
+            }
+            71% {
+                height: 29px;
+            }
+            72% {
+                height: 28px;
+            }
+            73% {
+                height: 27px;
+            }
+            74% {
+                height: 26px;
+            }
+            75% {
+                height: 25px;
+            }
+            76% {
+                height: 24px;
+            }
+            77% {
+                height: 23px;
+            }
+            78% {
+                height: 22px;
+            }
+            79% {
+                height: 21px;
+            }
+            80% {
+                height: 20px;
+            }
+            81% {
+                height: 19px;
+            }
+            82% {
+                height: 18px;
+            }
+            83% {
+                height: 17px;
+            }
+            84% {
+                height: 16px;
+            }
+            85% {
+                height: 15px;
+            }
+            86% {
+                height: 14px;
+            }
+            87% {
+                height: 13px;
+            }
+            88% {
+                height: 12px;
+            }
+            89% {
+                height: 11px;
+            }
+            90% {
+                height: 10px;
+            }
+            91% {
+                height: 9px;
+            }
+            92% {
+                height: 8px;
+            }
+            93% {
+                height: 7px;
+            }
+            94% {
+                height: 6px;
+            }
+            95% {
+                height: 5px;
+            }
+            96% {
+                height: 4px;
+            }
+            97% {
+                height: 3px;
+            }
+            98% {
+                height: 2px;
+            }
+            99% {
+                height: 1px;
+            }
+            100% {
+                height: 0px;
+            }
+        }
+        
+        @keyframes loadAction2 {
+            25% {
+                content: 'Loading graphs';
+            }
+            50% {
+                content: 'Loading graphs.';
+            }
+            75% {
+                content: 'Loading graphs..';
+            }
+            100% {
+                content: 'Loading graphs...';
+            }
+        }
+        
+        #logo {}
+        
+        .col_white_amrc {
+            color: #FFF;
+        }
+        
+        footer {
+            height: 50%;
+            width: 100%;
+            background-color: #263238;
+            min-height: 100px;
+            padding: 10px 0px 25px 0px;
+            padding-bottom: 40px
+        }
+        
+        .pt2 {
+            padding-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        footer p {
+            font-size: 13px;
+            color: #CCC;
+            padding-bottom: 0px;
+            margin-bottom: 8px;
+        }
+        
+        .mb10 {
+            padding-bottom: 15px;
+        }
+        
+        .footer_ul_amrc {
+            margin: 0px;
+            list-style-type: none;
+            font-size: 14px;
+            padding: 0px 0px 10px 0px;
+        }
+        
+        .footer_ul_amrc li {
+            padding: 0px 0px 5px 0px;
+        }
+        
+        .footer_ul_amrc li a {
+            color: #CCC;
+        }
+        
+        .footer_ul_amrc li a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .fleft {
+            float: left;
+        }
+        
+        .padding-right {
+            padding-right: 10px;
+        }
+        
+        .footer_ul2_amrc {
+            margin: 0px;
+            list-style-type: none;
+            padding: 0px;
+        }
+        
+        .footer_ul2_amrc li p {
+            display: table;
+        }
+        
+        .footer_ul2_amrc li a:hover {
+            text-decoration: none;
+        }
+        
+        .footer_ul2_amrc li i {
+            margin-top: 5px;
+        }
+        
+        .bottom_border {
+            border-bottom: 1px solid #323f45;
+            padding-bottom: 20px;
+        }
+        
+        .foote_bottom_ul_amrc {
+            list-style-type: none;
+            padding: 0px;
+            display: table;
+            margin-top: 10px;
+            margin-right: auto;
+            margin-bottom: 10px;
+            margin-left: auto;
+        }
+        
+        .foote_bottom_ul_amrc li {
+            display: inline;
+        }
+        
+        .foote_bottom_ul_amrc li a {
+            color: #999;
+            margin: 0 12px;
+        }
+        
+        .social_footer_ul {
+            display: table;
+            margin: 15px auto 0 auto;
+            list-style-type: none;
+            padding-right: 60px;
+        }
+        
+        .social_footer_ul li {
+            padding-left: 25px;
+            padding-top: 20px;
+            float: left;
+        }
+        
+        .social_footer_ul li a {
+            color: #CCC;
+            border: 1px solid #CCC;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .social_footer_ul li i {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+        }
+        
+        #navbar {
+            transition: top 1s;
+        }
+        
+        .menuItem {
+            position: relative;
+        }
+        
+        .menuItem:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 50%;
+            right: 50%;
+            bottom: 15%;
+            background: #FFFFF0;
+            height: 1.8px;
+            -webkit-transition-duration: 0.2s;
+            transition-duration: 0.3s;
+        }
+        
+        .menuItem:hover:before,
+        .menuItem:focus:before,
+        .menuItem:active:before {
+            left: 7.5%;
+            right: 5%;
+        }
+        
+        @media only screen and (max-width: 700px) {
+            .menuItem:hover:before,
+            .menuItem:focus:before,
+            .menuItem:active:before {
+                left: 50%;
+                right: 50%;
+            }
+        }
+        
+        @keyframes run3 {
+            0% {
+                background: radial-gradient(circle at 0px 55px, white, darkgrey);
+            }
+            0.5% {
+                background: radial-gradient(circle at 2px 54.5px, white, darkgrey);
+            }
+            1% {
+                background: radial-gradient(circle at 4px 54px, white, darkgrey);
+            }
+            1.5% {
+                background: radial-gradient(circle at 6px 53.5px, white, darkgrey);
+            }
+            2% {
+                background: radial-gradient(circle at 8px 53px, white, darkgrey);
+            }
+            2.5% {
+                background: radial-gradient(circle at 10px 52.5px, white, darkgrey);
+            }
+            3% {
+                background: radial-gradient(circle at 12px 52px, white, darkgrey);
+            }
+            3.5% {
+                background: radial-gradient(circle at 14px 51.5px, white, darkgrey);
+            }
+            4% {
+                background: radial-gradient(circle at 16px 51px, white, darkgrey);
+            }
+            4.5% {
+                background: radial-gradient(circle at 18px 50.5px, white, darkgrey);
+            }
+            5% {
+                background: radial-gradient(circle at 20px 50px, white, darkgrey);
+            }
+            5.5% {
+                background: radial-gradient(circle at 22px 49.5px, white, darkgrey);
+            }
+            6% {
+                background: radial-gradient(circle at 24px 49px, white, darkgrey);
+            }
+            6.5% {
+                background: radial-gradient(circle at 26px 48.5px, white, darkgrey);
+            }
+            7% {
+                background: radial-gradient(circle at 28px 48px, white, darkgrey);
+            }
+            7.5% {
+                background: radial-gradient(circle at 30px 47.5px, white, darkgrey);
+            }
+            8% {
+                background: radial-gradient(circle at 32px 47px, white, darkgrey);
+            }
+            8.5% {
+                background: radial-gradient(circle at 34px 46.5px, white, darkgrey);
+            }
+            9% {
+                background: radial-gradient(circle at 36px 46px, white, darkgrey);
+            }
+            9.5% {
+                background: radial-gradient(circle at 38px 45.5px, white, darkgrey);
+            }
+            10% {
+                background: radial-gradient(circle at 40px 45px, white, darkgrey);
+            }
+            10.5% {
+                background: radial-gradient(circle at 42px 44.5px, white, darkgrey);
+            }
+            11% {
+                background: radial-gradient(circle at 44px 44px, white, darkgrey);
+            }
+            11.5% {
+                background: radial-gradient(circle at 46px 43.5px, white, darkgrey);
+            }
+            12% {
+                background: radial-gradient(circle at 48px 43px, white, darkgrey);
+            }
+            12.5% {
+                background: radial-gradient(circle at 50px 42.5px, white, darkgrey);
+            }
+            13% {
+                background: radial-gradient(circle at 52px 42px, white, darkgrey);
+            }
+            13.5% {
+                background: radial-gradient(circle at 54px 41.5px, white, darkgrey);
+            }
+            14% {
+                background: radial-gradient(circle at 56px 41px, white, darkgrey);
+            }
+            14.5% {
+                background: radial-gradient(circle at 58px 40.5px, white, darkgrey);
+            }
+            15% {
+                background: radial-gradient(circle at 60px 40px, white, darkgrey);
+            }
+            15.5% {
+                background: radial-gradient(circle at 62px 39.5px, white, darkgrey);
+            }
+            16% {
+                background: radial-gradient(circle at 64px 39px, white, darkgrey);
+            }
+            16.5% {
+                background: radial-gradient(circle at 66px 38.5px, white, darkgrey);
+            }
+            17% {
+                background: radial-gradient(circle at 68px 38px, white, darkgrey);
+            }
+            17.5% {
+                background: radial-gradient(circle at 70px 37.5px, white, darkgrey);
+            }
+            18% {
+                background: radial-gradient(circle at 72px 37px, white, darkgrey);
+            }
+            18.5% {
+                background: radial-gradient(circle at 74px 36.5px, white, darkgrey);
+            }
+            19% {
+                background: radial-gradient(circle at 76px 36px, white, darkgrey);
+            }
+            19.5% {
+                background: radial-gradient(circle at 78px 35.5px, white, darkgrey);
+            }
+            20% {
+                background: radial-gradient(circle at 80px 35px, white, darkgrey);
+            }
+            20.5% {
+                background: radial-gradient(circle at 82px 34.5px, white, darkgrey);
+            }
+            21% {
+                background: radial-gradient(circle at 84px 34px, white, darkgrey);
+            }
+            21.5% {
+                background: radial-gradient(circle at 86px 33.5px, white, darkgrey);
+            }
+            22% {
+                background: radial-gradient(circle at 88px 33px, white, darkgrey);
+            }
+            22.5% {
+                background: radial-gradient(circle at 90px 32.5px, white, darkgrey);
+            }
+            23% {
+                background: radial-gradient(circle at 92px 32px, white, darkgrey);
+            }
+            23.5% {
+                background: radial-gradient(circle at 94px 31.5px, white, darkgrey);
+            }
+            24% {
+                background: radial-gradient(circle at 96px 31px, white, darkgrey);
+            }
+            24.5% {
+                background: radial-gradient(circle at 98px 30.5px, white, darkgrey);
+            }
+            25% {
+                background: radial-gradient(circle at 100px 30px, white, darkgrey);
+            }
+            25.5% {
+                background: radial-gradient(circle at 102px 29.5px, white, darkgrey);
+            }
+            26% {
+                background: radial-gradient(circle at 104px 29px, white, darkgrey);
+            }
+            26.5% {
+                background: radial-gradient(circle at 106px 28.5px, white, darkgrey);
+            }
+            27% {
+                background: radial-gradient(circle at 108px 28px, white, darkgrey);
+            }
+            27.5% {
+                background: radial-gradient(circle at 110px 27.5px, white, darkgrey);
+            }
+            28% {
+                background: radial-gradient(circle at 112px 27px, white, darkgrey);
+            }
+            28.5% {
+                background: radial-gradient(circle at 114px 26.5px, white, darkgrey);
+            }
+            29% {
+                background: radial-gradient(circle at 116px 26px, white, darkgrey);
+            }
+            29.5% {
+                background: radial-gradient(circle at 118px 25.5px, white, darkgrey);
+            }
+            30% {
+                background: radial-gradient(circle at 120px 25px, white, darkgrey);
+            }
+            30.5% {
+                background: radial-gradient(circle at 122px 24.5px, white, darkgrey);
+            }
+            31% {
+                background: radial-gradient(circle at 124px 24px, white, darkgrey);
+            }
+            31.5% {
+                background: radial-gradient(circle at 126px 23.5px, white, darkgrey);
+            }
+            32% {
+                background: radial-gradient(circle at 128px 23px, white, darkgrey);
+            }
+            32.5% {
+                background: radial-gradient(circle at 130px 22.5px, white, darkgrey);
+            }
+            33% {
+                background: radial-gradient(circle at 132px 22px, white, darkgrey);
+            }
+            33.5% {
+                background: radial-gradient(circle at 134px 21.5px, white, darkgrey);
+            }
+            34% {
+                background: radial-gradient(circle at 136px 21px, white, darkgrey);
+            }
+            34.5% {
+                background: radial-gradient(circle at 138px 20.5px, white, darkgrey);
+            }
+            35% {
+                background: radial-gradient(circle at 140px 20px, white, darkgrey);
+            }
+            35.5% {
+                background: radial-gradient(circle at 142px 19.5px, white, darkgrey);
+            }
+            36% {
+                background: radial-gradient(circle at 144px 19px, white, darkgrey);
+            }
+            36.5% {
+                background: radial-gradient(circle at 146px 18.5px, white, darkgrey);
+            }
+            37% {
+                background: radial-gradient(circle at 148px 18px, white, darkgrey);
+            }
+            37.5% {
+                background: radial-gradient(circle at 150px 17.5px, white, darkgrey);
+            }
+            38% {
+                background: radial-gradient(circle at 152px 17px, white, darkgrey);
+            }
+            38.5% {
+                background: radial-gradient(circle at 154px 16.5px, white, darkgrey);
+            }
+            39% {
+                background: radial-gradient(circle at 156px 16px, white, darkgrey);
+            }
+            39.5% {
+                background: radial-gradient(circle at 158px 15.5px, white, darkgrey);
+            }
+            40% {
+                background: radial-gradient(circle at 160px 15px, white, darkgrey);
+            }
+            40.5% {
+                background: radial-gradient(circle at 162px 14.5px, white, darkgrey);
+            }
+            41% {
+                background: radial-gradient(circle at 164px 14px, white, darkgrey);
+            }
+            41.5% {
+                background: radial-gradient(circle at 166px 13.5px, white, darkgrey);
+            }
+            42% {
+                background: radial-gradient(circle at 168px 13px, white, darkgrey);
+            }
+            42.5% {
+                background: radial-gradient(circle at 170px 12.5px, white, darkgrey);
+            }
+            43% {
+                background: radial-gradient(circle at 172px 12px, white, darkgrey);
+            }
+            43.5% {
+                background: radial-gradient(circle at 174px 11.5px, white, darkgrey);
+            }
+            44% {
+                background: radial-gradient(circle at 176px 11px, white, darkgrey);
+            }
+            44.5% {
+                background: radial-gradient(circle at 178px 10.5px, white, darkgrey);
+            }
+            45% {
+                background: radial-gradient(circle at 180px 10px, white, darkgrey);
+            }
+            45.5% {
+                background: radial-gradient(circle at 182px 9.5px, white, darkgrey);
+            }
+            46% {
+                background: radial-gradient(circle at 184px 9px, white, darkgrey);
+            }
+            46.5% {
+                background: radial-gradient(circle at 186px 8.5px, white, darkgrey);
+            }
+            47% {
+                background: radial-gradient(circle at 188px 8px, white, darkgrey);
+            }
+            47.5% {
+                background: radial-gradient(circle at 190px 7.5px, white, darkgrey);
+            }
+            48% {
+                background: radial-gradient(circle at 192px 7px, white, darkgrey);
+            }
+            48.5% {
+                background: radial-gradient(circle at 194px 6.5px, white, darkgrey);
+            }
+            49% {
+                background: radial-gradient(circle at 196px 6px, white, darkgrey);
+            }
+            49.5% {
+                background: radial-gradient(circle at 198px 5.5px, white, darkgrey);
+            }
+            50% {
+                background: radial-gradient(circle at 200px 5px, white, darkgrey);
+            }
+            50.5% {
+                background: radial-gradient(circle at 198px 1px, white, darkgrey);
+            }
+            51% {
+                background: radial-gradient(circle at 196px 1.5px, white, darkgrey);
+            }
+            51.5% {
+                background: radial-gradient(circle at 194px 2px, white, darkgrey);
+            }
+            52% {
+                background: radial-gradient(circle at 192px 2.5px, white, darkgrey);
+            }
+            52.5% {
+                background: radial-gradient(circle at 190px 3px, white, darkgrey);
+            }
+            53% {
+                background: radial-gradient(circle at 188px 3.5px, white, darkgrey);
+            }
+            53.5% {
+                background: radial-gradient(circle at 186px 4px, white, darkgrey);
+            }
+            54% {
+                background: radial-gradient(circle at 184px 4.5px, white, darkgrey);
+            }
+            54.5% {
+                background: radial-gradient(circle at 182px 5px, white, darkgrey);
+            }
+            55% {
+                background: radial-gradient(circle at 180px 5.5px, white, darkgrey);
+            }
+            55.5% {
+                background: radial-gradient(circle at 178px 6px, white, darkgrey);
+            }
+            56% {
+                background: radial-gradient(circle at 176px 6.5px, white, darkgrey);
+            }
+            56.5% {
+                background: radial-gradient(circle at 174px 7px, white, darkgrey);
+            }
+            57% {
+                background: radial-gradient(circle at 172px 7.5px, white, darkgrey);
+            }
+            57.5% {
+                background: radial-gradient(circle at 170px 8px, white, darkgrey);
+            }
+            58% {
+                background: radial-gradient(circle at 168px 8.5px, white, darkgrey);
+            }
+            58.5% {
+                background: radial-gradient(circle at 166px 9px, white, darkgrey);
+            }
+            59% {
+                background: radial-gradient(circle at 164px 9.5px, white, darkgrey);
+            }
+            59.5% {
+                background: radial-gradient(circle at 162px 10px, white, darkgrey);
+            }
+            60% {
+                background: radial-gradient(circle at 160px 10.5px, white, darkgrey);
+            }
+            60.5% {
+                background: radial-gradient(circle at 158px 11px, white, darkgrey);
+            }
+            61% {
+                background: radial-gradient(circle at 156px 11.5px, white, darkgrey);
+            }
+            61.5% {
+                background: radial-gradient(circle at 154px 12px, white, darkgrey);
+            }
+            62% {
+                background: radial-gradient(circle at 152px 12.5px, white, darkgrey);
+            }
+            62.5% {
+                background: radial-gradient(circle at 150px 13px, white, darkgrey);
+            }
+            63% {
+                background: radial-gradient(circle at 148px 13.5px, white, darkgrey);
+            }
+            63.5% {
+                background: radial-gradient(circle at 146px 14px, white, darkgrey);
+            }
+            64% {
+                background: radial-gradient(circle at 144px 14.5px, white, darkgrey);
+            }
+            64.5% {
+                background: radial-gradient(circle at 142px 15px, white, darkgrey);
+            }
+            65% {
+                background: radial-gradient(circle at 140px 15.5px, white, darkgrey);
+            }
+            65.5% {
+                background: radial-gradient(circle at 138px 16px, white, darkgrey);
+            }
+            66% {
+                background: radial-gradient(circle at 136px 16.5px, white, darkgrey);
+            }
+            66.5% {
+                background: radial-gradient(circle at 134px 17px, white, darkgrey);
+            }
+            67% {
+                background: radial-gradient(circle at 132px 17.5px, white, darkgrey);
+            }
+            67.5% {
+                background: radial-gradient(circle at 130px 18px, white, darkgrey);
+            }
+            68% {
+                background: radial-gradient(circle at 128px 18.5px, white, darkgrey);
+            }
+            68.5% {
+                background: radial-gradient(circle at 126px 19px, white, darkgrey);
+            }
+            69% {
+                background: radial-gradient(circle at 124px 19.5px, white, darkgrey);
+            }
+            69.5% {
+                background: radial-gradient(circle at 122px 20px, white, darkgrey);
+            }
+            70% {
+                background: radial-gradient(circle at 120px 20.5px, white, darkgrey);
+            }
+            70.5% {
+                background: radial-gradient(circle at 118px 21px, white, darkgrey);
+            }
+            71% {
+                background: radial-gradient(circle at 116px 21.5px, white, darkgrey);
+            }
+            71.5% {
+                background: radial-gradient(circle at 114px 22px, white, darkgrey);
+            }
+            72% {
+                background: radial-gradient(circle at 112px 22.5px, white, darkgrey);
+            }
+            72.5% {
+                background: radial-gradient(circle at 110px 23px, white, darkgrey);
+            }
+            73% {
+                background: radial-gradient(circle at 108px 23.5px, white, darkgrey);
+            }
+            73.5% {
+                background: radial-gradient(circle at 106px 24px, white, darkgrey);
+            }
+            74% {
+                background: radial-gradient(circle at 104px 24.5px, white, darkgrey);
+            }
+            74.5% {
+                background: radial-gradient(circle at 102px 25px, white, darkgrey);
+            }
+            75% {
+                background: radial-gradient(circle at 100px 25.5px, white, darkgrey);
+            }
+            75.5% {
+                background: radial-gradient(circle at 98px 26px, white, darkgrey);
+            }
+            76% {
+                background: radial-gradient(circle at 96px 26.5px, white, darkgrey);
+            }
+            76.5% {
+                background: radial-gradient(circle at 94px 27px, white, darkgrey);
+            }
+            77% {
+                background: radial-gradient(circle at 92px 27.5px, white, darkgrey);
+            }
+            77.5% {
+                background: radial-gradient(circle at 90px 28px, white, darkgrey);
+            }
+            78% {
+                background: radial-gradient(circle at 88px 28.5px, white, darkgrey);
+            }
+            78.5% {
+                background: radial-gradient(circle at 86px 29px, white, darkgrey);
+            }
+            79% {
+                background: radial-gradient(circle at 84px 29.5px, white, darkgrey);
+            }
+            79.5% {
+                background: radial-gradient(circle at 82px 30px, white, darkgrey);
+            }
+            80% {
+                background: radial-gradient(circle at 80px 30.5px, white, darkgrey);
+            }
+            80.5% {
+                background: radial-gradient(circle at 78px 31px, white, darkgrey);
+            }
+            81% {
+                background: radial-gradient(circle at 76px 31.5px, white, darkgrey);
+            }
+            81.5% {
+                background: radial-gradient(circle at 74px 32px, white, darkgrey);
+            }
+            82% {
+                background: radial-gradient(circle at 72px 32.5px, white, darkgrey);
+            }
+            82.5% {
+                background: radial-gradient(circle at 70px 33px, white, darkgrey);
+            }
+            83% {
+                background: radial-gradient(circle at 68px 33.5px, white, darkgrey);
+            }
+            83.5% {
+                background: radial-gradient(circle at 66px 34px, white, darkgrey);
+            }
+            84% {
+                background: radial-gradient(circle at 64px 34.5px, white, darkgrey);
+            }
+            84.5% {
+                background: radial-gradient(circle at 62px 35px, white, darkgrey);
+            }
+            85% {
+                background: radial-gradient(circle at 60px 35.5px, white, darkgrey);
+            }
+            85.5% {
+                background: radial-gradient(circle at 58px 36px, white, darkgrey);
+            }
+            86% {
+                background: radial-gradient(circle at 56px 36.5px, white, darkgrey);
+            }
+            86.5% {
+                background: radial-gradient(circle at 54px 37px, white, darkgrey);
+            }
+            87% {
+                background: radial-gradient(circle at 52px 37.5px, white, darkgrey);
+            }
+            87.5% {
+                background: radial-gradient(circle at 50px 38px, white, darkgrey);
+            }
+            88% {
+                background: radial-gradient(circle at 48px 38.5px, white, darkgrey);
+            }
+            88.5% {
+                background: radial-gradient(circle at 46px 39px, white, darkgrey);
+            }
+            89% {
+                background: radial-gradient(circle at 44px 39.5px, white, darkgrey);
+            }
+            89.5% {
+                background: radial-gradient(circle at 42px 40px, white, darkgrey);
+            }
+            90% {
+                background: radial-gradient(circle at 40px 40.5px, white, darkgrey);
+            }
+            90.5% {
+                background: radial-gradient(circle at 38px 41px, white, darkgrey);
+            }
+            91% {
+                background: radial-gradient(circle at 36px 41.5px, white, darkgrey);
+            }
+            91.5% {
+                background: radial-gradient(circle at 34px 42px, white, darkgrey);
+            }
+            92% {
+                background: radial-gradient(circle at 32px 42.5px, white, darkgrey);
+            }
+            92.5% {
+                background: radial-gradient(circle at 30px 43px, white, darkgrey);
+            }
+            93% {
+                background: radial-gradient(circle at 28px 43.5px, white, darkgrey);
+            }
+            93.5% {
+                background: radial-gradient(circle at 26px 44px, white, darkgrey);
+            }
+            94% {
+                background: radial-gradient(circle at 24px 44.5px, white, darkgrey);
+            }
+            94.5% {
+                background: radial-gradient(circle at 22px 45px, white, darkgrey);
+            }
+            95% {
+                background: radial-gradient(circle at 20px 45.5px, white, darkgrey);
+            }
+            95.5% {
+                background: radial-gradient(circle at 18px 46px, white, darkgrey);
+            }
+            96% {
+                background: radial-gradient(circle at 16px 46.5px, white, darkgrey);
+            }
+            96.5% {
+                background: radial-gradient(circle at 14px 47px, white, darkgrey);
+            }
+            97% {
+                background: radial-gradient(circle at 12px 47.5px, white, darkgrey);
+            }
+            97.5% {
+                background: radial-gradient(circle at 10px 48px, white, darkgrey);
+            }
+            98% {
+                background: radial-gradient(circle at 8px 48.5px, white, darkgrey);
+            }
+            98.5% {
+                background: radial-gradient(circle at 6px 49px, white, darkgrey);
+            }
+            99% {
+                background: radial-gradient(circle at 4px 49.5px, white, darkgrey);
+            }
+            99.5% {
+                background: radial-gradient(circle at 2px 50px, white, darkgrey);
+            }
+            100% {
+                background: radial-gradient(circle at 0px 50.5px, white, darkgrey);
+            }
+        }
+        
+        #logo {
+            animation: run3 3s linear infinite;
+            opacity: 80%;
+        }
+        
+        #contact {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            /*$("#logo").hover(
+                function() {
+                    $("#logo").css("animation", "run3 3s linear infinite");
+                    $("#logo").css("animation-play-state", "running");
+                    $("#logo").css("opacity", "80%");
+                },
+                function() {
+                    $("#logo").css("animation-play-state", "paused");
+                    $("#logo").css("animation", "none");
+                    $("#logo").css("background", "none");
+                    $("#logo").css("opacity", "100%");
+                }
+            )*/
+        })
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+            if (currentScrollPos > prevScrollpos && currentScrollPos > 50) {
+                document.getElementById("navbar").style.top = "-70px";
+            } else {
+                document.getElementById("navbar").style.top = "0px";
+            }
+            prevScrollpos = currentScrollPos;
+        }
+    </script>
+
+</html>
+
+</html>
+
+</html>
