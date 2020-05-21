@@ -527,8 +527,7 @@
                     Object.keys(simMC_resultJ[year]).forEach(function(inout) {
                         Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
                             if (simMC_resultJ[year][inout][kpi]["mean"] === "IRR with multiple roots") {
-                                console.log("so entra aqui");
-                                console.log(simMC_resultJ);
+
                             } else {
                                 if (kpi !== "pricepanel" && kpi !== "priceinverters") {
                                     if (kpi !== "Discounted payback") {
@@ -584,7 +583,7 @@
                 });
                 var allSimGraph = {};
                 Object.keys(graphsObj).forEach(function(kpi, index) {
-                    console.log(graphsObj, "so entra aqui graph")
+
                     data1 = graphsObj[kpi];
 
                     var obj = {
@@ -788,7 +787,8 @@
                         });
                     }
                 });
-                console.log(graphsObj2);
+                console.log(graphsObj2, "aqui");
+                console.log(IRRflag, "IRRflag");
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
                     if (IRRflag === false) {
