@@ -791,11 +791,9 @@
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
                     if (graphKpi == "Sensitivity analysis IRR" && IRRflag === "True") {
-                        if (index % 2 == 0) {
-                            string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + kpi1 + "><p>IRR with multiple roots</p></div></div>";
-                        } else {
-                            $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + kpi2 + "><p>IRR with multiple roots</p></div></div></div>");
-                        }
+
+                        $("#ponte").after("<p>Multiple IRRs found use MIRR instead</p>");
+
                     } else {
 
                         Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
