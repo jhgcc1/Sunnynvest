@@ -790,8 +790,10 @@
                 console.log(IRRflag, "IRRflag");
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
-                    if (index == Object.keys(graphsObj2).length - 1 && IRRflag === "True") {
-                        console.log("in ponte")
+                    var objlength = Object.keys(graphsObj2).length - 1;
+                    console.log(index, objlength);
+                    if (index == objlength && IRRflag === "True") {
+                        console.log("in ponte");
                         $("#ponte").append("<p>Multiple IRRs found use MIRR instead</p>");
 
                     } else {
