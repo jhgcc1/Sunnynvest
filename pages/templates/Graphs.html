@@ -791,8 +791,8 @@
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
                     if (graphKpi == "Sensitivity analysis IRR" && IRRflag === "True") {
-
-                        $("#ponte").after("<p>Multiple IRRs found use MIRR instead</p>");
+                        console.log("in ponte")
+                        $("#ponte").append("<p>Multiple IRRs found use MIRR instead</p>");
 
                     } else {
 
