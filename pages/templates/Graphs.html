@@ -526,53 +526,57 @@
                     yearAux.push(thisyear);
                     Object.keys(simMC_resultJ[year]).forEach(function(inout) {
                         Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
-                            if (kpi !== "pricepanel" && kpi !== "priceinverters") {
-                                if (kpi !== "Discounted payback") {
-                                    if (!graphsObj[kpi + " box"]) {
-                                        graphsObj[kpi + " box"] = [];
+                            if (simMC_resultJ[year][inout][kpi] !== "IRR with multiple roots") {
+
+
+                                if (kpi !== "pricepanel" && kpi !== "priceinverters") {
+                                    if (kpi !== "Discounted payback") {
+                                        if (!graphsObj[kpi + " box"]) {
+                                            graphsObj[kpi + " box"] = [];
+                                        }
+
+                                        var trace = {
+                                            y: simMC_resultJ[year][inout][kpi]["rawData"],
+                                            type: 'box',
+                                            name: thisyear,
+                                            marker: {
+                                                color: colorArray[parseInt(year)]
+                                            },
+                                            boxmean: "sd"
+                                        };
+                                        graphsObj[kpi + " box"].push(trace);
                                     }
 
-                                    var trace = {
-                                        y: simMC_resultJ[year][inout][kpi]["rawData"],
-                                        type: 'box',
-                                        name: thisyear,
+                                    if (!graphsObj[kpi + " hist"]) {
+                                        graphsObj[kpi + " hist"] = [];
+                                    }
+
+                                    var x = simMC_resultJ[year][inout][kpi]["rawData"];
+                                    console.log(x, "aqui2");
+                                    var data = {
+                                        //histfunc: "count",
+                                        x: x,
+                                        type: "histogram",
+                                        histnorm: 'probability',
                                         marker: {
-                                            color: colorArray[parseInt(year)]
+                                            color: colorArray[year]
                                         },
-                                        boxmean: "sd"
+                                        name: thisyear,
+                                        cumulative: {
+                                            enabled: false
+                                        },
+                                        visible: thisyear === new Date().getFullYear() + 0
                                     };
-                                    graphsObj[kpi + " box"].push(trace);
+
+                                    if (kpi === "Discounted payback") {
+                                        data["autobinx"] = false;
+                                        data["xbins"] = {
+                                            size: 1
+                                        };
+                                    }
+
+                                    graphsObj[kpi + " hist"].push(data);
                                 }
-
-                                if (!graphsObj[kpi + " hist"]) {
-                                    graphsObj[kpi + " hist"] = [];
-                                }
-
-                                var x = simMC_resultJ[year][inout][kpi]["rawData"];
-                                console.log(x, "aqui2");
-                                var data = {
-                                    //histfunc: "count",
-                                    x: x,
-                                    type: "histogram",
-                                    histnorm: 'probability',
-                                    marker: {
-                                        color: colorArray[year]
-                                    },
-                                    name: thisyear,
-                                    cumulative: {
-                                        enabled: false
-                                    },
-                                    visible: thisyear === new Date().getFullYear() + 0
-                                };
-
-                                if (kpi === "Discounted payback") {
-                                    data["autobinx"] = false;
-                                    data["xbins"] = {
-                                        size: 1
-                                    };
-                                }
-
-                                graphsObj[kpi + " hist"].push(data);
                             }
                         });
                     });
@@ -769,15 +773,19 @@
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
                     if (graph !== "rangeSpider") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                            if (!graphsObj2[kpi]) {
-                                graphsObj2[kpi] = {};
-                            }
+                            if (spiderS_resultJ[graph]["Sensitivity analysis IRR"] !== "IRR with multiple roots") {
 
-                            if (!graphsObj2[kpi][graph]) {
-                                graphsObj2[kpi][graph] = [];
-                            }
 
-                            graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
+                                if (!graphsObj2[kpi]) {
+                                    graphsObj2[kpi] = {};
+                                }
+
+                                if (!graphsObj2[kpi][graph]) {
+                                    graphsObj2[kpi][graph] = [];
+                                }
+
+                                graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
+                            }
                         });
                     }
                 });

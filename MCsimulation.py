@@ -4,7 +4,7 @@ from Random import rndCustom
 import numpy as np
 
 def simMC(objIpunt):
-    
+    boleanIRR=False
     simMC_result={}
     #objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
     #objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
@@ -46,6 +46,8 @@ def simMC(objIpunt):
             if irr=="nan":
                 print(irr)
                 print(array_total_cashflow_inflation)
+                boleanIRR=True
+
             pb=Snumath.FinancialSimulation(result_wacc_no_inflation,plifespanS,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
             temporary_list_outputs=[priceperKWp,spayback,total_initial_investment[0],irr,npv,mirr,vul,cost_per_kwh,lcoe,pb]
             if SimulationYearString not in simMC_result:
@@ -53,7 +55,7 @@ def simMC(objIpunt):
             for index,item in enumerate(simMC_result[SimulationYearString]["outputs"]):
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"].append(temporary_list_outputs[index])
         for item in simMC_result[SimulationYearString]["outputs"]:
-            if(item!="Discounted payback"):
+            if(item!="Discounted payback" and boleanIRR==False):
                 simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                 simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
             else:
@@ -61,7 +63,9 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["outputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"]=auxList
-
+        if boleanIRR=True:
+            simMC_result[SimulationYearString]["outputs"][item]["mean"]="Irr with multiple roots"
+            simMC_result[SimulationYearString]["outputs"][item]["std"]="Irr with multiple roots"
         for index,item in enumerate(simMC_result[SimulationYearString]["inputs"]):
             simMC_result[SimulationYearString]["inputs"][item]["rawData"]=temporary_list_inputs[index]
             simMC_result[SimulationYearString]["inputs"][item]["mean"]=np.mean(temporary_list_inputs[index])

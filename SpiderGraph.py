@@ -1,7 +1,7 @@
 import Snumath
 
 def spiderS(obj):
-
+    Irrbolean=False
     Result_spider={"Energy production":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Wacc":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Maintenance":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"System price":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]}}
     rangeSpider=[x for x in range(-50,50,3)]
     label_year,label_year_simulation,year = Snumath.lebals_years(obj["plifespan"],obj["sim_year"])
@@ -19,6 +19,8 @@ def spiderS(obj):
         total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
+        if irr=="nan":
+            Irrbolean=True
         Result_spider["Energy production"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Energy production"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Energy production"]["Sensitivity analysis MIRR"].append(mirr)
@@ -39,6 +41,8 @@ def spiderS(obj):
         total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
+        if irr=="nan":
+            Irrbolean=True
         Result_spider["Maintenance"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Maintenance"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Maintenance"]["Sensitivity analysis MIRR"].append(mirr)
@@ -65,6 +69,8 @@ def spiderS(obj):
         total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
+        if irr=="nan":
+            Irrbolean=True
         Result_spider["System price"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["System price"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["System price"]["Sensitivity analysis MIRR"].append(mirr)
@@ -85,6 +91,8 @@ def spiderS(obj):
         total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
+        if irr=="nan":
+            Irrbolean=True
         Result_spider["Wacc"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Wacc"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Wacc"]["Sensitivity analysis MIRR"].append(mirr)
@@ -93,7 +101,11 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
-        
+    if Irrbolean=True:
+        Result_spider["Energy production"]["Sensitivity analysis IRR"]="IRR with multiple roots"
+        Result_spider["System price"]["Sensitivity analysis IRR"]="IRR with multiple roots"
+        Result_spider["Wacc"]["Sensitivity analysis IRR"]="IRR with multiple roots"
+        Result_spider["Maintenance"]["Sensitivity analysis IRR"]="IRR with multiple roots"
     return Result_spider
 
 
