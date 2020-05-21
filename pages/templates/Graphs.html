@@ -767,11 +767,11 @@
                         Plotly.newPlot('graphStarts' + kpi2, allSimGraph[kpi22][0], allSimGraph[kpi22][1], config);
                     }
                 });
-                let IRRflag = false;
+                let IRRflag = spiderS_resultJ["IRRflag"];
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
-                    if (graph !== "rangeSpider") {
+                    if (graph !== "rangeSpider" && graph !== "IRRflag") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                            if (spiderS_resultJ[graph]["Sensitivity analysis IRR"] !== "IRR with multiple roots") {
+                            if (kpi == "Sensitivity analysis IRR" && IRRflag == "True") {} else {
                                 if (!graphsObj2[kpi]) {
                                     graphsObj2[kpi] = {};
                                 }
@@ -781,8 +781,6 @@
                                 }
 
                                 graphsObj2[kpi][graph].push(spiderS_resultJ[graph][kpi]);
-                            } else {
-                                IRRflag = true;
                             }
                         });
                     }

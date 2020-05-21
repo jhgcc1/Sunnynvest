@@ -102,10 +102,7 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
     if Irrbolean==True:
-        Result_spider["Energy production"]["Sensitivity analysis IRR"]="IRR with multiple roots"
-        Result_spider["System price"]["Sensitivity analysis IRR"]="IRR with multiple roots"
-        Result_spider["Wacc"]["Sensitivity analysis IRR"]="IRR with multiple roots"
-        Result_spider["Maintenance"]["Sensitivity analysis IRR"]="IRR with multiple roots"
+        Result_spider["IRRflag"]=True
     return Result_spider
 
 
