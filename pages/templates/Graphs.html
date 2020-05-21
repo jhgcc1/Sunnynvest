@@ -789,7 +789,7 @@
                 console.log(IRRflag, "IRRflag");
                 Object.keys(graphsObj2).forEach(function(graphKpi, index) {
                     var data = [];
-                    if (IRRflag === false) {
+                    if (IRRflag === "False") {
                         Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
                             var trace = {
                                 y: graphsObj2[graphKpi][kpi][0],

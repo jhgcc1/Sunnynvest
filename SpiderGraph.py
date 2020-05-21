@@ -102,7 +102,9 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
     if Irrbolean==True:
-        Result_spider["IRRflag"]=True
+        Result_spider["IRRflag"]="True"
+    else:
+        Result_spider["IRRflag"]="False"
     return Result_spider
 
 
