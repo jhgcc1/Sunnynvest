@@ -2,7 +2,7 @@ import Snumath
 
 def staticMaths(objIpunt):
     label_year,label_year_simulation,year = Snumath.lebals_years(objIpunt["plifespan"],0)
-    ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(objIpunt["energyconsume"],objIpunt["economy"],objIpunt["Irradiation"],objIpunt["painelpower"],objIpunt["pricepainel"])
+    ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(objIpunt["energyconsume"],objIpunt["economy"],objIpunt["Irradiation"],objIpunt["painelpower"],objIpunt["pricepainel"],objIpunt["sellOrComp"],objIpunt["npanel"])
     result_wacc=Snumath.wacc(objIpunt["person_or_business_or_sellenergy"],objIpunt["ccp"],objIpunt["cct"],objIpunt["pccp"],objIpunt["pcct"],objIpunt["inflation"],objIpunt["profittax"])
     result_wacc_no_inflation=Snumath.wacc_no_inflation(objIpunt["person_or_business_or_sellenergy"],objIpunt["ccp"],objIpunt["cct"],objIpunt["pccp"],objIpunt["pcct"],objIpunt["profittax"])
     result_wacc_m_no_inflation=Snumath.wacc_m_no_inflation(result_wacc_no_inflation)

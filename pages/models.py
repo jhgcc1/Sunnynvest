@@ -15,6 +15,8 @@ post_save.connect(create_profile,sender=User)
 	
 
 class dadosmodels(models.Model):
+	npanel=models.IntegerField(default=0)
+	sellOrComp=models.TextField(default='')
 	clientShare=models.TextField(default='')
 	dictStringResult=models.TextField(default='')
 	paymentMethod = models.CharField(max_length=100,default='')

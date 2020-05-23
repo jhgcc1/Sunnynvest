@@ -124,7 +124,12 @@ def input(request):
 	args={'nomeoulogin':nomeoulogin,'logout':logout, 'profile':profile}
 	args=mandaremail(request,args)
 	if request.POST.get('calcular'):
-
+		sellOrComp = request.POST.get('CompensateOrSell')
+		if sollOrComp != "Sell":
+			npanel=0
+		else:
+			npanel=int(request.POST.get("npanel"))
+		
 		paymentMethod = request.POST.get('paymentMethod')
 		if paymentMethod=="cash":
 			yearsTopay=0
@@ -200,6 +205,8 @@ def input(request):
 			sim_year=int(request.POST.get('sim_year')[0:1])
 			form = dadosform(request.POST)
 			objIpunt={"energyconsume":energyconsume,
+			"npanel":npanel,
+			"sellOrComp":sellOrComp,
 			"pricekwh":pricekwh,
 			"paymentMethod":paymentMethod,
 			"economy":economy/100,
@@ -291,11 +298,11 @@ def input(request):
 
 				clientShare=str(request.user)+"&"+projeto
 				args["clientShare"]=clientShare
-
-				dictStringResult={"clientShare":clientShare,"spiderS_result":spiderS_result,"simMC_result":simMC_result,"staticMaths_result":staticMaths_result}
+				args["sellOrComp"]=sellOrComp
+				dictStringResult={"sellOrComp":sellOrComp,"clientShare":clientShare,"spiderS_result":spiderS_result,"simMC_result":simMC_result,"staticMaths_result":staticMaths_result}
 				json.dumps(dictStringResult)
 				
-				dadosmodels_obj= dadosmodels(clientShare=clientShare,entry=entry,yearsTopay=yearsTopay,paymentMethod=paymentMethod,energyconsume=energyconsume, usuario=request.user,radiation1=radiation1,radiation2=radiation2,radiation3=radiation3,pricekwh=pricekwh,
+				dadosmodels_obj= dadosmodels(npanel=npanel,sellOrComp=sellOrComp,clientShare=clientShare,entry=entry,yearsTopay=yearsTopay,paymentMethod=paymentMethod,energyconsume=energyconsume, usuario=request.user,radiation1=radiation1,radiation2=radiation2,radiation3=radiation3,pricekwh=pricekwh,
 				economy=economy,painelpower =painelpower,panelprice1=panelprice1,panelprice2=panelprice2,panelprice3=panelprice3,priceproject=priceproject,pricewiring=pricewiring,
 				pricess=pricess,pricelabor=pricelabor,energy_production_tax=energy_production_tax,depreciation_years_inverters=depreciation_years_inverters,
 				depreciation_years_painels=depreciation_years_painels,person_or_business_or_sellenergy=person_or_business_or_sellenergy,incometax=incometax,sim_year=sim_year,
@@ -316,6 +323,8 @@ def input(request):
 				entry = float(request.POST.get('entry'))
 			print(economy)
 			objIpunt={"energyconsume":energyconsume,
+			"npanel":npanel,
+			"sellOrComp":sellOrComp,
 			"pricekwh":pricekwh,
 			"paymentMethod":paymentMethod,
 			"economy":economy,

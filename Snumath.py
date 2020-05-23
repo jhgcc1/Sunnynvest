@@ -52,13 +52,19 @@ def lebals_years(plifespan,simulation_period):
     label_year_simulation=[x for x in range(year,year+simulation_period+1)]
     return label_year,label_year_simulation,year
 
-def InitialCalculations(energyconsume,economy,radiation,painelpower,pricepainel):
-    #number of needed painels
-    ndeplacas=int(energyconsume*economy/(((radiation)*30*painelpower)/1000))
+def InitialCalculations(energyconsume,economy,radiation,painelpower,pricepainel,sellOrComp,npanel):
+    if sellOrComp=="Sell":
+        ndeplacas=npanel
+        #maximum economy achieved
+        maxeconomy='100%'
+    else:
+        #number of needed painels
+        ndeplacas=int(energyconsume*economy/(((radiation)*30*painelpower)/1000))
+        #maximum economy achieved
+        maxeconomy=str(((((radiation*painelpower*ndeplacas*30)/1000)/energyconsume)*100))+'%'
     #total investment in painels
     invest_painels=ndeplacas*pricepainel
-    #maximum economy achieved
-    maxeconomy=str(((((radiation*painelpower*ndeplacas*30)/1000)/energyconsume)*100))+'%'
+
     #plant power
     wplantpower=(ndeplacas*painelpower)
     kwplantpower=wplantpower/1000

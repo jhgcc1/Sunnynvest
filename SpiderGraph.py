@@ -8,7 +8,7 @@ def spiderS(obj):
     for percent in rangeSpider:
         percentage = percent/100
         #energy
-        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"])
+        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         kwplantpower=kwplantpower+(kwplantpower*percentage)
         result_wacc=Snumath.wacc(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["inflation"],obj["profittax"])
         result_wacc_no_inflation=Snumath.wacc_no_inflation(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["profittax"])
@@ -30,7 +30,7 @@ def spiderS(obj):
         Result_spider["Energy production"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         
         #maintenance
-        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"])
+        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         result_wacc=Snumath.wacc(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["inflation"],obj["profittax"])
         result_wacc_no_inflation=Snumath.wacc_no_inflation(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["profittax"])
         result_wacc_m_no_inflation=Snumath.wacc_m_no_inflation(result_wacc_no_inflation)
@@ -51,7 +51,7 @@ def spiderS(obj):
         Result_spider["Maintenance"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["Maintenance"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         #investment
-        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"])
+        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         invest_painelsS=invest_painels+(invest_painels*percentage)
         priceinvertersS=obj["priceinverters"]+(obj["priceinverters"]*percentage)
         pricestringboxS=obj["pricestringbox"]+(obj["pricestringbox"]*percentage)
@@ -79,7 +79,7 @@ def spiderS(obj):
         Result_spider["System price"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["System price"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         #wacc
-        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"])
+        ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         result_wacc=Snumath.wacc(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["inflation"],obj["profittax"])
         result_wacc=result_wacc+(result_wacc*percentage)
         result_wacc_no_inflation=Snumath.wacc_no_inflation(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["profittax"])
