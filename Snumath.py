@@ -199,8 +199,8 @@ def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflatio
     #Npv
     npv=np.npv(result_wacc,array_total_cashflow_inflation)
     #irr
-    #irr=np.irr(array_total_cashflow_inflation)##
-    irr="nan"
+    irr=np.irr(array_total_cashflow_inflation)##
+    #irr="nan"
     #mirr
     mirr=np.mirr(array_total_cashflow_inflation,result_wacc,ccp)
     spayback=-array_total_cashflow_noinflation[0]/array_total_cashflow_noinflation[1]
