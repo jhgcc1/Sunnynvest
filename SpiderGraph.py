@@ -1,5 +1,5 @@
 import Snumath
-
+import numpy as np
 def spiderS(obj):
     Irrbolean=False
     Result_spider={"Energy production":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Wacc":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Maintenance":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"System price":{"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]}}
