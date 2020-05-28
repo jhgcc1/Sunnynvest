@@ -46,6 +46,8 @@ var tabl = {
     linha15: ["LCOE", "Output", "X", "X", "X"],
     linha16: ["Discounted payback ", "Output", "X", "No", "No"],
     linha17: ["MIRR", "Output", "X", "X", "X"],
+    linha18: ["Future value (IRR rate)", "Output", "X", "X", "X"],
+    linha19: ["Future value (MIRR rate)", "Output", "X", "X", "X"],
 }
 console.log(tabl, "table1");
 var table2 = ["Sensitivity analysis IRR",
@@ -54,7 +56,9 @@ var table2 = ["Sensitivity analysis IRR",
     "Sensitivity analysis Simple Payback",
     "Sensitivity analysis Equivalent annual annuity",
     "Sensitivity analysis LCOE",
-    "Sensitivity analysis Cost/KWh"
+    "Sensitivity analysis Cost/KWh",
+    "Sensitivity analysis Future value (IRR rate)",
+    "Sensitivity analysis Future value (MIRR rate)"
 ]
 
 var table3 = [

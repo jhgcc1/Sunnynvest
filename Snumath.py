@@ -167,17 +167,18 @@ def maintenanceF(maintenance,ndeplacas,plifespan):
     return array_maintenance
 
 #Fiscal effects
-def fiscal_effects(array_gross_revenue,person_or_business_or_sellenergy,array_depreciation_inverters,array_depreciation_painels,profittax,array_maintenance,plifespan):
-    if person_or_business_or_sellenergy=='Business':
-        array_ficaleffects_positive=(array_depreciation_inverters+array_depreciation_painels+array_maintenance)*profittax
-        array_ficaleffects_negative=(array_gross_revenue*profittax)
-        total_fiscaleffets=array_ficaleffects_positive-array_ficaleffects_negative
-    elif person_or_business_or_sellenergy=='Person':
-        total_fiscaleffets=np.array([0 for x in range(0,plifespan+1)])
-    elif person_or_business_or_sellenergy=='Sell energy':
+def fiscal_effects(array_gross_revenue,person_or_business_or_sellenergy,array_depreciation_inverters,array_depreciation_painels,profittax,array_maintenance,plifespan,sellOrComp):
+    if sellOrComp=="Sell":
         array_ficaleffects_positive=(array_depreciation_inverters+array_depreciation_painels+array_maintenance)*profittax
         array_ficaleffects_negative=np.array([0 for x in range(0,plifespan+1)])
         total_fiscaleffets=array_ficaleffects_positive-array_ficaleffects_negative
+    else:
+        if person_or_business_or_sellenergy=='Business':
+            array_ficaleffects_positive=(array_depreciation_inverters+array_depreciation_painels+array_maintenance)*profittax
+            array_ficaleffects_negative=(array_gross_revenue*profittax)
+            total_fiscaleffets=array_ficaleffects_positive-array_ficaleffects_negative
+        elif person_or_business_or_sellenergy=='Person':
+            total_fiscaleffets=np.array([0 for x in range(0,plifespan+1)])
     return total_fiscaleffets
 
 #no inflation cashflow

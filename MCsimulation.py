@@ -47,7 +47,7 @@ def simMC(objIpunt):
             total_initial_investment,array_depreciation_inverters,array_investmentinvertes,array_depreciation_painels,array_residual_value_inverters=Snumath.derepciation_and_investment_and_reinvestment_and_residual_value(invest_painels,priceinvertersS,objIpunt["pricestringbox"],objIpunt["priceproject"],objIpunt["pricewiring"],objIpunt["pricess"],objIpunt["pricelabor"],objIpunt["priceothers"],SimulationYear,objIpunt["depreciation_years_painels"],objIpunt["depreciation_percentage_inverters"],objIpunt["depreciation_percentage_painels"],year,ilifespanS,plifespanS,objIpunt["depreciation_years_inverters"])
             priceperKWp=total_initial_investment[0]/wplantpower
             array_maintenance=Snumath.maintenanceF(mantenanceS,ndeplacas,plifespanS)
-            total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,objIpunt["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,objIpunt["profittax"],array_maintenance,plifespanS)
+            total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,objIpunt["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,objIpunt["profittax"],array_maintenance,plifespanS,objIpunt["sellOrComp"])
             array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(objIpunt["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
             npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccpS,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanS,array_cashflow_negative,array_KWhenergy_per_year)
             if irr=="nan":
@@ -56,14 +56,19 @@ def simMC(objIpunt):
                 boleanIRR=True
 
             pb=Snumath.FinancialSimulation(result_wacc_no_inflation,plifespanS,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
-            temporary_list_outputs=[priceperKWp,spayback,total_initial_investment[0],irr,npv,mirr,vul,cost_per_kwh,lcoe,pb]
+            if boleanIRR:
+                fvReinvestIRR="nan"
+            else:
+                fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            temporary_list_outputs=[priceperKWp,spayback,total_initial_investment[0],irr,npv,mirr,vul,cost_per_kwh,lcoe,pb,fvReinvestIRR,fvReinvestMIRR]
             if SimulationYearString not in simMC_result:
-                simMC_result[SimulationYearString]={"inputs":{"priceinverters":{"mean":0,"std":0,"rawData":[]},"pricepanel":{"mean":0,"std":0,"rawData":[]},"Maintenance":{"mean":0,"std":0,"rawData":[]},"Cost of debit":{"mean":0,"std":0,"rawData":[]},"Irradiation":{"mean":0,"std":0,"rawData":[]},"Cost of equity":{"mean":0,"std":0,"rawData":[]},"Inverters lifespan":{"mean":0,"std":0,"rawData":[]},"Panels lifespan":{"mean":0,"std":0,"rawData":[]}},"outputs":{"Price per KWp":{"mean":0,"std":0,"rawData":[]},"Simple payback":{"mean":0,"std":0,"rawData":[]},"Total investment":{"mean":0,"std":0,"rawData":[]},"IRR":{"mean":0,"std":0,"rawData":[]},"NPV":{"mean":0,"std":0,"rawData":[]},"MIRR":{"mean":0,"std":0,"rawData":[]},"Equivalent annual annuity":{"mean":0,"std":0,"rawData":[]},"Cost/kwh":{"mean":0,"std":0,"rawData":[]},"LCOE":{"mean":0,"std":0,"rawData":[]},"Discounted payback":{"rawData":[]}}}
+                simMC_result[SimulationYearString]={"inputs":{"priceinverters":{"mean":0,"std":0,"rawData":[]},"pricepanel":{"mean":0,"std":0,"rawData":[]},"Maintenance":{"mean":0,"std":0,"rawData":[]},"Cost of debit":{"mean":0,"std":0,"rawData":[]},"Irradiation":{"mean":0,"std":0,"rawData":[]},"Cost of equity":{"mean":0,"std":0,"rawData":[]},"Inverters lifespan":{"mean":0,"std":0,"rawData":[]},"Panels lifespan":{"mean":0,"std":0,"rawData":[]}},"outputs":{"Price per KWp":{"mean":0,"std":0,"rawData":[]},"Simple payback":{"mean":0,"std":0,"rawData":[]},"Total investment":{"mean":0,"std":0,"rawData":[]},"IRR":{"mean":0,"std":0,"rawData":[]},"NPV":{"mean":0,"std":0,"rawData":[]},"MIRR":{"mean":0,"std":0,"rawData":[]},"Equivalent annual annuity":{"mean":0,"std":0,"rawData":[]},"Cost/kwh":{"mean":0,"std":0,"rawData":[]},"LCOE":{"mean":0,"std":0,"rawData":[]},"Discounted payback":{"rawData":[]},"Future value<br> (reinvesting profit in a project with same profitability, IRR rate)":{"mean":0,"std":0,"rawData":[]},"Future value<br> (reinvesting profit with MIRR rate)":{"mean":0,"std":0,"rawData":[]}}}
             for index,item in enumerate(simMC_result[SimulationYearString]["outputs"]):
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"].append(temporary_list_outputs[index])
         for item in simMC_result[SimulationYearString]["outputs"]:
             if(item!="Discounted payback"):
-                if (item=="IRR" and boleanIRR==False) or item!="IRR":
+                if (("IRR" in item) and boleanIRR==False) or "IRR" not in item:
                     simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                     simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                 else:

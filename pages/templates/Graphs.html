@@ -773,7 +773,7 @@
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
                     if (graph !== "rangeSpider" && graph !== "IRRflag") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                            if (kpi == "Sensitivity analysis IRR" && IRRflag === "True") {} else {
+                            if ((kpi == "Sensitivity analysis IRR" || kpi == "Sensitivity analysis Future value (IRR rate)") && IRRflag === "True") {} else {
                                 if (!graphsObj2[kpi]) {
                                     graphsObj2[kpi] = {};
                                 }
@@ -793,13 +793,11 @@
                     var data = [];
                     var objlength = Object.keys(graphsObj2).length - 1;
                     console.log(index, objlength);
-                    if (index == objlength && IRRflag === "True") {
+                    if (index == objlength && IRRflag === "False") {
                         console.log("in ponte");
                         $("#ponte").append("<br><div style='padding-top:20%;margin-bottom:11%;display:flex;align-items:center;justify-content:center;'><div><p>Multiple IRRs found use, MIRR instead.<br>Sensitivity analysis histograms and boxplots not available</p><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px;margin-left:8%;'></img></div></div><br>");
                         //multiple irr
                     } else {
-
-
                         Object.keys(graphsObj2[graphKpi]).forEach(function(kpi) {
                             var trace = {
                                 y: graphsObj2[graphKpi][kpi][0],

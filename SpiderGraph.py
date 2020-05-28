@@ -16,11 +16,16 @@ def spiderS(obj):
         array_gross_revenue,array_Whenergy_per_year,array_KWhenergy_per_year,array_MWhenergy_per_year=Snumath.energyProduction(result_wacc_m_no_inflation,obj["plifespan"],obj["pricekwh"],wplantpower,mwplantpower,kwplantpower,obj["initial_pefficiency"],obj["Irradiation"],obj["preduction"],obj["energy_production_tax"])
         total_initial_investment,array_depreciation_inverters,array_investmentinvertes,array_depreciation_painels,array_residual_value_inverters=Snumath.derepciation_and_investment_and_reinvestment_and_residual_value(invest_painels,obj["priceinverters"],obj["pricestringbox"],obj["priceproject"],obj["pricewiring"],obj["pricess"],obj["pricelabor"],obj["priceothers"],obj["sim_year"],obj["depreciation_years_painels"],obj["depreciation_percentage_inverters"],obj["depreciation_percentage_painels"],year,obj["ilifespan"],obj["plifespan"],obj["depreciation_years_inverters"])
         array_maintenance=Snumath.maintenanceF(obj["maintenance"],ndeplacas,obj["plifespan"])
-        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
+        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"],obj["sellOrComp"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
+        if boleanIRR:
+            fvReinvestIRR="nan"
+        else:
+            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
         Result_spider["Energy production"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Energy production"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Energy production"]["Sensitivity analysis MIRR"].append(mirr)
@@ -28,6 +33,8 @@ def spiderS(obj):
         Result_spider["Energy production"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Energy production"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["Energy production"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Energy production"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
+        Result_spider["Energy production"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         
         #maintenance
         ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
@@ -38,11 +45,16 @@ def spiderS(obj):
         total_initial_investment,array_depreciation_inverters,array_investmentinvertes,array_depreciation_painels,array_residual_value_inverters=Snumath.derepciation_and_investment_and_reinvestment_and_residual_value(invest_painels,obj["priceinverters"],obj["pricestringbox"],obj["priceproject"],obj["pricewiring"],obj["pricess"],obj["pricelabor"],obj["priceothers"],obj["sim_year"],obj["depreciation_years_painels"],obj["depreciation_percentage_inverters"],obj["depreciation_percentage_painels"],year,obj["ilifespan"],obj["plifespan"],obj["depreciation_years_inverters"])
         array_maintenance=Snumath.maintenanceF(obj["maintenance"],ndeplacas,obj["plifespan"])
         array_maintenance=array_maintenance+(array_maintenance*percentage)
-        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
+        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"],obj["sellOrComp"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
+        if boleanIRR:
+            fvReinvestIRR="nan"
+        else:
+            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
         Result_spider["Maintenance"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Maintenance"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Maintenance"]["Sensitivity analysis MIRR"].append(mirr)
@@ -50,6 +62,8 @@ def spiderS(obj):
         Result_spider["Maintenance"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Maintenance"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["Maintenance"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
+        Result_spider["Maintenance"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         #investment
         ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         invest_painelsS=invest_painels+(invest_painels*percentage)
@@ -66,11 +80,16 @@ def spiderS(obj):
         array_gross_revenue,array_Whenergy_per_year,array_KWhenergy_per_year,array_MWhenergy_per_year=Snumath.energyProduction(result_wacc_m_no_inflation,obj["plifespan"],obj["pricekwh"],wplantpower,mwplantpower,kwplantpower,obj["initial_pefficiency"],obj["Irradiation"],obj["preduction"],obj["energy_production_tax"])
         total_initial_investment,array_depreciation_inverters,array_investmentinvertes,array_depreciation_painels,array_residual_value_inverters=Snumath.derepciation_and_investment_and_reinvestment_and_residual_value(invest_painelsS,priceinvertersS,pricestringboxS,priceprojectS,pricewiringS,pricessS,pricelaborS,priceothersS,obj["sim_year"],obj["depreciation_years_painels"],obj["depreciation_percentage_inverters"],obj["depreciation_percentage_painels"],year,obj["ilifespan"],obj["plifespan"],obj["depreciation_years_inverters"])
         array_maintenance=Snumath.maintenanceF(obj["maintenance"],ndeplacas,obj["plifespan"])
-        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
+        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"],obj["sellOrComp"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
+        if boleanIRR:
+            fvReinvestIRR="nan"
+        else:
+            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
         Result_spider["System price"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["System price"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["System price"]["Sensitivity analysis MIRR"].append(mirr)
@@ -78,6 +97,8 @@ def spiderS(obj):
         Result_spider["System price"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["System price"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["System price"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["System price"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
+        Result_spider["System price"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         #wacc
         ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         result_wacc=Snumath.wacc(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["inflation"],obj["profittax"])
@@ -88,11 +109,16 @@ def spiderS(obj):
         array_gross_revenue,array_Whenergy_per_year,array_KWhenergy_per_year,array_MWhenergy_per_year=Snumath.energyProduction(result_wacc_m_no_inflation,obj["plifespan"],obj["pricekwh"],wplantpower,mwplantpower,kwplantpower,obj["initial_pefficiency"],obj["Irradiation"],obj["preduction"],obj["energy_production_tax"])
         total_initial_investment,array_depreciation_inverters,array_investmentinvertes,array_depreciation_painels,array_residual_value_inverters=Snumath.derepciation_and_investment_and_reinvestment_and_residual_value(invest_painels,obj["priceinverters"],obj["pricestringbox"],obj["priceproject"],obj["pricewiring"],obj["pricess"],obj["pricelabor"],obj["priceothers"],obj["sim_year"],obj["depreciation_years_painels"],obj["depreciation_percentage_inverters"],obj["depreciation_percentage_painels"],year,obj["ilifespan"],obj["plifespan"],obj["depreciation_years_inverters"])
         array_maintenance=Snumath.maintenanceF(obj["maintenance"],ndeplacas,obj["plifespan"])
-        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"])
+        total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,obj["plifespan"],obj["sellOrComp"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
+        if boleanIRR:
+            fvReinvestIRR="nan"
+        else:
+            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
         Result_spider["Wacc"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Wacc"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Wacc"]["Sensitivity analysis MIRR"].append(mirr)
@@ -100,6 +126,8 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Wacc"]["Sensitivity analysis LCOE"].append(lcoe)
         Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Wacc"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
+        Result_spider["Wacc"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
     if Irrbolean==True:
         Result_spider["IRRflag"]="True"

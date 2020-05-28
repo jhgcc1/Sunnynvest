@@ -1346,9 +1346,12 @@
         $("input[name='CompensateOrSell']").change(function(e) {
             console.log($(this)[0].value);
             if ($(this)[0].value === "Sell") {
+                $('#person_or_business_or_sellenergy').val("Business").change();
                 $("#comp").slideUp();
                 $("#sell").slideDown();
             } else {
+                $('#person_or_business_or_sellenergy').val("Please Select").change();
+                $('#person_or_business_or_sellenergy[value="Please Select"]').attr('selected', 'selected');
                 console.log("in");
                 $("#comp").slideDown();
                 $("#sell").slideUp();
