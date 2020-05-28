@@ -125,7 +125,7 @@ def input(request):
 	args=mandaremail(request,args)
 	if request.POST.get('calcular'):
 		sellOrComp = request.POST.get('CompensateOrSell')
-		if sollOrComp != "Sell":
+		if sellOrComp != "Sell":
 			npanel=0
 		else:
 			npanel=int(request.POST.get("npanel"))
