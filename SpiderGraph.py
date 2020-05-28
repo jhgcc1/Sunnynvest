@@ -24,8 +24,8 @@ def spiderS(obj):
         if Irrbolean:
             fvReinvestIRR="nan"
         else:
-            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
-        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            fvReinvestIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
         Result_spider["Energy production"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Energy production"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Energy production"]["Sensitivity analysis MIRR"].append(mirr)
@@ -53,8 +53,8 @@ def spiderS(obj):
         if Irrbolean:
             fvReinvestIRR="nan"
         else:
-            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
-        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            fvReinvestIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
         Result_spider["Maintenance"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Maintenance"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Maintenance"]["Sensitivity analysis MIRR"].append(mirr)
@@ -88,8 +88,8 @@ def spiderS(obj):
         if Irrbolean:
             fvReinvestIRR="nan"
         else:
-            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
-        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            fvReinvestIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
         Result_spider["System price"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["System price"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["System price"]["Sensitivity analysis MIRR"].append(mirr)
@@ -117,8 +117,8 @@ def spiderS(obj):
         if Irrbolean:
             fvReinvestIRR="nan"
         else:
-            fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
-        fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+            fvReinvestIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
+        fvReinvestMIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
         Result_spider["Wacc"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Wacc"]["Sensitivity analysis NPV"].append(npv)
         Result_spider["Wacc"]["Sensitivity analysis MIRR"].append(mirr)
