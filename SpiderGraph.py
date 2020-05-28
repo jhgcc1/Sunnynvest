@@ -21,7 +21,7 @@ def spiderS(obj):
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
-        if boleanIRR:
+        if Irrbolean:
             fvReinvestIRR="nan"
         else:
             fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
@@ -50,7 +50,7 @@ def spiderS(obj):
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
-        if boleanIRR:
+        if Irrbolean:
             fvReinvestIRR="nan"
         else:
             fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
@@ -85,7 +85,7 @@ def spiderS(obj):
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
-        if boleanIRR:
+        if Irrbolean:
             fvReinvestIRR="nan"
         else:
             fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
@@ -114,7 +114,7 @@ def spiderS(obj):
         npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,obj["plifespan"],array_cashflow_negative,array_KWhenergy_per_year)
         if irr=="nan":
             Irrbolean=True
-        if boleanIRR:
+        if Irrbolean:
             fvReinvestIRR="nan"
         else:
             fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
