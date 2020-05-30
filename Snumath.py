@@ -248,8 +248,8 @@ def Static(invest_painels,priceinverters,pricestringbox,priceproject,pricewiring
     if numberofyears_topay>plifespan:
         gap=numberofyears_topay-plifespan
         for x in range(0,gap):
-            array_total_cashflow_inflation.append(0)
-            array_total_cashflow_noinflation.append(0)
+            np.append(array_total_cashflow_inflation,0)
+            np.append(array_total_cashflow_noinflation,0)
     else:
         gap=0
     array_annuity_inflation= np.array([-np.pmt(result_wacc,numberofyears_topay,array_total_cashflow_inflation[0]+entry) if x != 0 and x <= numberofyears_topay  else 0 for x in range(0,plifespan+1+gap)])
