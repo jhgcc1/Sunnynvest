@@ -24,7 +24,7 @@ def spiderS(obj):
         if Irrbolean:
             fvReinvestIRR="nan"
         else:
-            fvReinvestIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
+            fvReinvestIRR=np.fv(irr, obj["plifespan"], 0,-total_initial_investment[0])
         fvReinvestMIRR=np.fv(mirr, obj["plifespan"], 0,-total_initial_investment[0])
         Result_spider["Energy production"]["Sensitivity analysis IRR"].append(irr)
         Result_spider["Energy production"]["Sensitivity analysis NPV"].append(npv)

@@ -59,7 +59,7 @@ def simMC(objIpunt):
             if boleanIRR:
                 fvReinvestIRR="nan"
             else:
-                fvReinvestIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
+                fvReinvestIRR=np.fv(irr, plifespanS, 0,-total_initial_investment[0])
             fvReinvestMIRR=np.fv(mirr, plifespanS, 0,-total_initial_investment[0])
             temporary_list_outputs=[priceperKWp,spayback,total_initial_investment[0],irr,npv,mirr,vul,cost_per_kwh,lcoe,pb,fvReinvestIRR,fvReinvestMIRR]
             if SimulationYearString not in simMC_result:
