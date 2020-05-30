@@ -50,7 +50,7 @@ def simMC(objIpunt):
             total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,objIpunt["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,objIpunt["profittax"],array_maintenance,plifespanS,objIpunt["sellOrComp"])
             array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(objIpunt["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
             mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccpS,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanS,array_cashflow_negative,array_KWhenergy_per_year)
-            if irr=="nan":
+            if irr=="nan" or irrNinf=="nan":
                 print(irr)
                 print(array_total_cashflow_inflation)
                 boleanIRR=True
