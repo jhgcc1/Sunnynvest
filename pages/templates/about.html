@@ -100,13 +100,13 @@
 
         stringSensitivity = "<br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><h2 class='wow bounceInUp'>Sensitivity analysis created by sunnynvest:</h2><br><div style='display:flex;justify-content:space-between;align-items:center'><ul style='width:35%' class='list-group'>";
         table2.forEach((item, index) => {
-            if (index <= 4) {
+            if (index <= table2.length / 2) {
                 stringSensitivity = stringSensitivity + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
             }
         })
         stringSensitivity = stringSensitivity + '</ul><div><i class="fa fa-angle-double-right wow bounceInUp" style="font-size:36px"></i><p>More...</p></div><ul style="width:35%"" class="list-group">';
         table2.forEach((item, index) => {
-            if (index >= 3) {
+            if (index > table2.length / 2) {
                 stringSensitivity = stringSensitivity + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
             }
         })
@@ -121,13 +121,13 @@
 
         staticAbout = "<br><hr style='height:1px;border:none;color:#333;background-color:#333;' /><br><h2 class='wow bounceInUp'>WoW! thats it? NO!<br>sunnynvest also makes the following deterministic analysis:</h2><br><div style='display:flex;justify-content:space-between;align-items:center'><ul style='width:35%' class='list-group'>";
         table3.forEach((item, index) => {
-            if (index <= 9) {
+            if (index <= table3.length / 2) {
                 staticAbout = staticAbout + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
             }
         })
         staticAbout = staticAbout + '</ul><div><i class="fa fa-angle-double-right wow bounceInUp" style="font-size:36px"></i><p>And more...</p></div><ul style="width:35%"" class="list-group">';
         table3.forEach((item, index) => {
-            if (index >= 10) {
+            if (index > table3.length / 2) {
                 staticAbout = staticAbout + '<li class="list-group-item wow bounceInUp">' + item + '</li>';
             }
         })

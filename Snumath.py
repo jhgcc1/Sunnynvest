@@ -200,9 +200,11 @@ def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflatio
     npv=np.npv(result_wacc,array_total_cashflow_inflation)
     #irr
     irr=np.irr(array_total_cashflow_inflation)##
+    irrNinf=np.irr(array_total_cashflow_noinflation)##
     #irr="nan"
     #mirr
     mirr=np.mirr(array_total_cashflow_inflation,result_wacc,ccp)
+    mirrNinf=np.mirr(array_total_cashflow_noinflation,result_wacc,ccp)
     spayback=-array_total_cashflow_noinflation[0]/array_total_cashflow_noinflation[1]
     #VUL
     pmt=np.pmt(result_wacc_no_inflation,plifespan,npv)
@@ -211,7 +213,7 @@ def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflatio
     cost_per_kwh=np.npv(result_wacc_no_inflation,array_cashflow_negative)/np.sum(array_KWhenergy_per_year)
     #lCOE
     lcoe=np.npv(result_wacc_no_inflation,array_cashflow_negative)/np.npv(result_wacc_no_inflation,array_KWhenergy_per_year)
-    return npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe
+    return mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe
 
 def FinancialSimulation(result_wacc_no_inflation,plifespan,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation):
     array_discounted_payback=np.array([np.npv(result_wacc,array_total_cashflow_inflation[0:x]) for x in range(1,plifespan+2)])

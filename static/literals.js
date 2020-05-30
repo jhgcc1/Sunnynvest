@@ -48,6 +48,8 @@ var tabl = {
     linha17: ["MIRR", "Output", "X", "X", "X"],
     linha18: ["Future value (IRR rate)", "Output", "X", "X", "X"],
     linha19: ["Future value (MIRR rate)", "Output", "X", "X", "X"],
+    linha20: ["Future value (IRR Non-inflated rate)", "Output", "X", "X", "X"],
+    linha21: ["Future value (MIRR Non-inflated rate)", "Output", "X", "X", "X"],
 }
 console.log(tabl, "table1");
 var table2 = ["Sensitivity analysis IRR",
@@ -58,7 +60,9 @@ var table2 = ["Sensitivity analysis IRR",
     "Sensitivity analysis LCOE",
     "Sensitivity analysis Cost/KWh",
     "Sensitivity analysis Future value (IRR rate)",
-    "Sensitivity analysis Future value (MIRR rate)"
+    "Sensitivity analysis Future value (MIRR rate)",
+    "Sensitivity analysis Future value (IRR Non-inflated rate)",
+    "Sensitivity analysis Future value (MIRR Non-inflated rate)",
 ]
 
 var table3 = [
