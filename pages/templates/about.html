@@ -6,6 +6,70 @@
 <script src={% static 'literals.js' %}></script>
 <script>
     $(document).ready(function() {
+        function PreLoadImage(srcURL, callBack, i, thePic) {
+            this.thePic = {...thePic
+            };
+            console.log(thePic[i], "this.thePic")
+            thePic[i].onload = function() {
+                callBack();
+                thePic[i].onload = function() {};
+            }
+
+            thePic[i].onerror = function() {
+
+            }
+            console.log(srcURL, "srcURL");
+            thePic[i].src = srcURL;
+            thePic[i].id = "img";
+            thePic[i].className = "imgG wow fadeIn type" + i;
+        }
+        let cb = function(i) {
+            console.log(thePic[i], "this");
+            $(".img" + i).wrap(thePic[i]);
+            if (i === "12") {
+                $("#img").hover(
+                    function() {
+                        $(this).addClass("hover");
+                    },
+                    function() {
+                        $(this).removeClass("hover");
+                    })
+                if ($(window).width() > 700) {
+                    $(".imgG").hover(
+                        function() {
+                            let type = $(this).attr('class').split(" ")[3];
+                            $("#help").text(help[type]);
+                            $("#helpTitle").text(helpT[type]);
+                            $("#expl").css("opacity", "1");
+                        },
+                        function() {
+                            $("#expl").css("opacity", "0");
+                        }
+                    )
+
+                } else {
+                    $("#spanlateral2").text("Click on the pictures to see what sunnynvest can do for you")
+                    $(".imgG").click(
+                        function() {
+                            let type = $(this).attr('class').split(" ")[3];
+                            $("#helpCell").css("display", "initial")
+                            setTimeout(function() {
+                                $("#helpTitleCell").text(helpT[type]);
+                                $("#helpCellContent").text(help[type]);
+                                $("#helpCell").css("opacity", "1");
+                            }, 100);
+
+                        }
+                    )
+                }
+            }
+        }
+        let thePic = {};
+        for (let i = 1; i <= 12; i++) {
+            thePic[i.toString()] = new Image();
+            var url_mask = "{% static 'graph12345.png' %}".replace(/12345/, i.toString());
+            PreLoadImage(url_mask, cb.bind(PreLoadImage, i.toString()), i.toString(), thePic);
+        }
         document.body.style.zoom = 1.0;
         $(".close").click(function() {
 
@@ -15,41 +79,7 @@
             }, 1500)
         });
 
-        $("#img").hover(
-            function() {
-                $(this).addClass("hover");
-            },
-            function() {
-                $(this).removeClass("hover");
-            })
-        if ($(window).width() > 700) {
-            $(".imgG").hover(
-                function() {
-                    let type = $(this).attr('class').split(" ")[3];
-                    $("#help").text(help[type]);
-                    $("#helpTitle").text(helpT[type]);
-                    $("#expl").css("opacity", "1");
-                },
-                function() {
-                    $("#expl").css("opacity", "0");
-                }
-            )
 
-        } else {
-            $("#spanlateral").text("Click on the pictures to see what sunnynvest can do for you")
-            $(".imgG").click(
-                function() {
-                    let type = $(this).attr('class').split(" ")[3];
-                    $("#helpCell").css("display", "initial")
-                    setTimeout(function() {
-                        $("#helpTitleCell").text(helpT[type]);
-                        $("#helpCellContent").text(help[type]);
-                        $("#helpCell").css("opacity", "1");
-                    }, 100);
-
-                }
-            )
-        }
         let stringTable1 = ""
         stringTable1 = '<br id="brs"><br id="brs"><div style="width:95% !important"class="table-responsive"id="mcTable"><table class="table"><thead class="thead-dark"><tr><th scope="col"></th><th scope="col">' + tabl["linha1"][0] + '</th><th scope="col">' + tabl["linha1"][1] + '</th><th scope="col">' + tabl["linha1"][2] + '</th><th scope="col">' + tabl["linha1"][3] + '</th><th scope="col">' + tabl["linha1"][4] + '</th></tr></thead><tbody>';
         Object.keys(tabl).forEach((line, index) => {
@@ -110,12 +140,7 @@
             mobile: true, // default
             live: true // default
         })
-
-        setTimeout(function() {
-            $("#bigContainer").css("display", "flex");
-            $(".load").css("display", "none");
-            wow.init();
-        }, 1000);
+        wow.init();
     })
 </script>
 
@@ -130,7 +155,7 @@
     <h3 style="text-align:center;color:white;top:10%;margin-left:2%;margin-right:2%" id="helpTitleCell"></h3>
     <p style="color:white;top:20%;margin-left:10%;margin-right:10%" id="helpCellContent"></p>
 </div>
-<div class="load" style="display:flex;justify-content:center;align-items:center;background-color:#333;z-index:99999999;overflow:hidden;position:absolute;left:0;top:0;bottom:0;right:0">
+<div class="load" style="display:none;justify-content:center;align-items:center;background-color:#333;z-index:99999999;overflow:hidden;position:absolute;left:0;top:0;bottom:0;right:0">
     <div style="display:initial" class="lds-roller">
         <div></div>
         <div></div>
@@ -142,7 +167,7 @@
         <div></div>
     </div>
 </div>
-<div id="bigContainer" style="display:none;justify-content:space-between">
+<div id="bigContainer" style="display:flex;justify-content:space-between">
 
     <div id="jhjh" style="margin-top:5%;width:60%;margin-left:5%">
         <div style="display:flex">
@@ -172,23 +197,25 @@
             discounted payback and Pareto chart are considered a must regarding to any kind of investment analysis.</p>
         <p class="wow bounceInUp">In addition to the traditional financial tools, statistics tools such as time series regressions, probability theory and Monte Carlo simulation together with sensitive analysis can be used to predict returns and measure risks. Sunnynvest makes
             use of all this mentioned tools and provides a full report generated by a <b>Artificial Inteligence engine.</b></p><br>
-        <h5 id="spanlateral" class="wow bounceInUp"><b>Pass your mouse over the pictures to see what sunnynvest can do for you</b></h5>
+        <h5 id="spanlateral" style="margin-left:5%" class="wow animated flash infinite slower"><b id="spanlateral2">Pass your mouse over the pictures to see what sunnynvest can do for you</b></h5>
         <br>
         <br>
         <div id="containerIMG" style="display:flex;flex-wrap:wrap;">
 
-            <div id="img" class="imgG wow bounceInUp type1" style="background-image:url(/static/graph1.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp type2" style="background-image:url(/static/graph2.png);background-size:cover;"></div>
-            <div id="img" class="imgG wow bounceInUp type3" style="background-image:url(/static/graph3.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp type4" style="background-image:url(/static/graph4.png);background-size:cover;"></div>
-            <div id="img" class="imgG wow bounceInUp type5" style="background-image:url(/static/graph5.png);background-size:cover; "></div>
-            <div id="img" class="imgG wow bounceInUp type6" style="background-image:url(/static/graph6.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG type7" style="background-image:url(/static/graph7.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG type8" style="background-image:url(/static/graph8.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG type9" style="background-image:url(/static/graph9.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG type10" style="background-image:url(/static/graph10.png);background-size:cover;"></div>
-            <div id="img" class="wow bounceInUp imgG type11" style="background-image:url(/static/graph11.png);background-size:cover; "></div>
-            <div id="img" class="wow bounceInUp imgG type12" style="background-image:url(/static/graph12.png);background-size:cover;"></div>
+
+            <div class="img1 lds-dual-ring"></div>
+            <div class="img2 lds-dual-ring"></div>
+            <div class="img3 lds-dual-ring"></div>
+            <div class="img4 lds-dual-ring"></div>
+            <div class="img5 lds-dual-ring"></div>
+            <div class="img6 lds-dual-ring"></div>
+            <div class="img7 lds-dual-ring"></div>
+            <div class="img8 lds-dual-ring"></div>
+            <div class="img9 lds-dual-ring"></div>
+            <div class="img10 lds-dual-ring"></div>
+            <div class="img11 lds-dual-ring"></div>
+            <div class="img12 lds-dual-ring"></div>
+
         </div>
         <hr style="height:1px;border:none;color:#333;background-color:#333;" />
         <br>
@@ -323,7 +350,37 @@
 </div>
 
 <style>
+    .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid black;
+        border-color: black transparent black transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+    
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    
     #img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 150px;
         height: 115px;
         margin-right: 2%;

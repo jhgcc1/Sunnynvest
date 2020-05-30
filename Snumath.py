@@ -245,11 +245,18 @@ def Static(invest_painels,priceinverters,pricestringbox,priceproject,pricewiring
     #discounted payback
     array_discounted_payback=np.array([np.npv(result_wacc,array_total_cashflow_inflation[0:x]) for x in range(1,plifespan+2)])
     #annuity cashflow inflationated 
-    array_annuity_inflation= np.array([-np.pmt(result_wacc,numberofyears_topay,array_total_cashflow_inflation[0]+entry) if x != 0 and x <= numberofyears_topay  else 0 for x in range(0,plifespan+1)])
+    if numberofyears_topay>plifespan:
+        gap=numberofyears_topay-plifespan
+        for x in range(0,gap):
+            array_total_cashflow_inflation.append(0)
+            array_total_cashflow_noinflation.append(0)
+    else:
+        gap=0
+    array_annuity_inflation= np.array([-np.pmt(result_wacc,numberofyears_topay,array_total_cashflow_inflation[0]+entry) if x != 0 and x <= numberofyears_topay  else 0 for x in range(0,plifespan+1+gap)])
     array_annuity_inflation_cashflow=array_annuity_inflation+array_total_cashflow_inflation
     array_annuity_inflation_cashflow[0]=-entry
     #annuity cashflow non inflationated
-    array_annuity_noinflation= np.array([-np.pmt(result_wacc_no_inflation,numberofyears_topay,array_total_cashflow_noinflation[0]+entry) if x != 0 and x <= numberofyears_topay  else 0 for x in range(0,plifespan+1)])
+    array_annuity_noinflation= np.array([-np.pmt(result_wacc_no_inflation,numberofyears_topay,array_total_cashflow_noinflation[0]+entry) if x != 0 and x <= numberofyears_topay  else 0 for x in range(0,plifespan+1+gap)])
     array_annuity_noinflation_cashflow=array_annuity_noinflation+array_total_cashflow_noinflation
     array_annuity_noinflation_cashflow[0]=-entry
     #annuity payment inflationated
