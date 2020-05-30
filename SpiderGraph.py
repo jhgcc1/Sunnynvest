@@ -72,8 +72,8 @@ def spiderS(obj):
         Result_spider["Maintenance"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["Maintenance"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
+        Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
+        Result_spider["Maintenance"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
         #investment
         ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         invest_painelsS=invest_painels+(invest_painels*percentage)
@@ -112,8 +112,8 @@ def spiderS(obj):
         Result_spider["System price"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["System price"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["System price"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
+        Result_spider["System price"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
+        Result_spider["System price"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
         #wacc
         ndeplacas,invest_painels,maxeconomy,wplantpower,kwplantpower,mwplantpower = Snumath.InitialCalculations(obj["energyconsume"],obj["economy"],obj["Irradiation"],obj["painelpower"],obj["pricepainel"],obj["sellOrComp"],obj["npanel"])
         result_wacc=Snumath.wacc(obj["person_or_business_or_sellenergy"],obj["ccp"],obj["cct"],obj["pccp"],obj["pcct"],obj["inflation"],obj["profittax"])
@@ -146,8 +146,8 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
         Result_spider["Wacc"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["Wacc"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
-        Result_spider["Energy production"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
+        Result_spider["Wacc"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
+        Result_spider["Wacc"]["Sensitivity analysis Future value (MIRR Non-inflated rate)"].append(fvReinvestMIRRNoinf)
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
     if Irrbolean==True:
         Result_spider["IRRflag"]="True"
