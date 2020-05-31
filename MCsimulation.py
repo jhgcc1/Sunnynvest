@@ -71,7 +71,7 @@ def simMC(objIpunt):
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"].append(temporary_list_outputs[index])
         for item in simMC_result[SimulationYearString]["outputs"]:
             if(item!="Discounted payback"):
-                if (("IRR" in item) and boleanIRR==False) or "IRR" not in item:
+                if (("IRR" in item and "MIRR" not in item) and boleanIRR==False) or "IRR" not in item:
                     simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                     simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                 else:
