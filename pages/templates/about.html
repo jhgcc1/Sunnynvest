@@ -26,42 +26,40 @@
         let cb = function(i) {
             console.log(thePic[i], "this");
             $(".img" + i).wrap(thePic[i]);
-            if (i === "12") {
-                $("#img").hover(
+            $("#img").hover(
+                function() {
+                    $(this).addClass("hover");
+                },
+                function() {
+                    $(this).removeClass("hover");
+                })
+            if ($(window).width() > 700) {
+                $(".imgG").hover(
                     function() {
-                        $(this).addClass("hover");
+                        let type = $(this).attr('class').split(" ")[3];
+                        $("#help").text(help[type]);
+                        $("#helpTitle").text(helpT[type]);
+                        $("#expl").css("opacity", "1");
                     },
                     function() {
-                        $(this).removeClass("hover");
-                    })
-                if ($(window).width() > 700) {
-                    $(".imgG").hover(
-                        function() {
-                            let type = $(this).attr('class').split(" ")[3];
-                            $("#help").text(help[type]);
-                            $("#helpTitle").text(helpT[type]);
-                            $("#expl").css("opacity", "1");
-                        },
-                        function() {
-                            $("#expl").css("opacity", "0");
-                        }
-                    )
+                        $("#expl").css("opacity", "0");
+                    }
+                )
 
-                } else {
-                    $("#spanlateral2").text("Click on the pictures to see what sunnynvest can do for you")
-                    $(".imgG").click(
-                        function() {
-                            let type = $(this).attr('class').split(" ")[3];
-                            $("#helpCell").css("display", "initial")
-                            setTimeout(function() {
-                                $("#helpTitleCell").text(helpT[type]);
-                                $("#helpCellContent").text(help[type]);
-                                $("#helpCell").css("opacity", "1");
-                            }, 100);
+            } else {
+                $("#spanlateral2").text("Click on the pictures to see what sunnynvest can do for you")
+                $(".imgG").click(
+                    function() {
+                        let type = $(this).attr('class').split(" ")[3];
+                        $("#helpCell").css("display", "initial")
+                        setTimeout(function() {
+                            $("#helpTitleCell").text(helpT[type]);
+                            $("#helpCellContent").text(help[type]);
+                            $("#helpCell").css("opacity", "1");
+                        }, 100);
 
-                        }
-                    )
-                }
+                    }
+                )
             }
         }
         let thePic = {};

@@ -759,6 +759,7 @@
                     AllGraphs.push["Mtirr", "<br><div style='padding-top:20%;margin-bottom:11%;display:flex;align-items:center;justify-content:center;'><div><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px;margin-left:8%;'></img></div></div><br>"]
                 }
                 for (let i = 0; i <= NdeGraphs - 1; i += 2) {
+
                     let string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + AllGraphs[i][0] + "></div></div>";
                     $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + AllGraphs[i + 1][0] + "></div></div></div>");
                     Plotly.newPlot(AllGraphs[i][0], AllGraphs[i][1], AllGraphs[i][2], AllGraphs[i][3]);
