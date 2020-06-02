@@ -760,8 +760,9 @@
                 }
                 for (let i = 0; i <= NdeGraphs - 1; i += 2) {
 
-                    let string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + AllGraphs[i][0] + "></div></div>";
-                    $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + AllGraphs[i + 1][0] + "></div></div></div>");
+                    let string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + AllGraphs[i][0] + "></div></div>";
+                    $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + AllGraphs[i + 1][0] + "></div></div></div>");
+                    console.log()
                     if (AllGraphs[i][0] !== "Mtirr") {
                         Plotly.newPlot(AllGraphs[i][0], AllGraphs[i][1], AllGraphs[i][2], AllGraphs[i][3]);
                     } else {
