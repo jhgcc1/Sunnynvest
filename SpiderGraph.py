@@ -2,7 +2,7 @@ import Snumath
 import numpy as np
 def spiderS(obj):
     Irrbolean=False
-    Result_spider={"Energy production":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Wacc":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Maintenance":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"System price":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost/KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]}}
+    Result_spider={"Energy production":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost per KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Wacc":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost per KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"Maintenance":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost per KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]},"System price":{"Sensitivity analysis Future value (MIRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR Non-inflated rate)":[],"Sensitivity analysis Future value (IRR rate)":[],"Sensitivity analysis Future value (MIRR rate)":[],"Sensitivity analysis LCOE":[],"Sensitivity analysis Cost per KWh":[],"Sensitivity analysis Equivalent annual annuity":[],"Sensitivity analysis Simple Payback":[],"Sensitivity analysis IRR":[],"Sensitivity analysis NPV":[],"Sensitivity analysis MIRR":[]}}
     rangeSpider=[x for x in range(-50,50,3)]
     label_year,label_year_simulation,year = Snumath.lebals_years(obj["plifespan"],obj["sim_year"])
     for percent in rangeSpider:
@@ -35,7 +35,7 @@ def spiderS(obj):
         Result_spider["Energy production"]["Sensitivity analysis Simple Payback"].append(spayback)
         Result_spider["Energy production"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Energy production"]["Sensitivity analysis LCOE"].append(lcoe)
-        Result_spider["Energy production"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Energy production"]["Sensitivity analysis Cost per KWh"].append(cost_per_kwh)
         Result_spider["Energy production"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["Energy production"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         Result_spider["Energy production"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
@@ -69,7 +69,7 @@ def spiderS(obj):
         Result_spider["Maintenance"]["Sensitivity analysis Simple Payback"].append(spayback)
         Result_spider["Maintenance"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Maintenance"]["Sensitivity analysis LCOE"].append(lcoe)
-        Result_spider["Maintenance"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Maintenance"]["Sensitivity analysis Cost per KWh"].append(cost_per_kwh)
         Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["Maintenance"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
@@ -109,7 +109,7 @@ def spiderS(obj):
         Result_spider["System price"]["Sensitivity analysis Simple Payback"].append(spayback)
         Result_spider["System price"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["System price"]["Sensitivity analysis LCOE"].append(lcoe)
-        Result_spider["System price"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["System price"]["Sensitivity analysis Cost per KWh"].append(cost_per_kwh)
         Result_spider["System price"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["System price"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         Result_spider["System price"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
@@ -143,7 +143,7 @@ def spiderS(obj):
         Result_spider["Wacc"]["Sensitivity analysis Simple Payback"].append(spayback)
         Result_spider["Wacc"]["Sensitivity analysis Equivalent annual annuity"].append(vul)
         Result_spider["Wacc"]["Sensitivity analysis LCOE"].append(lcoe)
-        Result_spider["Wacc"]["Sensitivity analysis Cost/KWh"].append(cost_per_kwh)
+        Result_spider["Wacc"]["Sensitivity analysis Cost per KWh"].append(cost_per_kwh)
         Result_spider["Wacc"]["Sensitivity analysis Future value (IRR rate)"].append(fvReinvestIRR)
         Result_spider["Wacc"]["Sensitivity analysis Future value (MIRR rate)"].append(fvReinvestMIRR)
         Result_spider["Wacc"]["Sensitivity analysis Future value (IRR Non-inflated rate)"].append(fvReinvestIRRNoinf)
