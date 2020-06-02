@@ -762,8 +762,16 @@
 
                     let string = '<div class="row"><div class="col-md-6"><div class="wow slideInLeft" id=' + "graphStarts" + AllGraphs[i][0] + "></div></div>";
                     $("#start").after(string + '<div class="col-md-6"><div class="wow slideInRight" id=' + "graphStarts" + AllGraphs[i + 1][0] + "></div></div></div>");
-                    Plotly.newPlot(AllGraphs[i][0], AllGraphs[i][1], AllGraphs[i][2], AllGraphs[i][3]);
-                    Plotly.newPlot(AllGraphs[i + 1][0], AllGraphs[i + 1][1], AllGraphs[i + 1][2], AllGraphs[i + 1][3]);
+                    if (AllGraphs[i][0] === "Mtirr") {
+                        Plotly.newPlot(AllGraphs[i][0], AllGraphs[i][1], AllGraphs[i][2], AllGraphs[i][3]);
+                    } else {
+                        $("#" + AllGraphs[i][0]).append(AllGraphs[i][1])
+                    }
+                    if (AllGraphs[i + 1][0] === "Mtirr") {
+                        Plotly.newPlot(AllGraphs[i + 1][0], AllGraphs[i + 1][1], AllGraphs[i + 1][2], AllGraphs[i + 1][3]);
+                    } else {
+                        $("#" + AllGraphs[i + 1][0]).append(AllGraphs[i + 1][1])
+                    }
                 }
                 if (sellOrComp === "Compensate") {
                     let npanels = staticMaths_resultJ["ndeplacas"];
