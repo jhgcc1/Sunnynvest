@@ -151,6 +151,22 @@ def spiderS(obj):
         Result_spider["rangeSpider"]=[x/100 for x in rangeSpider]
     if Irrbolean==True:
         Result_spider["IRRflag"]="True"
+
+        del Result_spider["System price"]["Sensitivity analysis Future value (IRR rate)"]
+        del Result_spider["Wacc"]["Sensitivity analysis Future value (IRR rate)"]
+        del Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR rate)"].
+        del Result_spider["Energy production"]["Sensitivity analysis Future value (IRR rate)"]
+
+        del Result_spider["System price"]["Sensitivity analysis Future value (IRR Non-inflated rate)"]
+        del Result_spider["Maintenance"]["Sensitivity analysis Future value (IRR Non-inflated rate)"]
+        del Result_spider["Energy production"]["Sensitivity analysis Future value (IRR Non-inflated rate)"]
+        del Result_spider["Wacc"]["Sensitivity analysis Future value (IRR Non-inflated rate)"]
+
+        del Result_spider["System price"]["Sensitivity analysis IRR"]
+        del Result_spider["Maintenance"]["Sensitivity analysis IRR"]
+        del Result_spider["Energy production"]["Sensitivity analysis IRR"]
+        del Result_spider["Wacc"]["Sensitivity analysis IRR"]
+        
     else:
         Result_spider["IRRflag"]="False"
     return Result_spider
