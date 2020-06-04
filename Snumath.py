@@ -213,6 +213,8 @@ def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflatio
     cost_per_kwh=np.npv(result_wacc_no_inflation,array_cashflow_negative)/np.sum(array_KWhenergy_per_year)
     #lCOE
     lcoe=np.npv(result_wacc_no_inflation,array_cashflow_negative)/np.npv(result_wacc_no_inflation,array_KWhenergy_per_year)
+
+
     return mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe
 
 def FinancialSimulation(result_wacc_no_inflation,plifespan,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation):
