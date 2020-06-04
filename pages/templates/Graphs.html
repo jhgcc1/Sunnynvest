@@ -672,7 +672,7 @@
                 Object.keys(spiderS_resultJ).forEach(function(graph) {
                     if (graph !== "rangeSpider" && graph !== "IRRflag") {
                         Object.keys(spiderS_resultJ[graph]).forEach(function(kpi) {
-                            if ((kpi == "Sensitivity analysis IRR" || kpi == "Sensitivity analysis Future value (IRR rate)" || kpi == "Sensitivity analysis Future value (IRR Non-inflated rate)") && IRRflag === "True") {} else {
+                            if (kpi.includes("IRR") && !kpi.includes("MIRR") && IRRflag === "True") {} else {
                                 if (!graphsObj2[kpi]) {
                                     graphsObj2[kpi] = {};
                                 }
