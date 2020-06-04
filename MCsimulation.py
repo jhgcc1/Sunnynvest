@@ -121,10 +121,6 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["inputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["inputs"][item]["rawData"]=auxList
-    if boleanIRR==True:
-        simMC_result["IRRflag"]="True"
-    else:
-        simMC_result["IRRflag"]="False"
     return simMC_result
         
 

@@ -434,6 +434,7 @@
                     }
                 });
                 var yearAux = [];
+                let IRRflag2 = "False";
                 Object.keys(simMC_resultJ).forEach(function(year) {
                     if (year !== "IRRflag") {
                         var thisyear = new Date().getFullYear() + parseInt(year);
@@ -441,6 +442,7 @@
                         Object.keys(simMC_resultJ[year]).forEach(function(inout) {
                             Object.keys(simMC_resultJ[year][inout]).forEach(function(kpi) {
                                 if (simMC_resultJ[year][inout][kpi]["mean"] === "IRR with multiple roots") {
+                                    IRRflag2 = "True";
 
                                 } else {
                                     if (kpi !== "pricepanel" && kpi !== "priceinverters") {
@@ -665,7 +667,6 @@
                     AllGraphs.push(['graphStarts' + kpi1, allSimGraph[kpi11][0], allSimGraph[kpi11][1], config]);
                 });
                 let IRRflag = spiderS_resultJ["IRRflag"];
-                let IRRflag2 = simMC_resultJ["IRRflag"];
                 if (IRRflag === "True" || IRRflag2 === "True") {
                     AllGraphs.push(["Mtirr1", "<br><div style='padding-top:20%;margin-bottom:11%;display:flex;align-items:center;justify-content:center;'><div><p>Multiple IRRs found use, MIRR instead.<br>Sensitivity analysis histograms and boxplots not available</p><img id='logo2' src={% static 'lOGO.png' %} style='width:330px;height:70px;margin-left:8%;'></img></div></div><br>"])
                 }
