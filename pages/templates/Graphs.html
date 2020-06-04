@@ -435,7 +435,7 @@
                 });
                 var yearAux = [];
                 Object.keys(simMC_resultJ).forEach(function(year) {
-                    if (year !== ["IRRflag"]) {
+                    if (year !== "IRRflag") {
                         var thisyear = new Date().getFullYear() + parseInt(year);
                         yearAux.push(thisyear);
                         Object.keys(simMC_resultJ[year]).forEach(function(inout) {

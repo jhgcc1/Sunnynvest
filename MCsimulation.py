@@ -102,12 +102,12 @@ def simMC(objIpunt):
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"].append(temporary_list_outputs[index])
         for item in simMC_result[SimulationYearString]["outputs"]:
             if(item!="Discounted payback"):
-                if (("IRR" in item and "MIRR" not in item) and boleanIRR==False) or "IRR" not in item:
-                    simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
-                    simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
-                else:
+                if (("IRR" in item and "MIRR" not in item) and boleanIRR==True):
                     simMC_result[SimulationYearString]["outputs"][item]["mean"]="IRR with multiple roots"
                     simMC_result[SimulationYearString]["outputs"][item]["std"]="IRR with multiple roots"
+                else:
+                    simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
+                    simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
             else:
                 print(item)
                 auxList=simMC_result[SimulationYearString]["outputs"][item]["rawData"]
@@ -121,11 +121,11 @@ def simMC(objIpunt):
                 auxList=simMC_result[SimulationYearString]["inputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["inputs"][item]["rawData"]=auxList
-    #if Irrbolean==True:
-        #simMC_result["IRRflag"]="True"
+    if Irrbolean==True:
+        simMC_result["IRRflag"]="True"
         
-    #else:
-        #simMC_result["IRRflag"]="False"
+    else:
+        simMC_result["IRRflag"]="False"
     return simMC_result
         
 
