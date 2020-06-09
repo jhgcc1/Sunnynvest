@@ -49,11 +49,11 @@ def simMC(objIpunt):
             array_maintenance=Snumath.maintenanceF(mantenanceS,ndeplacas,plifespanS)
             total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,objIpunt["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,objIpunt["profittax"],array_maintenance,plifespanS,objIpunt["sellOrComp"])
             array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(objIpunt["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
-            mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccpS,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanS,array_cashflow_negative,array_KWhenergy_per_year)
+            mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccpS,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanS,array_cashflow_negative,array_KWhenergy_per_year,cctS)
             
-            ccpSInf=ccpS+objIpunt["inflation"]+(ccpS*objIpunt["inflation"])
+            
             fvCCPS=np.fv(ccpS,plifespanS, 0,-total_initial_investment[0])
-            fvCCPSinf=np.fv(ccpSInf,plifespanS, 0,-total_initial_investment[0])
+            fvCCPSinf=np.fv(ccpS,plifespanS, 0,-total_initial_investment[0])
             
             if irr=="nan" or irrNinf=="nan":
                 print(irr)

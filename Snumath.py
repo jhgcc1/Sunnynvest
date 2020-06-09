@@ -195,16 +195,16 @@ def cash_flow_no_inflation_and_inflation(inflation,total_initial_investment,arra
     array_total_cashflow_inflation=np.array(array_total_cashflow_inflation)
     return array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative
 
-def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccp,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespan,array_cashflow_negative,array_KWhenergy_per_year):
+def FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,ccp,array_total_cashflow_noinflation,result_wacc_no_inflation,plifespan,array_cashflow_negative,array_KWhenergy_per_year,cct):
     #Npv
     npv=np.npv(result_wacc,array_total_cashflow_inflation)
     #irr
     irr=np.irr(array_total_cashflow_inflation)
     irrNinf=np.irr(array_total_cashflow_noinflation)
-    irr="nan"
+    #irr="nan"
     #mirr
-    mirr=np.mirr(array_total_cashflow_inflation,result_wacc,ccp)
-    mirrNinf=np.mirr(array_total_cashflow_noinflation,result_wacc,ccp)
+    mirr=np.mirr(array_total_cashflow_inflation,cct,ccp)
+    mirrNinf=np.mirr(array_total_cashflow_noinflation,cct,ccp)
     spayback=-array_total_cashflow_noinflation[0]/array_total_cashflow_noinflation[1]
     #VUL
     pmt=np.pmt(result_wacc_no_inflation,plifespan,npv)

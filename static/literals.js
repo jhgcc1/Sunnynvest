@@ -49,7 +49,13 @@ var tabl = {
     linha18: ["Future value (IRR rate)", "Output", "X", "X", "X"],
     linha19: ["Future value (MIRR rate)", "Output", "X", "X", "X"],
     linha20: ["Future value (IRR Non-inflated rate)", "Output", "X", "X", "X"],
+    linha21: ["Non-inflated IRR", "Output", "X", "X", "X"],
+    linha21: ["Non-inflated MIRR", "Output", "X", "X", "X"],
+    linha21: ["Future value IRR-Cost of equity (inflated)", "Output", "X", "X", "X"],
+    linha21: ["Future value IRR-Cost of equity (Non-inflated)", "Output", "X", "X", "X"],
+    linha21: ["Future value MIRR-Cost of equity (inflated)", "Output", "X", "X", "X"],
     linha21: ["Future value (MIRR Non-inflated rate)", "Output", "X", "X", "X"],
+    linha21: ["Future value MIRR-Cost of equity (Non-inflated)", "Output", "X", "X", "X"],
 }
 console.log(tabl, "table1");
 var table2 = ["Sensitivity analysis IRR",
@@ -63,6 +69,12 @@ var table2 = ["Sensitivity analysis IRR",
     "Sensitivity analysis Future value (MIRR rate)",
     "Sensitivity analysis Future value (IRR Non-inflated rate)",
     "Sensitivity analysis Future value (MIRR Non-inflated rate)",
+    "Sensitivity analysis Non-inflated IRR",
+    "Sensitivity analysis Non-inflated MIRR",
+    "Sensitivity analysis Future value IRR-Cost of equity (inflated)",
+    "Sensitivity analysis Future value IRR-Cost of equity (Non-inflated)",
+    "Sensitivity analysis Future value MIRR-Cost of equity (inflated)",
+    "Sensitivity analysis Future value MIRR-Cost of equity (Non-inflated)"
 ]
 
 var table3 = [
