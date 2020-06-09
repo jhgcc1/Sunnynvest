@@ -13,7 +13,7 @@ def staticMaths(objIpunt):
     array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(objIpunt["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
     abcList,array_co2_reduction,sum_array_KWhenergy_per_year,sum_array_gross_revenue,sum_array_gross_revenue_inf,spayback,array_discounted_payback,array_annuity_inflation_cashflow,array_annuity_noinflation_cashflow,annuity_payment_inflation,annuity_payment_noinflation=Snumath.Static(invest_painels,objIpunt["priceinverters"],objIpunt["pricestringbox"],objIpunt["priceproject"],objIpunt["pricewiring"],objIpunt["pricess"],objIpunt["pricelabor"],objIpunt["priceothers"],objIpunt["entry"],objIpunt["carbon_red"],array_KWhenergy_per_year,objIpunt["plifespan"],array_gross_revenue,objIpunt["inflation"],array_total_cashflow_noinflation,result_wacc,array_total_cashflow_inflation,objIpunt["yearsTopay"],result_wacc_no_inflation)
     if len(array_annuity_noinflation_cashflow)>len(label_year):
-        gap=array_annuity_noinflation_cashflow-label_year
+        gap=len(array_annuity_noinflation_cashflow)-len(label_year)
         for i in range(0,gap):
             label_year.append(label_year[-1]+1)
     resultStatic={"Pareto chart":abcList,
