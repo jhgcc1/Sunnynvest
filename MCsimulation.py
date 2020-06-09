@@ -9,8 +9,6 @@ def simMC(objIpunt):
     simMC_result={}
     #objIpunt["depreciation_percentage_painels"]=(100/objIpunt["depreciation_years_painels"])/100
     #objIpunt["depreciation_percentage_inverters"]=(100/objIpunt["depreciation_years_inverters"])/100
-    print("2")
-    print(objIpunt["sim_year"])
     for SimulationYear in range(0,objIpunt["sim_year"]):
         rd_distMaintenance=rnd(objIpunt["distMaintenance"])
         rd_distPricePanel=rnd(objIpunt["distPricePanel"])# cant be negative
@@ -56,8 +54,6 @@ def simMC(objIpunt):
             fvCCPSinf=np.fv(ccpS,plifespanS, 0,-total_initial_investment[0])
             
             if irr=="nan" or irrNinf=="nan":
-                print(irr)
-                print(array_total_cashflow_inflation)
                 boleanIRR=True
 
             pb=Snumath.FinancialSimulation(result_wacc_no_inflation,plifespanS,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -108,7 +104,6 @@ def simMC(objIpunt):
                     simMC_result[SimulationYearString]["outputs"][item]["mean"]=np.mean(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
                     simMC_result[SimulationYearString]["outputs"][item]["std"]=np.std(simMC_result[SimulationYearString]["outputs"][item]["rawData"])
             else:
-                print(item)
                 auxList=simMC_result[SimulationYearString]["outputs"][item]["rawData"]
                 auxList.sort()
                 simMC_result[SimulationYearString]["outputs"][item]["rawData"]=auxList

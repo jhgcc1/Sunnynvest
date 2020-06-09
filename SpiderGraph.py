@@ -125,8 +125,6 @@ def spiderS(obj):
         fvCCPSinf=fvCCPS
         
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,obj["plifespan"],npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -183,8 +181,6 @@ def spiderS(obj):
         fvCCPSinf=fvCCPS
         
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,obj["plifespan"],npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -241,8 +237,6 @@ def spiderS(obj):
         fvCCPSinf=fvCCPS
         
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,obj["plifespan"],npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -293,13 +287,11 @@ def spiderS(obj):
         
         total_fiscaleffets=Snumath.fiscal_effects(array_gross_revenue,obj["person_or_business_or_sellenergy"],array_depreciation_inverters,array_depreciation_painels,obj["profittax"],array_maintenance,plifespanSpider,obj["sellOrComp"])
         array_total_cashflow_noinflation,array_total_cashflow_inflation,array_cashflow_negative=Snumath.cash_flow_no_inflation_and_inflation(obj["inflation"],total_initial_investment,array_maintenance,array_investmentinvertes,array_gross_revenue,array_residual_value_inverters,total_fiscaleffets)
-        mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanSpider,array_cashflow_negative,array_KWhenergy_per_year)
+        mirrNinf,irrNinf,npv,irr,mirr,spayback,vul,cost_per_kwh,lcoe=Snumath.FinancialKPI_spider_and_simulation(result_wacc,array_total_cashflow_inflation,obj["ccp"],array_total_cashflow_noinflation,result_wacc_no_inflation,plifespanSpider,array_cashflow_negative,array_KWhenergy_per_year,obj["cct"])
         #ccpSInf=obj["ccp"]+obj["inflation"]+(obj["ccp"]*obj["inflation"])
         fvCCPS=np.fv(obj["ccp"],plifespanSpider, 0,-total_initial_investment[0])
         fvCCPSinf=fvCCPS        
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,plifespanSpider,npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -363,8 +355,6 @@ def spiderS(obj):
         fvCCPSinf=fvCCPS
         
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,obj["plifespan"],npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
@@ -424,8 +414,6 @@ def spiderS(obj):
         fvCCPSinf=fvCCPS
         
         if irr=="nan" or irrNinf=="nan":
-            print(irr)
-            print(array_total_cashflow_inflation)
             Irrbolean=True
 
         pb=Snumath.FinancialSimulation(result_wacc_no_inflation,obj["plifespan"],npv,array_cashflow_negative,array_KWhenergy_per_year,result_wacc,array_total_cashflow_inflation)
