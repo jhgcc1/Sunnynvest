@@ -80,7 +80,6 @@ def simMC(objIpunt):
             dfvMirrCcpInf=fvReinvestMIRR-fvCCPSinf
             dfvMirrCcpNoInf=fvReinvestMIRRNoinf-fvCCPS
 
-
             temporary_list_outputs=[priceperKWp,spayback,total_initial_investment[0],irr,npv,mirr,vul,cost_per_kwh,lcoe,fvReinvestIRR,fvReinvestMIRR,fvReinvestIRRNoinf,fvReinvestMIRRNoinf,irrNinf,mirrNinf,dfvIrrCcpInf,dfvIrrCcpNoInf,dfvMirrCcpInf,dfvMirrCcpNoInf,pb]
             if SimulationYearString not in simMC_result:
                 simMC_result[SimulationYearString]={"inputs":{"priceinverters":{"mean":0,"std":0,"rawData":[]},"pricepanel":{"mean":0,"std":0,"rawData":[]},
