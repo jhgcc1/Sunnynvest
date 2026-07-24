@@ -24,7 +24,7 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'REMOVED'
+SECRET_KEY = os.environ.get("SECRET_KEY", "change-me-set-SECRET_KEY-in-env")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,10 +33,10 @@ ALLOWED_HOSTS = [
     "sunsubversion.herokuapp.com","127.0.0.1","sunnynvest.com","www.sunnynvest.com"
 ]
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'REMOVED'
-EMAIL_HOST_PASSWORD = 'REMOVED'
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 # Application definition
 
 INSTALLED_APPS = [
